@@ -27,7 +27,7 @@ const nearbyGuides = cities.filter((entry) => city.nearbyCities.includes(entry.n
       meta={[city.nearbyCities.join(' · '), `${city.commonNeeds.length} common project themes`]}
       actions={[
         { href: '/cities/', label: 'Back to Cities', variant: 'ghost' },
-        { href: '/contractors/', label: 'Browse Contractor Profiles' },
+        { href: '/rebates/', label: 'Review Estimated Rebates' },
       ]}
     >
       <span slot="title">
@@ -85,6 +85,15 @@ const nearbyGuides = cities.filter((entry) => city.nearbyCities.includes(entry.n
               and the editorial resources focused on front-yard planning and irrigation upgrades.
             </p>
           </div>
+
+          <div class="meta-block">
+            <p class="meta-block__title">Rebate Planning</p>
+            <p class="meta-block__text">
+              If rebate research is part of the brief, use the SGV rebates hub as an estimated
+              planning layer only and confirm current utility terms before assuming anything is
+              available for this city.
+            </p>
+          </div>
         </aside>
       </div>
     </section>
@@ -95,8 +104,8 @@ const nearbyGuides = cities.filter((entry) => city.nearbyCities.includes(entry.n
       text={city.ctaText}
       primaryHref="/contractors/"
       primaryLabel="Compare Profiles"
-      secondaryHref="/resources/"
-      secondaryLabel="Read Resources"
+      secondaryHref="/rebates/"
+      secondaryLabel="Review Rebate Guidance"
     />
   </main>
   <Footer />

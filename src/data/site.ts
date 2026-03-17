@@ -1,5 +1,6 @@
 export const primaryNavLinks = [
   { href: '/contractors/', label: 'Find Contractors' },
+  { href: '/rebates/', label: 'Rebates' },
   { href: '/resources/', label: 'Resources' },
   { href: '/cities/', label: 'Cities' },
   { href: '/resources/planning-a-drought-smart-front-yard-in-the-sgv/', label: 'Planning Guide' },
@@ -10,6 +11,7 @@ export const footerColumns = [
     title: 'Homeowners',
     links: [
       { href: '/#quote', label: 'Get a Free Quote' },
+      { href: '/rebates/', label: 'Estimated Rebates' },
       { href: '/contractors/', label: 'Find Contractors' },
       { href: '/cities/', label: 'City Guides' },
       { href: '/resources/', label: 'Planning Resources' },
@@ -27,6 +29,7 @@ export const footerColumns = [
   {
     title: 'Resources',
     links: [
+      { href: '/rebates/', label: 'Rebate Hub' },
       { href: '/resources/', label: 'Editorial Library' },
       { href: '/cities/pasadena/', label: 'Pasadena Guide' },
       { href: '/cities/glendora/', label: 'Glendora Guide' },

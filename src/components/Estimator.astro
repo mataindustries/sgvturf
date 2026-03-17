@@ -1,0 +1,145 @@
+---
+import type { RebateEntry, RebateProjectType } from '../data/rebates';
+
+interface Props {
+  entries: RebateEntry[];
+  projectTypes: RebateProjectType[];
+  cityOptions: string[];
+}
+
+const { entries, projectTypes, cityOptions } = Astro.props;
+
+const estimatorConfig = {
+  entries: entries.map((entry) => ({
+    districtName: entry.districtName,
+    coverageCities: entry.coverageCities,
+    projectTypes: entry.projectTypes,
+    estimatePerSqFt: entry.estimatePerSqFt,
+  })),
+};
+---
+
+<div class="rebate-estimator" data-rebate-estimator>
+  <div>
+    <p class="section-eyebrow">Illustrative Estimator</p>
+    <h3 class="rebate-estimator__title">
+      Sketch an <em>estimated rebate range</em> before you inquire.
+    </h3>
+    <p class="rebate-estimator__intro">
+      This is a lightweight planning tool, not a live utility checker. Use it to frame scope and
+      possible savings before you move into the prototype inquiry flow.
+    </p>
+
+    <form class="rebate-estimator__form">
+      <div class="form-row">
+        <label class="field">
+          <span class="field__label">Lawn Size (sq ft)</span>
+          <input
+            class="field__control"
+            type="number"
+            name="lawnSize"
+            min="100"
+            step="50"
+            value="1200"
+          />
+        </label>
+
+        <label class="field">
+          <span class="field__label">Project Type</span>
+          <select class="field__control" name="projectType">
+            {projectTypes.map((projectType) => (
+              <option value={projectType.id}>{projectType.label}</option>
+            ))}
+          </select>
+        </label>
+      </div>
+
+      <label class="field">
+        <span class="field__label">City (optional)</span>
+        <select class="field__control" name="city">
+          <option value="">Choose a city</option>
+          {cityOptions.map((city) => (
+            <option value={city}>{city}</option>
+          ))}
+        </select>
+      </label>
+    </form>
+  </div>
+
+  <div class="rebate-estimator__result" aria-live="polite">
+    <p class="rebate-estimator__kicker">Possible Rebate Range</p>
+    <p class="rebate-estimator__range" data-estimate-range>$900 to $2,200 estimated</p>
+    <p class="rebate-estimator__context" data-estimate-context>
+      Using the broad SGV rebate examples on this page.
+    </p>
+    <p class="rebate-estimator__disclaimer">
+      Values are illustrative estimates only. Actual program rules, funding, and approval timing
+      may differ by district, utility, and project scope.
+    </p>
+  </div>
+</div>
+
+<script define:vars={{ estimatorConfig }}>
+  const formatCurrency = (value) =>
+    new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      maximumFractionDigits: 0,
+    }).format(value);
+
+  const roundEstimate = (value) => {
+    const rounded = Math.round(value / 50) * 50;
+    return Math.max(50, rounded);
+  };
+
+  document.querySelectorAll('[data-rebate-estimator]').forEach((root) => {
+    const form = root.querySelector('form');
+    const rangeNode = root.querySelector('[data-estimate-range]');
+    const contextNode = root.querySelector('[data-estimate-context]');
+
+    if (!(form instanceof HTMLFormElement) || !rangeNode || !contextNode) {
+      return;
+    }
+
+    const updateEstimate = () => {
+      const formData = new FormData(form);
+      const lawnSizeValue = Number(formData.get('lawnSize') || 0);
+      const lawnSize = lawnSizeValue > 0 ? lawnSizeValue : 1200;
+      const projectType = String(formData.get('projectType') || '');
+      const city = String(formData.get('city') || '');
+
+      const projectMatches = estimatorConfig.entries.filter((entry) =>
+        entry.projectTypes.includes(projectType),
+      );
+
+      const cityMatches = city
+        ? projectMatches.filter((entry) => entry.coverageCities.includes(city))
+        : [];
+
+      const pool = cityMatches.length > 0 ? cityMatches : projectMatches;
+
+      if (!pool.length) {
+        rangeNode.textContent = 'No illustrative estimate available';
+        contextNode.textContent =
+          'Try a different project type to see the closest SGV-style planning range.';
+        return;
+      }
+
+      const minRate = Math.min(...pool.map((entry) => entry.estimatePerSqFt.min));
+      const maxRate = Math.max(...pool.map((entry) => entry.estimatePerSqFt.max));
+      const minEstimate = roundEstimate(lawnSize * minRate);
+      const maxEstimate = roundEstimate(lawnSize * maxRate);
+      const names = pool.slice(0, 2).map((entry) => entry.districtName);
+
+      rangeNode.textContent = `${formatCurrency(minEstimate)} to ${formatCurrency(maxEstimate)} estimated`;
+      contextNode.textContent =
+        cityMatches.length > 0
+          ? `Closest illustrative match for ${city}: ${names.join(' and ')}.`
+          : 'Using the broad SGV rebate examples on this page.';
+    };
+
+    form.addEventListener('input', updateEstimate);
+    form.addEventListener('change', updateEstimate);
+    updateEstimate();
+  });
+</script>

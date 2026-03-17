@@ -28,7 +28,7 @@ const relatedArticles = resources.filter((entry) => entry.slug !== article.slug)
       meta={[article.publishedLabel, article.readTime, article.tags.join(' · ')]}
       actions={[
         { href: '/resources/', label: 'Back to Resources', variant: 'ghost' },
-        { href: '/cities/', label: 'Explore City Guides' },
+        { href: '/rebates/', label: 'Review Estimated Rebates' },
       ]}
     >
       <span slot="title">{article.title}</span>
@@ -84,7 +84,9 @@ const relatedArticles = resources.filter((entry) => entry.slug !== article.slug)
             <p class="meta-block__title">How to Use This</p>
             <p class="meta-block__text">
               Pair this article with the city guides if you want the planning advice translated into
-              different SGV lot types and neighborhood contexts.
+              different SGV lot types and neighborhood contexts. If budget shaping matters, pair it
+              with the rebates hub as an estimated planning reference rather than a live incentive
+              feed.
             </p>
           </div>
         </aside>
@@ -117,8 +119,8 @@ const relatedArticles = resources.filter((entry) => entry.slug !== article.slug)
       text={article.ctaText}
       primaryHref="/resources/"
       primaryLabel="Browse All Resources"
-      secondaryHref="/contractors/"
-      secondaryLabel="Compare Contractor Profiles"
+      secondaryHref="/rebates/"
+      secondaryLabel="Review Rebate Guidance"
     />
   </main>
   <Footer />

@@ -1,0 +1,154 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import PageHero from '../../components/PageHero.astro';
+import CollectionCta from '../../components/CollectionCta.astro';
+import RebateCard from '../../components/RebateCard.astro';
+import Estimator from '../../components/Estimator.astro';
+import FAQItem from '../../components/FAQItem.astro';
+import { cityOptions } from '../../data/cities';
+import { rebateEntries, rebateFaqs, rebateProjectTypes } from '../../data/rebates';
+
+const title = 'SGV Rebates Hub | SGV Turf';
+const description =
+  'Review SGV-focused rebate examples, estimated savings ranges, and a lightweight planning estimator for drought-smart yard projects.';
+
+const rebateReasons = [
+  {
+    eyebrow: 'Budget Clarity',
+    title: 'Early rebate research changes the project brief.',
+    text:
+      'Even an estimated incentive range can affect how much turf you remove now, how much planting you phase later, and whether irrigation upgrades belong in the first scope.',
+  },
+  {
+    eyebrow: 'Better Conversations',
+    title: 'Contractor calls go faster when the rebate lane is already clear.',
+    text:
+      'Homeowners usually get better planning feedback when they can say whether they are exploring a turf conversion, planting-first refresh, or a simpler irrigation efficiency package.',
+  },
+  {
+    eyebrow: 'Careful Positioning',
+    title: 'The strongest framing is precise and non-promissory.',
+    text:
+      'This hub stays deliberately careful: every number is estimated, every district note is illustrative, and every next step points back to confirmation rather than certainty.',
+  },
+];
+---
+
+<BaseLayout title={title} description={description}>
+  <Nav />
+  <main>
+    <PageHero
+      eyebrow="Estimated Rebates"
+      description="A premium planning hub for SGV homeowners who want a cleaner sense of how district or utility rebates might shape a front-yard conversion. The emphasis is on estimated ranges and better project framing, not real-time program promises."
+      meta={['5 SGV rebate lanes', 'Illustrative estimates only', 'Turf + irrigation focus']}
+      actions={[
+        { href: '/#quote', label: 'Start the Inquiry Flow' },
+        { href: '/resources/', label: 'Read Planning Resources', variant: 'ghost' },
+      ]}
+    >
+      <span slot="title">
+        SGV rebate guidance with<br />
+        <em>careful, estimated ranges</em>
+      </span>
+    </PageHero>
+
+    <section class="surface-section surface-section--white">
+      <div class="section-shell">
+        <div class="section-header">
+          <div>
+            <p class="section-eyebrow">Why It Matters</p>
+            <h2 class="section-title">
+              Rebates are most useful when they<br />
+              <em>improve the planning conversation</em>
+            </h2>
+          </div>
+        </div>
+
+        <div class="rebate-reasons">
+          {rebateReasons.map((reason) => (
+            <article class="detail-panel">
+              <p class="detail-panel__eyebrow">{reason.eyebrow}</p>
+              <h3 class="detail-panel__title">{reason.title}</h3>
+              <p class="detail-panel__copy">{reason.text}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="surface-section surface-section--cream">
+      <div class="section-shell">
+        <div class="section-header">
+          <div>
+            <p class="section-eyebrow">District Snapshot</p>
+            <h2 class="section-title">
+              SGV-focused rebate lanes for<br />
+              <em>different utility contexts</em>
+            </h2>
+          </div>
+        </div>
+
+        <p class="collection-lede">
+          These entries are curated as planning benchmarks for the valley. Use them to understand
+          the kind of savings band a project might fall into, then verify the live program terms
+          before relying on any one number.
+        </p>
+
+        <div class="rebate-grid">
+          {rebateEntries.map((entry) => (
+            <RebateCard entry={entry} />
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="surface-section surface-section--white">
+      <div class="section-shell">
+        <div class="section-header">
+          <div>
+            <p class="section-eyebrow">Planning Tool</p>
+            <h2 class="section-title">
+              Estimate the rough range, then<br />
+              <em>pressure-test the scope</em>
+            </h2>
+          </div>
+        </div>
+
+        <Estimator entries={rebateEntries} projectTypes={rebateProjectTypes} cityOptions={cityOptions} />
+      </div>
+    </section>
+
+    <section class="surface-section surface-section--cream">
+      <div class="section-shell">
+        <div class="section-header">
+          <div>
+            <p class="section-eyebrow">FAQ</p>
+            <h2 class="section-title">
+              Common questions about<br />
+              <em>estimated rebate planning</em>
+            </h2>
+          </div>
+        </div>
+
+        <div class="faq-list">
+          {rebateFaqs.map((item, index) => (
+            <FAQItem question={item.question} answer={item.answer} open={index === 0} />
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <CollectionCta
+      eyebrow="Next Step"
+      title="Turn the rebate idea into a cleaner inquiry."
+      text="Once you have a rough range in mind, use the existing inquiry flow to outline your lawn size, project type, and the rebate lane you want a contractor or planner to sanity-check."
+      primaryHref="/#quote"
+      primaryLabel="Open the Inquiry Form"
+      secondaryHref="/contractors/"
+      secondaryLabel="Compare Contractor Profiles"
+    />
+  </main>
+  <Footer />
+</BaseLayout>

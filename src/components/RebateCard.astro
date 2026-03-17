@@ -1,0 +1,34 @@
+---
+import type { RebateEntry } from '../data/rebates';
+
+interface Props {
+  entry: RebateEntry;
+}
+
+const { entry } = Astro.props;
+---
+
+<article class="rebate-card">
+  <div class="rebate-card__header">
+    <p class="rebate-card__eyebrow">{entry.districtName}</p>
+    <h3 class="rebate-card__title">{entry.rebateType}</h3>
+  </div>
+
+  <div class="rebate-card__meta">
+    <div>
+      <p class="rebate-card__label">Coverage Area</p>
+      <p class="rebate-card__value">{entry.coverageArea}</p>
+    </div>
+
+    <div>
+      <p class="rebate-card__label">Estimated Savings</p>
+      <p class="rebate-card__value rebate-card__value--emphasis">{entry.estimatedSavingsRange}</p>
+    </div>
+  </div>
+
+  <p class="rebate-card__notes">{entry.notes}</p>
+
+  <a class="button button--ghost rebate-card__action" href={entry.ctaHref}>
+    {entry.ctaLabel}
+  </a>
+</article>
