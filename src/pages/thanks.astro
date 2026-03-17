@@ -1,18 +1,42 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Nav from '../components/Nav.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
 import Footer from '../components/Footer.astro';
 import PageHero from '../components/PageHero.astro';
 import CollectionCta from '../components/CollectionCta.astro';
+import { createBreadcrumbSchema } from '../lib/seo';
 
 const title = 'Thank You | SGV Turf';
 const description =
   'Thank-you page for SGV Turf inquiry submissions, including careful next-step guidance and links back to core browsing surfaces.';
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Thanks' },
+];
+
+const structuredData = createBreadcrumbSchema(
+  [
+    { name: 'Home', path: '/' },
+    { name: 'Thanks', path: '/thanks/' },
+  ],
+  Astro.site,
+);
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalUrl="/thanks/"
+  ogTitle="Thank You | SGV Turf"
+  ogDescription="Confirmation page for SGV Turf project-brief submissions with careful next-step guidance."
+  structuredData={structuredData}
+  noindex={true}
+>
   <Nav />
-  <main>
+  <Breadcrumbs items={breadcrumbs} />
+  <main id="main-content">
     <PageHero
       eyebrow="Submission Received"
       description="Your project brief has been recorded through the current SGV Turf intake flow. This confirms receipt only. It does not imply instant contractor matching, guaranteed incentives, or a fully automated marketplace process."

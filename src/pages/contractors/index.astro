@@ -1,20 +1,43 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Nav from '../../components/Nav.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import Footer from '../../components/Footer.astro';
 import PageHero from '../../components/PageHero.astro';
 import ContractorCard from '../../components/ContractorCard.astro';
 import CollectionCta from '../../components/CollectionCta.astro';
 import { contractors } from '../../data/contractors';
+import { createBreadcrumbSchema } from '../../lib/seo';
 
 const title = 'SGV Sample Contractor Profiles | SGV Turf';
 const description =
   'Browse sample SGV contractor profiles for drought-smart landscaping, turf removal, irrigation upgrades, and low-water front yard planning.';
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Contractors' },
+];
+
+const structuredData = createBreadcrumbSchema(
+  [
+    { name: 'Home', path: '/' },
+    { name: 'Contractors', path: '/contractors/' },
+  ],
+  Astro.site,
+);
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalUrl="/contractors/"
+  ogTitle="SGV Sample Contractor Profiles | SGV Turf"
+  ogDescription="Review carefully worded sample contractor profiles for different SGV yard types, specialties, and planning fits."
+  structuredData={structuredData}
+>
   <Nav />
-  <main>
+  <Breadcrumbs items={breadcrumbs} />
+  <main id="main-content">
     <PageHero
       eyebrow="Sample Directory"
       description="These seeded profiles are intentionally generic and non-verified. They are here to demonstrate how SGV Turf can organize specialties, service areas, and planning fit without leaning on fake reviews or deceptive trust signals."

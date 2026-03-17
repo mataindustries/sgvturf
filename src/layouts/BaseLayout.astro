@@ -1,18 +1,46 @@
 ---
 import '../styles/tokens.css';
 import '../styles/global.css';
+import {
+  defaultDescription,
+  defaultOgDescription,
+  defaultOgTitle,
+  defaultSocialImage,
+  defaultTitle,
+  siteName,
+} from '../data/site';
+import { toAbsoluteUrl, toCanonicalUrl, toJsonLd } from '../lib/seo';
 
 interface Props {
   title?: string;
   description?: string;
+  canonicalUrl?: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  socialImage?: string;
+  ogType?: 'website' | 'article';
+  noindex?: boolean;
+  structuredData?: Record<string, unknown> | Array<Record<string, unknown>>;
 }
 
 const gaMeasurementId = 'G-20YE3554RG';
 
 const {
-  title = 'SGV Turf | The San Gabriel Valley Turf & Xeriscaping Authority',
-  description = 'The editorial-style home for finding trusted SGV turf replacement and xeriscaping contractors, rebate guidance, and regional project resources.',
+  title = defaultTitle,
+  description = defaultDescription,
+  canonicalUrl = Astro.url.pathname,
+  ogTitle = defaultOgTitle,
+  ogDescription = defaultOgDescription,
+  socialImage = defaultSocialImage,
+  ogType = 'website',
+  noindex = false,
+  structuredData,
 } = Astro.props;
+
+const canonicalHref = toCanonicalUrl(canonicalUrl, Astro.site);
+const socialImageUrl = toAbsoluteUrl(socialImage, Astro.site);
+const robots = noindex ? 'noindex, nofollow' : 'index, follow';
+const jsonLdEntries = toJsonLd(structuredData);
 ---
 
 <!doctype html>
@@ -23,8 +51,20 @@ const {
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
     <meta name="theme-color" content="#f6f0e4" />
+    <meta name="robots" content={robots} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
+    {canonicalHref && <link rel="canonical" href={canonicalHref} />}
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:title" content={ogTitle} />
+    <meta property="og:description" content={ogDescription} />
+    <meta property="og:image" content={socialImageUrl} />
+    {canonicalHref && <meta property="og:url" content={canonicalHref} />}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={ogTitle} />
+    <meta name="twitter:description" content={ogDescription} />
+    <meta name="twitter:image" content={socialImageUrl} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -49,8 +89,15 @@ const {
       };
     </script>
     <title>{title}</title>
+    {jsonLdEntries.map((entry) => (
+      <script
+        type="application/ld+json"
+        set:html={JSON.stringify(entry).replace(/</g, '\\u003c')}
+      />
+    ))}
   </head>
   <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
     <slot />
   </body>
 </html>

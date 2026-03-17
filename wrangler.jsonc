@@ -30,7 +30,12 @@
 	 * Note: Use secrets to store sensitive data.
 	 * https://developers.cloudflare.com/workers/configuration/secrets/
 	 */
-	// "vars": {  "MY_VARIABLE": "production_value" }
+	// "vars": {
+	//   "PUBLIC_SITE_URL": "https://your-production-domain"
+	// }
+	// Use secrets for:
+	// - TURNSTILE_SECRET_KEY
+	// - LEAD_WEBHOOK_URL
 	/**
 	 * Static Assets
 	 * https://developers.cloudflare.com/workers/static-assets/binding/

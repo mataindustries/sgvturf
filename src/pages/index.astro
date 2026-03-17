@@ -10,11 +10,40 @@ import LeadForm from '../components/LeadForm.astro';
 import EditorialGrid from '../components/EditorialGrid.astro';
 import ContractorPricing from '../components/ContractorPricing.astro';
 import Footer from '../components/Footer.astro';
+import { createOrganizationSchema, createServiceSchema, createWebsiteSchema } from '../lib/seo';
+import { defaultDescription, defaultTitle } from '../data/site';
+
+const title = defaultTitle;
+const description = defaultDescription;
+
+const structuredData = [
+  createOrganizationSchema(Astro.site),
+  createWebsiteSchema(Astro.site),
+  createServiceSchema(
+    {
+      name: 'SGV drought-smart landscape planning guidance',
+      description,
+      serviceType:
+        'Editorial landscape planning guidance, sample contractor positioning, and estimated rebate research',
+      path: '/',
+      areaServed: 'San Gabriel Valley',
+      areaType: 'AdministrativeArea',
+    },
+    Astro.site,
+  ),
+];
 ---
 
-<BaseLayout>
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalUrl="/"
+  ogTitle="SGV Turf | City Guides, Rebates, and Water-Wise Project Planning"
+  ogDescription="Browse SGV city guides, sample contractor profiles, estimated rebate planning, and editorial landscape resources for lower-water yard projects."
+  structuredData={structuredData}
+>
   <Nav />
-  <main>
+  <main id="main-content">
     <Hero />
     <SearchStrip />
     <HowItWorks />

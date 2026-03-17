@@ -10,10 +10,13 @@ export interface ResourceArticle {
   title: string;
   excerpt: string;
   intro: string;
+  publishedAt: string;
   publishedLabel: string;
   readTime: string;
   featured: boolean;
   tags: string[];
+  relatedCitySlugs: string[];
+  relatedRebateSlugs: string[];
   keyTakeaways: string[];
   sections: ResourceSection[];
   ctaTitle: string;
@@ -30,10 +33,13 @@ export const resources: ResourceArticle[] = [
       'A practical framework for reducing lawn, organizing materials, and keeping an SGV front yard polished instead of patchy.',
     intro:
       'The best drought-smart front yards in the San Gabriel Valley do not start with plants. They start with layout: where people walk, where the eye lands from the street, and how much open space the yard really needs.',
+    publishedAt: '2026-03-06',
     publishedLabel: 'March 2026',
     readTime: '7 min read',
     featured: true,
     tags: ['Front Yard', 'Planning', 'Budget'],
+    relatedCitySlugs: ['pasadena', 'south-pasadena'],
+    relatedRebateSlugs: ['upper-sgv-regional-programs', 'pasadena-water-and-power'],
     keyTakeaways: [
       'Begin with circulation and open-space needs before selecting plants.',
       'Use fewer materials and repeat them consistently across the yard.',
@@ -81,10 +87,13 @@ export const resources: ResourceArticle[] = [
       'A grounded comparison of appearance, maintenance rhythm, heat, and where each option tends to work best in San Gabriel Valley yards.',
     intro:
       'Artificial turf and low-water planting solve different problems. One reduces ongoing garden care in open-use areas. The other creates a more climate-responsive yard with texture, shade potential, and a softer long-term look.',
+    publishedAt: '2026-02-12',
     publishedLabel: 'February 2026',
     readTime: '6 min read',
     featured: true,
     tags: ['Artificial Turf', 'Planting', 'Decision Guide'],
+    relatedCitySlugs: ['arcadia', 'temple-city'],
+    relatedRebateSlugs: ['upper-sgv-regional-programs', 'valley-county-water-district'],
     keyTakeaways: [
       'Artificial turf is strongest in spaces that need durable open-use coverage.',
       'Low-water planting usually ages more naturally and offers more visual depth.',
@@ -132,10 +141,13 @@ export const resources: ResourceArticle[] = [
       'Why many landscape upgrades underperform without a smarter irrigation plan, and which changes tend to have the biggest impact first.',
     intro:
       'A drought-smart yard is only partly a plant palette decision. In many SGV homes, the old irrigation layout is the real bottleneck because it was set up to support wall-to-wall lawn instead of different planting zones.',
+    publishedAt: '2026-01-16',
     publishedLabel: 'January 2026',
     readTime: '5 min read',
     featured: false,
     tags: ['Irrigation', 'Maintenance', 'Systems'],
+    relatedCitySlugs: ['san-gabriel', 'glendora'],
+    relatedRebateSlugs: ['golden-state-water-sgv', 'central-sgv-utility-programs'],
     keyTakeaways: [
       'Hydrozoning matters more than simply reducing watering frequency.',
       'Drip and point-source irrigation work best when the planting layout is clear.',
@@ -178,10 +190,13 @@ export const resources: ResourceArticle[] = [
       'A look at the small design moves that make water-wise landscapes feel intentional, settled, and neighborhood-appropriate rather than improvised.',
     intro:
       'Premium does not have to mean elaborate. In SGV landscape work, it often means the yard looks edited: the hardscape aligns, the plant spacing makes sense, and the palette feels calm from the street.',
+    publishedAt: '2025-12-10',
     publishedLabel: 'December 2025',
     readTime: '6 min read',
     featured: false,
     tags: ['Premium Look', 'Curb Appeal', 'Editorial'],
+    relatedCitySlugs: ['pasadena', 'monrovia'],
+    relatedRebateSlugs: ['upper-sgv-regional-programs'],
     keyTakeaways: [
       'The most premium yards usually rely on restraint rather than excess.',
       'Clean edges and repetition matter as much as plant selection.',

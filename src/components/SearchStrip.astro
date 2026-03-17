@@ -7,23 +7,31 @@ const cities = ['City', ...cityOptions];
 
 <section class="search-strip" id="find" aria-labelledby="find-pro-label">
   <div class="section-shell search-strip__inner">
-    <p class="search-strip__label" id="find-pro-label">Find a Pro</p>
+    <div class="search-strip__copy">
+      <p class="search-strip__label" id="find-pro-label">Quick Routing</p>
+      <p class="search-strip__note">Use this as a shortcut into the sample contractor directory.</p>
+    </div>
 
-    <form class="search-strip__form">
-      <select aria-label="Service type">
+    <form class="search-strip__form" action="/contractors/" method="get">
+      <select aria-label="Service type" name="service">
         {searchServices.map((service) => (
-          <option>{service}</option>
+          <option value={service}>{service}</option>
         ))}
       </select>
 
-      <select aria-label="City">
+      <select aria-label="City" name="city">
         {cities.map((city) => (
-          <option>{city}</option>
+          <option value={city}>{city}</option>
         ))}
       </select>
 
-      <input type="text" placeholder="Project description (optional)" aria-label="Project description" />
-      <button class="button button--search" type="submit">Search</button>
+      <input
+        type="text"
+        name="notes"
+        placeholder="Project description (optional)"
+        aria-label="Project description"
+      />
+      <button class="button button--search" type="submit">Browse Profiles</button>
     </form>
   </div>
 </section>

@@ -1,20 +1,43 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Nav from '../../components/Nav.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import Footer from '../../components/Footer.astro';
 import PageHero from '../../components/PageHero.astro';
 import ResourceCard from '../../components/ResourceCard.astro';
 import CollectionCta from '../../components/CollectionCta.astro';
 import { resources } from '../../data/resources';
+import { createBreadcrumbSchema } from '../../lib/seo';
 
 const title = 'SGV Landscaping Resources | SGV Turf';
 const description =
   'Read seeded editorial resources for SGV homeowners considering drought-smart landscaping, irrigation upgrades, and turf replacement planning.';
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Resources' },
+];
+
+const structuredData = createBreadcrumbSchema(
+  [
+    { name: 'Home', path: '/' },
+    { name: 'Resources', path: '/resources/' },
+  ],
+  Astro.site,
+);
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalUrl="/resources/"
+  ogTitle="SGV Landscaping Resources | SGV Turf"
+  ogDescription="Read editorial SGV landscape planning guides that connect water-wise design decisions, rebates, and local context."
+  structuredData={structuredData}
+>
   <Nav />
-  <main>
+  <Breadcrumbs items={breadcrumbs} />
+  <main id="main-content">
     <PageHero
       eyebrow="Editorial Library"
       description="These articles are seeded as realistic, local-feeling homeowner resources for the SGV. They stay generic on purpose and focus on planning clarity, not on unverifiable claims or location-specific regulations."

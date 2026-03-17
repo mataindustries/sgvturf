@@ -1,20 +1,43 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Nav from '../../components/Nav.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import Footer from '../../components/Footer.astro';
 import PageHero from '../../components/PageHero.astro';
 import CityCard from '../../components/CityCard.astro';
 import CollectionCta from '../../components/CollectionCta.astro';
 import { cities } from '../../data/cities';
+import { createBreadcrumbSchema } from '../../lib/seo';
 
 const title = 'SGV City Guides | SGV Turf';
 const description =
   'Explore 12 seeded SGV city guides covering common landscaping needs, drought-smart planning considerations, and practical next steps.';
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Cities' },
+];
+
+const structuredData = createBreadcrumbSchema(
+  [
+    { name: 'Home', path: '/' },
+    { name: 'Cities', path: '/cities/' },
+  ],
+  Astro.site,
+);
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalUrl="/cities/"
+  ogTitle="SGV City Guides | Local Context for Water-Wise Yards"
+  ogDescription="Compare city-specific SGV landscape planning notes, common lot conditions, and next-step links into contractors, rebates, and inquiry."
+  structuredData={structuredData}
+>
   <Nav />
-  <main>
+  <Breadcrumbs items={breadcrumbs} />
+  <main id="main-content">
     <PageHero
       eyebrow="Regional Planning"
       description="Each city guide is written to feel local to the San Gabriel Valley while remaining generic and non-deceptive. The goal is to give homeowners a more grounded starting point before they compare actual contractors."

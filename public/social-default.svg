@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">SGV Turf social card</title>
+  <desc id="desc">Editorial SGV landscape planning and rebate guidance.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#f6f0e4" />
+      <stop offset="100%" stop-color="#e8dfc8" />
+    </linearGradient>
+    <linearGradient id="panel" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#7a8c6e" />
+      <stop offset="100%" stop-color="#4a5c40" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)" />
+  <circle cx="1020" cy="120" r="170" fill="#c8603a" opacity="0.08" />
+  <circle cx="180" cy="540" r="200" fill="#7a8c6e" opacity="0.12" />
+
+  <rect x="70" y="78" width="1060" height="474" rx="18" fill="#fdfaf4" stroke="#d4c8a8" stroke-width="3" />
+  <rect x="640" y="78" width="490" height="474" rx="18" fill="url(#panel)" />
+
+  <text x="128" y="178" fill="#c8603a" font-family="'DM Mono', monospace" font-size="24" letter-spacing="6">
+    SAN GABRIEL VALLEY
+  </text>
+  <text x="128" y="260" fill="#2c1f14" font-family="'Playfair Display', serif" font-size="80" font-weight="700">
+    SGV
+  </text>
+  <text x="128" y="345" fill="#2c1f14" font-family="'Playfair Display', serif" font-size="80" font-style="italic">
+    Turf
+  </text>
+  <text x="128" y="420" fill="#8c8070" font-family="'Libre Baskerville', serif" font-size="30">
+    Editorial planning, sample contractor positioning,
+  </text>
+  <text x="128" y="462" fill="#8c8070" font-family="'Libre Baskerville', serif" font-size="30">
+    estimated rebates, and structured project intake.
+  </text>
+
+  <path d="M870 470Q820 360 760 315Q796 330 840 360Q828 310 860 255Q874 312 866 360Q902 330 942 306Q914 350 870 470Z" fill="#d4e0cd" opacity="0.92" />
+  <path d="M870 470Q870 382 860 255" stroke="#2c3820" stroke-width="3" opacity="0.35" />
+  <circle cx="752" cy="496" r="38" fill="#688a58" opacity="0.9" />
+  <circle cx="1008" cy="486" r="24" fill="#7a9868" opacity="0.82" />
+  <rect x="690" y="504" width="372" height="20" rx="10" fill="#2c3820" opacity="0.34" />
+</svg>

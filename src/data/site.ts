@@ -1,3 +1,22 @@
+export const siteName = 'SGV Turf';
+
+export const defaultTitle = 'SGV Turf | San Gabriel Valley Drought-Smart Landscape Planning';
+
+export const defaultDescription =
+  'An editorial SGV reference for homeowners comparing drought-smart landscaping ideas, sample contractor positioning, estimated rebate guidance, and structured project intake.';
+
+export const defaultOgTitle = 'SGV Turf | SGV Turf Removal, Xeriscape, and Rebate Planning';
+
+export const defaultOgDescription =
+  'Explore SGV city guides, sample contractor profiles, estimated rebate planning, and practical water-wise landscape resources without misleading marketplace claims.';
+
+export const defaultSocialImage = '/social-default.svg';
+
+export const siteRegionName = 'San Gabriel Valley, California';
+
+export const siteTagline =
+  'A regional editorial prototype for SGV homeowners exploring water-wise landscaping, turf replacement, and drought-smart front yard planning.';
+
 export const primaryNavLinks = [
   { href: '/contractors/', label: 'Find Contractors' },
   { href: '/rebates/', label: 'Rebates' },
@@ -36,6 +55,13 @@ export const footerColumns = [
       { href: '/resources/what-makes-an-sgv-yard-feel-premium-after-turf-removal/', label: 'Premium Design Notes' },
     ],
   },
+];
+
+export const footerMetaLinks = [
+  { href: '/cities/', label: 'City guides' },
+  { href: '/contractors/', label: 'Sample contractor profiles' },
+  { href: '/rebates/', label: 'Estimated rebates' },
+  { href: '/resources/', label: 'Editorial resources' },
 ];
 
 export const searchServices = [

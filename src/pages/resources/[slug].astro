@@ -1,12 +1,16 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Nav from '../../components/Nav.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import Footer from '../../components/Footer.astro';
 import PageHero from '../../components/PageHero.astro';
 import ResourceCard from '../../components/ResourceCard.astro';
 import CollectionCta from '../../components/CollectionCta.astro';
+import { cities } from '../../data/cities';
+import { rebateEntries } from '../../data/rebates';
 import { resources } from '../../data/resources';
 import type { ResourceArticle } from '../../data/resources';
+import { createArticleSchema, createBreadcrumbSchema } from '../../lib/seo';
 
 export function getStaticPaths() {
   return resources.map((article) => ({
@@ -17,11 +21,52 @@ export function getStaticPaths() {
 
 const { article } = Astro.props as { article: ResourceArticle };
 const relatedArticles = resources.filter((entry) => entry.slug !== article.slug).slice(0, 2);
+const relatedCities = cities.filter((city) => article.relatedCitySlugs.includes(city.slug));
+const relatedRebateEntries = rebateEntries.filter((entry) => article.relatedRebateSlugs.includes(entry.slug));
+const rebateContext =
+  relatedRebateEntries.length > 0
+    ? `${relatedRebateEntries.map((entry) => entry.districtName).join(' and ')} are useful estimate-only rebate lanes to compare alongside this topic.`
+    : 'Use the rebates hub as a planning cross-check if budget framing is part of the project.';
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Resources', href: '/resources/' },
+  { label: article.title },
+];
+const structuredData = [
+  createBreadcrumbSchema(
+    [
+      { name: 'Home', path: '/' },
+      { name: 'Resources', path: '/resources/' },
+      { name: article.title, path: `/resources/${article.slug}/` },
+    ],
+    Astro.site,
+  ),
+  createArticleSchema(
+    {
+      headline: article.title,
+      description: article.metaDescription,
+      path: `/resources/${article.slug}/`,
+      datePublished: article.publishedAt,
+      category: article.category,
+      keywords: article.tags,
+    },
+    Astro.site,
+  ),
+];
 ---
 
-<BaseLayout title={`${article.title} | SGV Turf`} description={article.metaDescription}>
+<BaseLayout
+  title={`${article.title} | SGV Turf`}
+  description={article.metaDescription}
+  canonicalUrl={`/resources/${article.slug}/`}
+  ogTitle={`${article.title} | SGV Turf`}
+  ogDescription={article.excerpt}
+  ogType="article"
+  structuredData={structuredData}
+>
   <Nav />
-  <main>
+  <Breadcrumbs items={breadcrumbs} />
+  <main id="main-content">
     <PageHero
       eyebrow={article.category}
       description={article.excerpt}
@@ -71,6 +116,17 @@ const relatedArticles = resources.filter((entry) => entry.slug !== article.slug)
         </article>
 
         <aside class="article-sidebar">
+          {relatedCities.length > 0 && (
+            <div class="meta-block">
+              <p class="meta-block__title">Related City Guides</p>
+              <div class="list-grid">
+                {relatedCities.map((city) => (
+                  <a href={`/cities/${city.slug}/`}>{city.name}</a>
+                ))}
+              </div>
+            </div>
+          )}
+
           <div class="meta-block">
             <p class="meta-block__title">Article Topics</p>
             <ul class="meta-list">
@@ -81,13 +137,11 @@ const relatedArticles = resources.filter((entry) => entry.slug !== article.slug)
           </div>
 
           <div class="meta-block">
-            <p class="meta-block__title">How to Use This</p>
-            <p class="meta-block__text">
-              Pair this article with the city guides if you want the planning advice translated into
-              different SGV lot types and neighborhood contexts. If budget shaping matters, pair it
-              with the rebates hub as an estimated planning reference rather than a live incentive
-              feed.
-            </p>
+            <p class="meta-block__title">Related Rebate Planning</p>
+            <p class="meta-block__text">{rebateContext}</p>
+            <a class="inline-link meta-block__link" href="/rebates/">
+              Review estimated rebates
+            </a>
           </div>
         </aside>
       </div>

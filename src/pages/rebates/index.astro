@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Nav from '../../components/Nav.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import Footer from '../../components/Footer.astro';
 import PageHero from '../../components/PageHero.astro';
 import CollectionCta from '../../components/CollectionCta.astro';
@@ -9,6 +10,7 @@ import Estimator from '../../components/Estimator.astro';
 import FAQItem from '../../components/FAQItem.astro';
 import { cityOptions } from '../../data/cities';
 import { rebateEntries, rebateFaqs, rebateProjectTypes } from '../../data/rebates';
+import { createBreadcrumbSchema } from '../../lib/seo';
 
 const title = 'SGV Rebates Hub | SGV Turf';
 const description =
@@ -34,11 +36,32 @@ const rebateReasons = [
       'This hub stays deliberately careful: every number is estimated, every district note is illustrative, and every next step points back to confirmation rather than certainty.',
   },
 ];
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Rebates' },
+];
+
+const structuredData = createBreadcrumbSchema(
+  [
+    { name: 'Home', path: '/' },
+    { name: 'Rebates', path: '/rebates/' },
+  ],
+  Astro.site,
+);
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalUrl="/rebates/"
+  ogTitle="SGV Rebates Hub | Estimated Turf and Irrigation Planning"
+  ogDescription="Use SGV-style rebate ranges as planning inputs only, then confirm current utility terms before relying on any incentive amount."
+  structuredData={structuredData}
+>
   <Nav />
-  <main>
+  <Breadcrumbs items={breadcrumbs} />
+  <main id="main-content">
     <PageHero
       eyebrow="Estimated Rebates"
       description="A premium planning hub for SGV homeowners who want a cleaner sense of how district or utility rebates might shape a front-yard conversion. The emphasis is on estimated ranges and better project framing, not real-time program promises."
