@@ -1,0 +1,1613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SGV Turf — The San Gabriel Valley's Turf & Xeriscaping Authority</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Mono:wght@400;500&family=Libre+Baskerville:ital@0;1&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --sage: #7A8C6E;
+    --sage-light: #B5C4A8;
+    --sage-dark: #4A5C40;
+    --terracotta: #C8603A;
+    --terracotta-light: #E8927A;
+    --sand: #E8DFC8;
+    --sand-dark: #D4C8A8;
+    --soil: #2C1F14;
+    --cream: #F5EFE0;
+    --olive: #6B7340;
+    --stone: #8C8070;
+    --white: #FDFAF4;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Manrope', sans-serif;
+    background: var(--white);
+    color: var(--soil);
+    overflow-x: hidden;
+  }
+
+  /* NOISE TEXTURE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.6;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 48px;
+    background: rgba(245, 239, 224, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--sand-dark);
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    color: var(--soil);
+    text-decoration: none;
+  }
+
+  .nav-logo span { color: var(--terracotta); }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+    align-items: center;
+  }
+
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--stone);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--terracotta); }
+
+  .nav-cta {
+    background: var(--terracotta) !important;
+    color: var(--white) !important;
+    padding: 10px 22px;
+    border-radius: 2px;
+    font-weight: 500 !important;
+    transition: background 0.2s !important;
+  }
+
+  .nav-cta:hover { background: var(--sage-dark) !important; }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    padding: 80px 64px 80px 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+  }
+
+  .hero-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .hero-tag::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--terracotta);
+  }
+
+  .hero-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.2rem, 5.5vw, 5.4rem);
+    font-weight: 900;
+    line-height: 1.0;
+    letter-spacing: -0.03em;
+    color: var(--soil);
+    margin-bottom: 28px;
+  }
+
+  .hero-headline em {
+    font-style: italic;
+    color: var(--sage-dark);
+  }
+
+  .hero-sub {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--stone);
+    max-width: 420px;
+    margin-bottom: 48px;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--terracotta);
+    color: var(--white);
+    padding: 16px 32px;
+    border: none;
+    border-radius: 2px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.25s;
+    display: inline-block;
+  }
+
+  .btn-primary:hover {
+    background: var(--sage-dark);
+    transform: translateY(-2px);
+  }
+
+  .btn-ghost {
+    color: var(--soil);
+    padding: 16px 32px;
+    border: 1.5px solid var(--sand-dark);
+    border-radius: 2px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.25s;
+    display: inline-block;
+  }
+
+  .btn-ghost:hover {
+    border-color: var(--sage);
+    color: var(--sage-dark);
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 40px;
+    margin-top: 60px;
+    padding-top: 40px;
+    border-top: 1px solid var(--sand-dark);
+  }
+
+  .hero-stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--soil);
+    line-height: 1;
+  }
+
+  .hero-stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--stone);
+    margin-top: 4px;
+  }
+
+  .hero-right {
+    background: var(--sage);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  /* Decorative xeriscaping SVG illustration placeholder */
+  .hero-illustration {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse at 30% 70%, rgba(74,92,64,0.6) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, rgba(107,115,64,0.5) 0%, transparent 50%),
+      linear-gradient(160deg, #7A8C6E 0%, #4A5C40 40%, #2C3820 100%);
+  }
+
+  /* Decorative plant forms */
+  .plant-shapes {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+
+  .plant-shapes svg {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 85%;
+  }
+
+  .hero-badge {
+    position: absolute;
+    top: 48px;
+    right: 48px;
+    width: 110px;
+    height: 110px;
+    background: var(--terracotta);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 16px;
+    animation: spin-slow 20s linear infinite;
+  }
+
+  @keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .hero-badge-text {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.5rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--white);
+    line-height: 1.6;
+    text-align: center;
+  }
+
+  /* ─── SEARCH STRIP ─── */
+  .search-strip {
+    background: var(--soil);
+    padding: 40px 80px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .search-strip-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--sage-light);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .search-row {
+    display: flex;
+    flex: 1;
+    gap: 0;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .search-row select, .search-row input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    border-right: 1px solid rgba(255,255,255,0.12);
+    padding: 14px 20px;
+    color: var(--white);
+    font-family: 'Manrope', sans-serif;
+    font-size: 0.9rem;
+    outline: none;
+    appearance: none;
+  }
+
+  .search-row select option { background: var(--soil); color: var(--white); }
+
+  .search-row input::placeholder { color: rgba(255,255,255,0.35); }
+
+  .search-row .btn-search {
+    background: var(--terracotta);
+    border: none;
+    padding: 14px 28px;
+    color: var(--white);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s;
+    white-space: nowrap;
+  }
+
+  .search-row .btn-search:hover { background: var(--terracotta-light); }
+
+  /* ─── HOW IT WORKS ─── */
+  .how-section {
+    padding: 100px 80px;
+    background: var(--cream);
+    position: relative;
+  }
+
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 64px;
+  }
+
+  .section-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--soil);
+    line-height: 1.1;
+  }
+
+  .section-title em {
+    font-style: italic;
+    color: var(--sage-dark);
+  }
+
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: var(--sand-dark);
+  }
+
+  .step-card {
+    background: var(--cream);
+    padding: 48px 40px;
+    position: relative;
+    transition: background 0.3s;
+  }
+
+  .step-card:hover { background: var(--white); }
+
+  .step-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem;
+    font-weight: 900;
+    color: var(--sand-dark);
+    line-height: 1;
+    margin-bottom: 24px;
+    transition: color 0.3s;
+  }
+
+  .step-card:hover .step-num { color: var(--sage-light); }
+
+  .step-icon {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 20px;
+  }
+
+  .step-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--soil);
+    margin-bottom: 12px;
+  }
+
+  .step-desc {
+    font-size: 0.88rem;
+    line-height: 1.7;
+    color: var(--stone);
+  }
+
+  /* ─── FEATURED CONTRACTORS ─── */
+  .contractors-section {
+    padding: 100px 80px;
+    background: var(--white);
+  }
+
+  .contractor-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 48px;
+  }
+
+  .contractor-card {
+    border: 1.5px solid var(--sand-dark);
+    padding: 32px;
+    border-radius: 2px;
+    position: relative;
+    transition: all 0.25s;
+    cursor: pointer;
+    background: var(--white);
+  }
+
+  .contractor-card:hover {
+    border-color: var(--sage);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(74,92,64,0.1);
+  }
+
+  .contractor-card.featured {
+    border-color: var(--terracotta);
+    background: linear-gradient(145deg, rgba(200,96,58,0.04) 0%, var(--white) 100%);
+  }
+
+  .featured-badge {
+    position: absolute;
+    top: -1px;
+    right: 24px;
+    background: var(--terracotta);
+    color: var(--white);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+  }
+
+  .contractor-logo {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 900;
+    margin-bottom: 16px;
+    color: var(--white);
+  }
+
+  .contractor-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--soil);
+    margin-bottom: 4px;
+  }
+
+  .contractor-city {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--stone);
+    margin-bottom: 14px;
+  }
+
+  .contractor-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+
+  .tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: var(--sand);
+    color: var(--sage-dark);
+    padding: 4px 10px;
+    border-radius: 2px;
+  }
+
+  .contractor-rating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .stars { color: var(--terracotta); font-size: 0.85rem; letter-spacing: 2px; }
+
+  .rating-count {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--stone);
+  }
+
+  .contractor-quote {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 0.82rem;
+    font-style: italic;
+    color: var(--stone);
+    line-height: 1.65;
+    border-left: 2px solid var(--sage-light);
+    padding-left: 14px;
+    margin-bottom: 24px;
+  }
+
+  .contractor-cta {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: gap 0.2s;
+  }
+
+  .contractor-cta:hover { gap: 14px; }
+
+  /* ─── LEAD CAPTURE ─── */
+  .lead-section {
+    background: var(--soil);
+    padding: 100px 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .lead-section::before {
+    content: '';
+    position: absolute;
+    top: -120px;
+    right: -120px;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(122,140,110,0.15) 0%, transparent 70%);
+  }
+
+  .lead-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--sage-light);
+    margin-bottom: 20px;
+  }
+
+  .lead-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3vw, 2.8rem);
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.15;
+    margin-bottom: 20px;
+    letter-spacing: -0.02em;
+  }
+
+  .lead-title em {
+    font-style: italic;
+    color: var(--sage-light);
+  }
+
+  .lead-desc {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 36px;
+  }
+
+  .lead-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .lead-bullets li {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.65);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .lead-bullets li::before {
+    content: '✓';
+    color: var(--sage-light);
+    font-size: 0.75rem;
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    border: 1px solid var(--sage);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .lead-form {
+    background: var(--cream);
+    padding: 48px;
+    border-radius: 2px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .lead-form-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--soil);
+    margin-bottom: 8px;
+  }
+
+  .lead-form-sub {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--stone);
+    margin-bottom: 32px;
+  }
+
+  .form-group {
+    margin-bottom: 16px;
+  }
+
+  .form-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--stone);
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .form-input, .form-select, .form-textarea {
+    width: 100%;
+    border: 1.5px solid var(--sand-dark);
+    background: var(--white);
+    padding: 12px 16px;
+    font-family: 'Manrope', sans-serif;
+    font-size: 0.9rem;
+    color: var(--soil);
+    border-radius: 2px;
+    outline: none;
+    transition: border-color 0.2s;
+    appearance: none;
+  }
+
+  .form-input:focus, .form-select:focus, .form-textarea:focus {
+    border-color: var(--sage);
+  }
+
+  .form-textarea { resize: vertical; min-height: 90px; }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+  .form-submit {
+    width: 100%;
+    background: var(--terracotta);
+    color: var(--white);
+    border: none;
+    padding: 16px;
+    border-radius: 2px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: background 0.2s;
+  }
+
+  .form-submit:hover { background: var(--sage-dark); }
+
+  .form-note {
+    text-align: center;
+    margin-top: 12px;
+    font-size: 0.72rem;
+    color: var(--stone);
+  }
+
+  /* ─── CITIES STRIP ─── */
+  .cities-strip {
+    background: var(--sand);
+    padding: 24px 80px;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    overflow: hidden;
+  }
+
+  .cities-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--stone);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .cities-scroll {
+    display: flex;
+    gap: 32px;
+    overflow: hidden;
+    flex: 1;
+  }
+
+  .city-pill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    color: var(--sage-dark);
+    text-decoration: none;
+    transition: color 0.2s;
+    cursor: pointer;
+  }
+
+  .city-pill:hover { color: var(--terracotta); }
+  
+  .city-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--sage-light); }
+
+  /* ─── EDITORIAL SECTION ─── */
+  .editorial-section {
+    padding: 100px 80px;
+    background: var(--cream);
+  }
+
+  .editorial-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 2px;
+    background: var(--sand-dark);
+    margin-top: 48px;
+  }
+
+  .editorial-card {
+    background: var(--cream);
+    padding: 40px;
+    transition: background 0.25s;
+    cursor: pointer;
+  }
+
+  .editorial-card:hover { background: var(--white); }
+
+  .editorial-card.big { padding: 56px; }
+
+  .editorial-cat {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 16px;
+  }
+
+  .editorial-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--soil);
+    line-height: 1.25;
+    margin-bottom: 12px;
+  }
+
+  .editorial-card.big .editorial-title {
+    font-size: 2rem;
+  }
+
+  .editorial-excerpt {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 0.82rem;
+    line-height: 1.7;
+    color: var(--stone);
+  }
+
+  .editorial-meta {
+    margin-top: 20px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--stone);
+  }
+
+  /* ─── PRICING ─── */
+  .pricing-section {
+    padding: 100px 80px;
+    background: var(--white);
+  }
+
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: var(--sand-dark);
+    margin-top: 48px;
+  }
+
+  .pricing-card {
+    background: var(--white);
+    padding: 48px 40px;
+    position: relative;
+  }
+
+  .pricing-card.highlight {
+    background: var(--soil);
+  }
+
+  .pricing-tier {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  .pricing-card:not(.highlight) .pricing-tier { color: var(--stone); }
+  .pricing-card.highlight .pricing-tier { color: var(--sage-light); }
+
+  .pricing-price {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.2rem;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .pricing-card:not(.highlight) .pricing-price { color: var(--soil); }
+  .pricing-card.highlight .pricing-price { color: var(--white); }
+
+  .pricing-period {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    margin-bottom: 32px;
+  }
+
+  .pricing-card:not(.highlight) .pricing-period { color: var(--stone); }
+  .pricing-card.highlight .pricing-period { color: rgba(255,255,255,0.45); }
+
+  .pricing-features {
+    list-style: none;
+    margin-bottom: 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .pricing-features li {
+    font-size: 0.84rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    line-height: 1.4;
+  }
+
+  .pricing-card:not(.highlight) .pricing-features li { color: var(--stone); }
+  .pricing-card.highlight .pricing-features li { color: rgba(255,255,255,0.65); }
+
+  .pricing-features li::before {
+    content: '—';
+    flex-shrink: 0;
+    font-family: 'DM Mono', monospace;
+  }
+
+  .pricing-card:not(.highlight) .pricing-features li::before { color: var(--sage); }
+  .pricing-card.highlight .pricing-features li::before { color: var(--sage-light); }
+
+  .btn-pricing {
+    display: block;
+    text-align: center;
+    padding: 14px;
+    border-radius: 2px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: all 0.25s;
+  }
+
+  .pricing-card:not(.highlight) .btn-pricing {
+    background: var(--sand);
+    color: var(--soil);
+  }
+
+  .pricing-card:not(.highlight) .btn-pricing:hover {
+    background: var(--terracotta);
+    color: var(--white);
+  }
+
+  .pricing-card.highlight .btn-pricing {
+    background: var(--terracotta);
+    color: var(--white);
+  }
+
+  .pricing-card.highlight .btn-pricing:hover {
+    background: var(--sage-light);
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--soil);
+    padding: 64px 80px 40px;
+    color: rgba(255,255,255,0.5);
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    margin-bottom: 32px;
+  }
+
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: var(--white);
+    margin-bottom: 16px;
+  }
+
+  .footer-logo span { color: var(--terracotta); }
+
+  .footer-tagline {
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    font-size: 0.88rem;
+    line-height: 1.6;
+    max-width: 260px;
+    color: rgba(255,255,255,0.4);
+  }
+
+  .footer-col-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.25);
+    margin-bottom: 16px;
+  }
+
+  .footer-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .footer-links a {
+    text-decoration: none;
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.45);
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--sage-light); }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-copy {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.06em;
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-tag { animation: fade-up 0.6s ease both; }
+  .hero-headline { animation: fade-up 0.6s 0.1s ease both; }
+  .hero-sub { animation: fade-up 0.6s 0.2s ease both; }
+  .hero-actions { animation: fade-up 0.6s 0.3s ease both; }
+  .hero-stats { animation: fade-up 0.6s 0.4s ease both; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 1024px) {
+    nav { padding: 16px 32px; }
+    .nav-links { gap: 20px; }
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-left { padding: 60px 40px; }
+    .hero-right { height: 40vh; display: block; }
+    .search-strip { padding: 32px 40px; flex-direction: column; align-items: stretch; }
+    .how-section, .contractors-section, .lead-section,
+    .editorial-section, .pricing-section { padding: 64px 40px; }
+    .steps-grid, .contractor-grid, .pricing-grid { grid-template-columns: 1fr; }
+    .lead-section { grid-template-columns: 1fr; gap: 48px; }
+    .editorial-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .cities-strip { padding: 20px 40px; }
+    .hero-stats { gap: 24px; }
+  }
+
+  @media (max-width: 640px) {
+    nav { padding: 14px 20px; }
+    .nav-links { display: none; }
+    .hero-left { padding: 48px 24px; }
+    .hero-headline { font-size: 2.6rem; }
+    .search-strip { padding: 24px; }
+    .how-section, .contractors-section, .lead-section,
+    .editorial-section, .pricing-section { padding: 48px 24px; }
+    .lead-form { padding: 32px 24px; }
+    footer { padding: 48px 24px 32px; }
+    .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+    .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">SGV<span>Turf</span></a>
+  <ul class="nav-links">
+    <li><a href="#find">Find Contractors</a></li>
+    <li><a href="#resources">Resources</a></li>
+    <li><a href="#cities">Cities</a></li>
+    <li><a href="#rebates">Rebates</a></li>
+    <li><a href="#list" class="nav-cta">List Your Business</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">San Gabriel Valley's Authority</div>
+    <h1 class="hero-headline">
+      Ditch the lawn.<br>
+      Find <em>trusted</em><br>
+      turf pros.
+    </h1>
+    <p class="hero-sub">
+      The definitive directory for turf replacement and xeriscaping in the SGV — from Pasadena to Pomona. Vetted contractors, local rebate guidance, and project quotes in one place.
+    </p>
+    <div class="hero-actions">
+      <a href="#quote" class="btn-primary">Get a Free Quote →</a>
+      <a href="#find" class="btn-ghost">Browse Contractors</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="hero-stat-num">140+</div>
+        <div class="hero-stat-label">Vetted Pros</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">34</div>
+        <div class="hero-stat-label">SGV Cities</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">$2.1M</div>
+        <div class="hero-stat-label">Rebates Captured</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-illustration"></div>
+    <div class="plant-shapes">
+      <svg viewBox="0 0 600 520" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMax meet">
+        <!-- Agave shapes -->
+        <ellipse cx="120" cy="480" rx="90" ry="20" fill="rgba(44,56,32,0.6)"/>
+        <path d="M120 460 Q80 380 40 340 Q60 360 100 390 Q90 330 120 280 Q130 340 120 390 Q150 360 185 340 Q160 380 120 460Z" fill="#3D5230"/>
+        <path d="M120 460 Q120 380 120 280" stroke="#2C3820" stroke-width="2" opacity="0.4"/>
+        
+        <!-- Succulent cluster left -->
+        <ellipse cx="60" cy="490" rx="50" ry="14" fill="rgba(44,56,32,0.4)"/>
+        <circle cx="60" cy="476" r="22" fill="#506840"/>
+        <circle cx="60" cy="476" r="14" fill="#5C7848"/>
+        <circle cx="60" cy="476" r="8" fill="#6B8858"/>
+        
+        <!-- Ornamental grass -->
+        <path d="M300 520 Q285 420 270 340" stroke="#7A9060" stroke-width="3" fill="none" opacity="0.8"/>
+        <path d="M300 520 Q310 430 330 350" stroke="#7A9060" stroke-width="3" fill="none" opacity="0.8"/>
+        <path d="M300 520 Q290 440 280 360 Q275 340 265 320" stroke="#8FA870" stroke-width="2" fill="none" opacity="0.6"/>
+        <path d="M300 520 Q315 440 335 360 Q340 340 350 318" stroke="#8FA870" stroke-width="2" fill="none" opacity="0.6"/>
+        <path d="M300 520 Q295 450 288 370" stroke="#5C7440" stroke-width="2" fill="none" opacity="0.7"/>
+        
+        <!-- Decomposed granite ground texture -->
+        <rect x="0" y="490" width="600" height="30" fill="#4A3828" opacity="0.5"/>
+        
+        <!-- Cactus right -->
+        <rect x="460" y="360" width="28" height="140" rx="14" fill="#4A6038"/>
+        <rect x="488" y="400" width="20" height="60" rx="10" fill="#4A6038"/>
+        <rect x="440" y="420" width="20" height="50" rx="10" fill="#4A6038"/>
+        <ellipse cx="474" cy="358" rx="16" ry="8" fill="#5A7048"/>
+        
+        <!-- Pebble/stone ground -->
+        <ellipse cx="200" cy="504" rx="18" ry="6" fill="#6B5840" opacity="0.4"/>
+        <ellipse cx="380" cy="508" rx="14" ry="5" fill="#6B5840" opacity="0.3"/>
+        <ellipse cx="500" cy="502" rx="20" ry="6" fill="#6B5840" opacity="0.4"/>
+        
+        <!-- Small succulents scattered -->
+        <circle cx="220" cy="490" r="16" fill="#608050"/>
+        <circle cx="220" cy="490" r="9" fill="#7A9868"/>
+        <circle cx="400" cy="488" r="12" fill="#506840"/>
+        <circle cx="400" cy="488" r="7" fill="#688A58"/>
+        
+        <!-- Sun/sky glow -->
+        <ellipse cx="500" cy="120" rx="80" ry="80" fill="rgba(200,96,58,0.08)"/>
+      </svg>
+    </div>
+    <div class="hero-badge">
+      <div class="hero-badge-text">SGV TURF<br/>AUTHORITY<br/>EST. 2024</div>
+    </div>
+  </div>
+</section>
+
+<!-- SEARCH STRIP -->
+<div class="search-strip" id="find">
+  <span class="search-strip-label">Find a Pro</span>
+  <div class="search-row">
+    <select>
+      <option>Service Type</option>
+      <option>Turf Removal</option>
+      <option>Artificial Turf</option>
+      <option>Drought-Tolerant Plants</option>
+      <option>Decomposed Granite</option>
+      <option>Drip Irrigation</option>
+      <option>Full Xeriscape Design</option>
+      <option>Permit Filing</option>
+    </select>
+    <select>
+      <option>City</option>
+      <option>Pasadena</option>
+      <option>Arcadia</option>
+      <option>Monrovia</option>
+      <option>Glendora</option>
+      <option>San Dimas</option>
+      <option>Covina</option>
+      <option>West Covina</option>
+      <option>El Monte</option>
+      <option>Alhambra</option>
+      <option>Temple City</option>
+      <option>Pomona</option>
+    </select>
+    <input type="text" placeholder="Project description (optional)">
+    <button class="btn-search">Search →</button>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section class="how-section">
+  <div class="section-header">
+    <div>
+      <div class="section-eyebrow">Simple Process</div>
+      <h2 class="section-title">From overgrown lawn<br>to <em>gorgeous xeriscape</em></h2>
+    </div>
+  </div>
+  <div class="steps-grid">
+    <div class="step-card">
+      <div class="step-num">01</div>
+      <h3 class="step-title">Describe Your Project</h3>
+      <p class="step-desc">Tell us your property size, preferred style, and timeline. We match you with contractors who specialize in exactly what you need — turf removal, native planting, DG pathways, or a full design-build.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">02</div>
+      <h3 class="step-title">Get Vetted Quotes</h3>
+      <p class="step-desc">Up to 3 pre-screened SGV contractors respond within 48 hours. All are licensed, insured, and familiar with LADWP and local water authority rebate programs — so you capture every dollar you're owed.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">03</div>
+      <h3 class="step-title">Choose & Transform</h3>
+      <p class="step-desc">Compare quotes, portfolios, and reviews side-by-side. Hire with confidence. We track your project and follow up to ensure it goes smoothly from permit to final walkthrough.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED CONTRACTORS -->
+<section class="contractors-section" id="directory">
+  <div class="section-header">
+    <div>
+      <div class="section-eyebrow">Featured Listings</div>
+      <h2 class="section-title">SGV's most trusted<br><em>xeriscape professionals</em></h2>
+    </div>
+    <a href="#" class="btn-ghost" style="white-space:nowrap">View All 140+ →</a>
+  </div>
+  <div class="contractor-grid">
+
+    <div class="contractor-card featured">
+      <div class="featured-badge">Featured</div>
+      <div class="contractor-logo" style="background: var(--sage-dark);">PD</div>
+      <div class="contractor-name">Pasadena DryLand Co.</div>
+      <div class="contractor-city">Pasadena · Arcadia · Temple City</div>
+      <div class="contractor-tags">
+        <span class="tag">Xeriscape Design</span>
+        <span class="tag">Rebate Filing</span>
+        <span class="tag">Native Plants</span>
+      </div>
+      <div class="contractor-rating">
+        <span class="stars">★★★★★</span>
+        <span class="rating-count">4.9 (87 reviews)</span>
+      </div>
+      <div class="contractor-quote">"They handled everything — design, permit, and rebate paperwork. Our LADWP check arrived before they even finished planting."</div>
+      <a class="contractor-cta" href="#">Request a Quote →</a>
+    </div>
+
+    <div class="contractor-card featured">
+      <div class="featured-badge">Featured</div>
+      <div class="contractor-logo" style="background: var(--terracotta);">SV</div>
+      <div class="contractor-name">San Gabriel Valley Turf</div>
+      <div class="contractor-city">Covina · West Covina · Glendora</div>
+      <div class="contractor-tags">
+        <span class="tag">Artificial Turf</span>
+        <span class="tag">Decomposed Granite</span>
+        <span class="tag">Drip Systems</span>
+      </div>
+      <div class="contractor-rating">
+        <span class="stars">★★★★★</span>
+        <span class="rating-count">4.8 (62 reviews)</span>
+      </div>
+      <div class="contractor-quote">"Fast crew, clean work. The DG and boulders look incredibly natural. Neighbors keep asking who did it."</div>
+      <a class="contractor-cta" href="#">Request a Quote →</a>
+    </div>
+
+    <div class="contractor-card">
+      <div class="contractor-logo" style="background: var(--olive);">EG</div>
+      <div class="contractor-name">East SGV Groundworks</div>
+      <div class="contractor-city">Pomona · San Dimas · La Verne</div>
+      <div class="contractor-tags">
+        <span class="tag">Turf Removal</span>
+        <span class="tag">Irrigation</span>
+      </div>
+      <div class="contractor-rating">
+        <span class="stars">★★★★☆</span>
+        <span class="rating-count">4.6 (41 reviews)</span>
+      </div>
+      <div class="contractor-quote">"Competitive pricing and they showed up on time every day. Solid work all around."</div>
+      <a class="contractor-cta" href="#">Request a Quote →</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- CITIES STRIP -->
+<div class="cities-strip" id="cities">
+  <span class="cities-label">Serving All SGV</span>
+  <div class="cities-scroll">
+    <a class="city-pill" href="#"><span class="city-dot"></span>Pasadena</a>
+    <a class="city-pill" href="#"><span class="city-dot"></span>Arcadia</a>
+    <a class="city-pill" href="#"><span class="city-dot"></span>Monrovia</a>
+    <a class="city-pill" href="#"><span class="city-dot"></span>Glendora</a>
+    <a class="city-pill" href="#"><span class="city-dot"></span>Covina</a>
+    <a class="city-pill" href="#"><span class="city-dot"></span>West Covina</a>
+    <a class="city-pill" href="#"><span class="city-dot"></span>El Monte</a>
+    <a class="city-pill" href="#"><span class="city-dot"></span>Alhambra</a>
+    <a class="city-pill" href="#"><span class="city-dot"></span>San Gabriel</a>
+    <a class="city-pill" href="#"><span class="city-dot"></span>Temple City</a>
+    <a class="city-pill" href="#"><span class="city-dot"></span>San Dimas</a>
+    <a class="city-pill" href="#"><span class="city-dot"></span>La Verne</a>
+    <a class="city-pill" href="#"><span class="city-dot"></span>Pomona</a>
+    <a class="city-pill" href="#"><span class="city-dot"></span>Diamond Bar</a>
+    <a class="city-pill" href="#"><span class="city-dot"></span>Rowland Heights</a>
+    <a class="city-pill" href="#"><span class="city-dot"></span>Hacienda Heights</a>
+  </div>
+</div>
+
+<!-- LEAD CAPTURE FORM -->
+<section class="lead-section" id="quote">
+  <div class="lead-left">
+    <div class="lead-eyebrow">Free Project Quotes</div>
+    <h2 class="lead-title">Tell us your vision.<br>We'll find your <em>perfect pro.</em></h2>
+    <p class="lead-desc">Most homeowners leave rebate money on the table because they don't know the right questions to ask. Our matched contractors do — they've filed hundreds of LADWP and SGVMWD rebate applications in the SGV.</p>
+    <ul class="lead-bullets">
+      <li>Matched to contractors in your exact city</li>
+      <li>Up to 3 competitive quotes, no obligation</li>
+      <li>Rebate eligibility check included</li>
+      <li>Average homeowner captures $1,200–$4,500 in rebates</li>
+      <li>Response within 48 hours, guaranteed</li>
+    </ul>
+  </div>
+  <div class="lead-form" id="quote-form">
+    <div class="lead-form-title">Start Your Project</div>
+    <div class="lead-form-sub">Free · No obligation · 2 minutes</div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">First Name</label>
+        <input class="form-input" type="text" placeholder="Maria">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Last Name</label>
+        <input class="form-input" type="text" placeholder="Gonzalez">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Email</label>
+      <input class="form-input" type="email" placeholder="maria@email.com">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Phone</label>
+      <input class="form-input" type="tel" placeholder="(626) 555-0100">
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">City</label>
+        <select class="form-select">
+          <option value="">Select city</option>
+          <option>Pasadena</option><option>Arcadia</option><option>Monrovia</option>
+          <option>Glendora</option><option>Covina</option><option>West Covina</option>
+          <option>El Monte</option><option>Alhambra</option><option>San Gabriel</option>
+          <option>Temple City</option><option>San Dimas</option><option>Pomona</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Lawn Size (sq ft)</label>
+        <select class="form-select">
+          <option>Under 500</option>
+          <option>500–1,000</option>
+          <option>1,000–2,500</option>
+          <option>2,500–5,000</option>
+          <option>5,000+</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Project Type</label>
+      <select class="form-select">
+        <option>Full Xeriscape Design & Install</option>
+        <option>Turf Removal Only</option>
+        <option>Artificial Turf Install</option>
+        <option>Drought-Tolerant Replanting</option>
+        <option>Drip Irrigation System</option>
+        <option>Decomposed Granite Conversion</option>
+        <option>Rebate Application Help</option>
+        <option>Not Sure — Need Consultation</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Tell us more (optional)</label>
+      <textarea class="form-textarea" placeholder="Any details about your property, style preferences, or timeline…"></textarea>
+    </div>
+    <button class="form-submit">Match Me with Contractors →</button>
+    <div class="form-note">🔒 Your info is only shared with matched contractors</div>
+  </div>
+</section>
+
+<!-- EDITORIAL / RESOURCES -->
+<section class="editorial-section" id="resources">
+  <div class="section-header">
+    <div>
+      <div class="section-eyebrow">The SGV Turf Guide</div>
+      <h2 class="section-title">Everything you need to<br><em>plan your project</em></h2>
+    </div>
+    <a href="#" class="btn-ghost" style="white-space:nowrap">All Resources →</a>
+  </div>
+  <div class="editorial-grid">
+    <div class="editorial-card big">
+      <div class="editorial-cat">Rebates & Money</div>
+      <h3 class="editorial-title">The Complete 2025 SGV Water Rebate Guide: How to Claim Up to $5,000 for Your Turf Removal</h3>
+      <p class="editorial-excerpt">LADWP, SGVMWD, and your local water district all have programs running simultaneously — but most homeowners only claim one. Here's how to stack them.</p>
+      <div class="editorial-meta">Updated Jan 2025 · 8 min read</div>
+    </div>
+    <div class="editorial-card">
+      <div class="editorial-cat">Plant Palette</div>
+      <h3 class="editorial-title">15 Native Plants That Thrive in the SGV Heat</h3>
+      <p class="editorial-excerpt">California poppies, Cleveland sage, and deer grass are just the start. A curated list for the inland foothills climate.</p>
+      <div class="editorial-meta">Dec 2024 · 5 min read</div>
+    </div>
+    <div class="editorial-card">
+      <div class="editorial-cat">Permits & Process</div>
+      <h3 class="editorial-title">Do You Need a Permit for Turf Replacement in Your SGV City?</h3>
+      <p class="editorial-excerpt">It depends on your municipality. We mapped out the requirements city-by-city so you're not surprised.</p>
+      <div class="editorial-meta">Nov 2024 · 4 min read</div>
+    </div>
+    <div class="editorial-card">
+      <div class="editorial-cat">Design Styles</div>
+      <h3 class="editorial-title">Decomposed Granite vs. River Rock: Which is Right for Your Yard?</h3>
+      <p class="editorial-excerpt">A side-by-side comparison of cost, maintenance, drainage, and curb appeal — with examples from real SGV projects.</p>
+      <div class="editorial-meta">Oct 2024 · 6 min read</div>
+    </div>
+    <div class="editorial-card">
+      <div class="editorial-cat">Artificial Turf</div>
+      <h3 class="editorial-title">Is Artificial Turf Worth It? An Honest Look at Cost & Heat</h3>
+      <p class="editorial-excerpt">Surface temps, water savings, and longevity — the real numbers from SGV homeowners who made the switch.</p>
+      <div class="editorial-meta">Sep 2024 · 7 min read</div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING FOR CONTRACTORS -->
+<section class="pricing-section" id="list">
+  <div class="section-header">
+    <div>
+      <div class="section-eyebrow">For Contractors</div>
+      <h2 class="section-title">Grow your SGV<br><em>customer base</em></h2>
+    </div>
+  </div>
+  <div class="pricing-grid">
+    <div class="pricing-card">
+      <div class="pricing-tier">Basic Listing</div>
+      <div class="pricing-price">Free</div>
+      <div class="pricing-period">Forever</div>
+      <ul class="pricing-features">
+        <li>Directory profile page</li>
+        <li>1 service category</li>
+        <li>Customer reviews</li>
+        <li>Contact form</li>
+      </ul>
+      <button class="btn-pricing">Claim Your Listing</button>
+    </div>
+    <div class="pricing-card highlight">
+      <div class="pricing-tier">Pro Listing</div>
+      <div class="pricing-price">$149</div>
+      <div class="pricing-period">per month</div>
+      <ul class="pricing-features">
+        <li>Priority placement in search results</li>
+        <li>Up to 5 service categories</li>
+        <li>Featured badge on profile</li>
+        <li>Portfolio photo gallery</li>
+        <li>Verified license display</li>
+        <li>Rebate certification badge</li>
+      </ul>
+      <button class="btn-pricing">Start Pro — 30 Days Free</button>
+    </div>
+    <div class="pricing-card">
+      <div class="pricing-tier">Lead Connect</div>
+      <div class="pricing-price">$29</div>
+      <div class="pricing-period">per qualified lead</div>
+      <ul class="pricing-features">
+        <li>Receive homeowner project requests</li>
+        <li>Leads matched to your city & specialty</li>
+        <li>Full contact info delivered instantly</li>
+        <li>No monthly commitment</li>
+        <li>Only pay for leads you accept</li>
+      </ul>
+      <button class="btn-pricing">Connect to Leads</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo">SGV<span>Turf</span></div>
+      <div class="footer-tagline">The San Gabriel Valley's definitive resource for water-wise landscaping, turf replacement, and xeriscaping.</div>
+    </div>
+    <div>
+      <div class="footer-col-title">Homeowners</div>
+      <ul class="footer-links">
+        <li><a href="#">Get a Free Quote</a></li>
+        <li><a href="#">Find Contractors</a></li>
+        <li><a href="#">Rebate Guide</a></li>
+        <li><a href="#">Project Calculator</a></li>
+        <li><a href="#">Permit Info by City</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Contractors</div>
+      <ul class="footer-links">
+        <li><a href="#">Claim Your Listing</a></li>
+        <li><a href="#">Pro Membership</a></li>
+        <li><a href="#">Lead Connect</a></li>
+        <li><a href="#">Advertise</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Resources</div>
+      <ul class="footer-links">
+        <li><a href="#">SGV City Guide</a></li>
+        <li><a href="#">Water Rebates</a></li>
+        <li><a href="#">Plant Library</a></li>
+        <li><a href="#">Design Inspiration</a></li>
+        <li><a href="#">Blog</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 SGVTurf.com · All rights reserved</div>
+    <div class="footer-copy">Serving Pasadena, Arcadia, Covina, Pomona, and 30+ SGV cities</div>
+  </div>
+</footer>
+
+<script>
+  // Smooth scroll for anchors
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // Nav shadow on scroll
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    nav.style.boxShadow = window.scrollY > 20
+      ? '0 4px 24px rgba(44,31,20,0.1)'
+      : 'none';
+  });
+
+  // Intersection Observer for section fade-ins
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.step-card, .contractor-card, .editorial-card, .pricing-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+
+  // Form submit
+  document.querySelector('.form-submit').addEventListener('click', function() {
+    this.textContent = '✓ Submitted — We\'ll match you within 48 hrs';
+    this.style.background = 'var(--sage-dark)';
+    this.disabled = true;
+  });
+</script>
+
+</body>
+</html>
