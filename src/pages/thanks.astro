@@ -1,0 +1,86 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import PageHero from '../components/PageHero.astro';
+import CollectionCta from '../components/CollectionCta.astro';
+
+const title = 'Thank You | SGV Turf';
+const description =
+  'Thank-you page for SGV Turf inquiry submissions, including careful next-step guidance and links back to core browsing surfaces.';
+---
+
+<BaseLayout title={title} description={description}>
+  <Nav />
+  <main>
+    <PageHero
+      eyebrow="Submission Received"
+      description="Your project brief has been recorded through the current SGV Turf intake flow. This confirms receipt only. It does not imply instant contractor matching, guaranteed incentives, or a fully automated marketplace process."
+      meta={['Structured intake saved', 'Editorial prototype remains careful', 'No instant routing implied']}
+      actions={[
+        { href: '/contractors/', label: 'Browse Contractors' },
+        { href: '/rebates/', label: 'Review Rebates', variant: 'ghost' },
+      ]}
+    >
+      <span slot="title">
+        Thanks for sharing<br />
+        <em>your project brief</em>
+      </span>
+    </PageHero>
+
+    <section class="surface-section surface-section--white">
+      <div class="section-shell detail-grid">
+        <div class="detail-main">
+          <div class="detail-panel">
+            <p class="detail-panel__eyebrow">Confirmation</p>
+            <h2 class="detail-panel__title">The submission is in the system.</h2>
+            <p class="detail-panel__copy">
+              SGV Turf now has the intake details you submitted, including your city, project type,
+              and any notes you added. The current build is still a lightweight editorial product,
+              so this step should be read as a saved inquiry rather than a live marketplace handoff.
+            </p>
+          </div>
+
+          <div class="detail-panel">
+            <p class="detail-panel__eyebrow">What Happens Next</p>
+            <ul class="detail-list">
+              <li>Your brief can be used as structured intake for later workflow integrations.</li>
+              <li>Any future outreach or routing logic can be layered onto this same submission flow.</li>
+              <li>For now, the strongest next move is still comparing city context, contractors, and rebate guidance.</li>
+            </ul>
+          </div>
+        </div>
+
+        <aside class="detail-sidebar">
+          <div class="meta-block">
+            <p class="meta-block__title">Keep Browsing</p>
+            <div class="list-grid">
+              <a href="/cities/">Return to City Guides</a>
+              <a href="/contractors/">Browse Contractor Profiles</a>
+              <a href="/rebates/">Review Estimated Rebates</a>
+            </div>
+          </div>
+
+          <div class="meta-block">
+            <p class="meta-block__title">Good to Know</p>
+            <p class="meta-block__text">
+              Rebate amounts remain estimated, contractor profiles remain seeded examples, and no
+              response timeline is promised on this prototype.
+            </p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <CollectionCta
+      eyebrow="Continue Planning"
+      title="Use the rest of the site to sharpen the brief."
+      text="City pages help with local context, contractor profiles help with positioning, and the rebates hub helps frame budget expectations without implying guaranteed incentives."
+      primaryHref="/cities/"
+      primaryLabel="Explore City Guides"
+      secondaryHref="/resources/"
+      secondaryLabel="Read Resources"
+    />
+  </main>
+  <Footer />
+</BaseLayout>

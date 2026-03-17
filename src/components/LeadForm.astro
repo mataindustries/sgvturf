@@ -2,12 +2,14 @@
 import { cityOptions } from '../data/cities';
 import { lawnSizes, leadFormProjectTypes as projectTypes } from '../data/site';
 
+const sourcePage = Astro.url.pathname;
+
 const benefits = [
   'Reference city-specific planning notes before you talk to a pro',
-  'Compare contractor specialties and service areas in one place',
-  'Use editorial resources to shape your project brief',
-  'Prototype inquiry form retained for future backend wiring',
-  'No sign-in required to browse the seeded directory content',
+  'Use rebate guidance and editorial resources to frame the project scope',
+  'Send a structured intake without implying instant contractor matching',
+  'Keep the brief organized for later workflow or backend integrations',
+  'No sign-in required to submit the current SGV Turf inquiry form',
 ];
 ---
 
@@ -20,9 +22,9 @@ const benefits = [
         Use it to <em>compare smarter.</em>
       </h2>
       <p class="lead-section__description">
-        This form currently serves as a prototype placeholder while the marketplace workflow is
-        still being built out. For now, use it alongside the new city guides, sample contractor
-        profiles, and editorial resources to organize your project scope.
+        This intake now saves a real submission through the current Cloudflare Pages flow. It is
+        still a careful, lightweight project brief, not a promise of instant routing, guaranteed
+        rebates, or a fully operational contractor marketplace.
       </p>
 
       <ul class="benefit-list">
@@ -32,75 +34,230 @@ const benefits = [
       </ul>
     </div>
 
-    <form class="lead-form">
+    <form class="lead-form" action="/api/lead" method="post" data-lead-form>
       <h3 class="lead-form__title">Outline Your Project</h3>
-      <p class="lead-form__subtitle">Prototype form · Content-first build</p>
+      <p class="lead-form__subtitle">Structured intake · No instant matching promises</p>
+
+      <label class="field">
+        <span class="field__label">Name</span>
+        <input class="field__control" type="text" name="name" placeholder="Maria Gonzalez" required />
+        <span class="field__error" data-field-error="name"></span>
+      </label>
 
       <div class="form-row">
         <label class="field">
-          <span class="field__label">First Name</span>
-          <input class="field__control" type="text" name="firstName" placeholder="Maria" />
+          <span class="field__label">Email</span>
+          <input
+            class="field__control"
+            type="email"
+            name="email"
+            placeholder="maria@email.com"
+            required
+          />
+          <span class="field__error" data-field-error="email"></span>
         </label>
 
         <label class="field">
-          <span class="field__label">Last Name</span>
-          <input class="field__control" type="text" name="lastName" placeholder="Gonzalez" />
+          <span class="field__label">Phone</span>
+          <input class="field__control" type="tel" name="phone" placeholder="(626) 555-0100" />
+          <span class="field__error" data-field-error="phone"></span>
         </label>
       </div>
-
-      <label class="field">
-        <span class="field__label">Email</span>
-        <input class="field__control" type="email" name="email" placeholder="maria@email.com" />
-      </label>
-
-      <label class="field">
-        <span class="field__label">Phone</span>
-        <input class="field__control" type="tel" name="phone" placeholder="(626) 555-0100" />
-      </label>
 
       <div class="form-row">
         <label class="field">
           <span class="field__label">City</span>
-          <select class="field__control" name="city">
+          <select class="field__control" name="city" required>
             <option value="">Select city</option>
             {cityOptions.map((city) => (
-              <option>{city}</option>
+              <option value={city}>{city}</option>
             ))}
           </select>
+          <span class="field__error" data-field-error="city"></span>
         </label>
 
         <label class="field">
           <span class="field__label">Lawn Size (sq ft)</span>
           <select class="field__control" name="lawnSize">
+            <option value="">Select size</option>
             {lawnSizes.map((size) => (
-              <option>{size}</option>
+              <option value={size}>{size}</option>
             ))}
           </select>
+          <span class="field__error" data-field-error="lawnSize"></span>
         </label>
       </div>
 
       <label class="field">
         <span class="field__label">Project Type</span>
-        <select class="field__control" name="projectType">
+        <select class="field__control" name="projectType" required>
+          <option value="">Select project type</option>
           {projectTypes.map((projectType) => (
-            <option>{projectType}</option>
+            <option value={projectType}>{projectType}</option>
           ))}
         </select>
+        <span class="field__error" data-field-error="projectType"></span>
       </label>
 
       <label class="field">
         <span class="field__label">Tell us more (optional)</span>
         <textarea
           class="field__control field__control--textarea"
-          name="details"
+          name="message"
           placeholder="Any details about your property, style preferences, or timeline."
         ></textarea>
+        <span class="field__error" data-field-error="message"></span>
       </label>
 
-      <button class="button button--primary button--submit" type="submit">
-        Save Prototype Inquiry
+      <div class="field field--hidden" aria-hidden="true">
+        <label>
+          <span class="field__label">Company</span>
+          <input class="field__control" type="text" name="company" tabindex="-1" autocomplete="off" />
+        </label>
+      </div>
+
+      <input type="hidden" name="sourcePage" value={sourcePage} />
+      <input type="hidden" name="turnstileToken" value="" />
+
+      <button class="button button--primary button--submit" type="submit" data-submit-button>
+        Send Project Brief
       </button>
-      <p class="lead-form__note">Not yet connected to live submissions or contractor routing.</p>
+      <p class="lead-form__status" data-form-status hidden></p>
+      <p class="lead-form__note">
+        Submitted through the current SGV Turf intake endpoint. No guaranteed rebates, live
+        contractor routing, or verified review system implied.
+      </p>
     </form>
   </div>
 </section>
+
+<script>
+  const trackLeadEvent = (eventName, params) => {
+    if (window.SGVTurfAnalytics && typeof window.SGVTurfAnalytics.track === 'function') {
+      window.SGVTurfAnalytics.track(eventName, params);
+    }
+  };
+
+  document.querySelectorAll('[data-lead-form]').forEach((form) => {
+    if (!(form instanceof HTMLFormElement)) {
+      return;
+    }
+
+    const submitButton = form.querySelector('[data-submit-button]');
+    const statusNode = form.querySelector('[data-form-status]');
+    const defaultButtonLabel = submitButton?.textContent || 'Send Project Brief';
+
+    const setStatus = (state, message) => {
+      if (!statusNode) {
+        return;
+      }
+
+      statusNode.hidden = !message;
+      statusNode.dataset.state = state;
+      statusNode.textContent = message;
+    };
+
+    const clearFieldErrors = () => {
+      form.querySelectorAll('[data-field-error]').forEach((node) => {
+        node.textContent = '';
+      });
+
+      Array.from(form.elements).forEach((field) => {
+        if (
+          field instanceof HTMLInputElement ||
+          field instanceof HTMLSelectElement ||
+          field instanceof HTMLTextAreaElement
+        ) {
+          field.removeAttribute('aria-invalid');
+        }
+      });
+    };
+
+    const applyFieldErrors = (errors = {}) => {
+      Object.entries(errors).forEach(([fieldName, message]) => {
+        const field = form.elements.namedItem(fieldName);
+        const errorNode = form.querySelector(`[data-field-error="${fieldName}"]`);
+
+        if (
+          field instanceof HTMLInputElement ||
+          field instanceof HTMLSelectElement ||
+          field instanceof HTMLTextAreaElement
+        ) {
+          field.setAttribute('aria-invalid', 'true');
+        }
+
+        if (errorNode) {
+          errorNode.textContent = String(message);
+        }
+      });
+    };
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      clearFieldErrors();
+
+      if (!form.reportValidity()) {
+        return;
+      }
+
+      const formData = new FormData(form);
+      const sourcePage = String(formData.get('sourcePage') || window.location.pathname || '/');
+      const projectType = String(formData.get('projectType') || '');
+
+      setStatus('pending', 'Sending your project brief...');
+
+      if (submitButton instanceof HTMLButtonElement) {
+        submitButton.disabled = true;
+        submitButton.textContent = 'Sending...';
+      }
+
+      trackLeadEvent('lead_submit_attempt', {
+        source_page: sourcePage,
+        project_type: projectType,
+      });
+
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+          },
+          body: formData,
+        });
+
+        const payload = await response.json().catch(() => null);
+
+        if (!response.ok || !payload?.ok) {
+          const errorMessage = payload?.message || 'We could not send that project brief right now.';
+          applyFieldErrors(payload?.errors || {});
+          setStatus('error', errorMessage);
+          trackLeadEvent('lead_submit_error', {
+            source_page: sourcePage,
+            project_type: projectType,
+            error_type: response.status || 'network',
+          });
+          return;
+        }
+
+        setStatus('success', 'Project brief received. Redirecting...');
+        trackLeadEvent('lead_submit_success', {
+          source_page: sourcePage,
+          project_type: projectType,
+        });
+        window.location.assign(payload.redirectTo || '/thanks');
+      } catch {
+        setStatus('error', 'There was a network problem. Please try again in a moment.');
+        trackLeadEvent('lead_submit_error', {
+          source_page: sourcePage,
+          project_type: projectType,
+          error_type: 'network',
+        });
+      } finally {
+        if (submitButton instanceof HTMLButtonElement) {
+          submitButton.disabled = false;
+          submitButton.textContent = defaultButtonLabel;
+        }
+      }
+    });
+  });
+</script>
