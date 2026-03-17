@@ -1,0 +1,130 @@
+---
+const cities = [
+  'Pasadena',
+  'Arcadia',
+  'Monrovia',
+  'Glendora',
+  'Covina',
+  'West Covina',
+  'El Monte',
+  'Alhambra',
+  'San Gabriel',
+  'Temple City',
+  'San Dimas',
+  'Pomona',
+];
+
+const lawnSizes = ['Under 500', '500-1,000', '1,000-2,500', '2,500-5,000', '5,000+'];
+const projectTypes = [
+  'Full Xeriscape Design & Install',
+  'Turf Removal Only',
+  'Artificial Turf Install',
+  'Drought-Tolerant Replanting',
+  'Drip Irrigation System',
+  'Decomposed Granite Conversion',
+  'Rebate Application Help',
+  'Not Sure, Need Consultation',
+];
+
+const benefits = [
+  'Matched to contractors in your exact city',
+  'Up to 3 competitive quotes, no obligation',
+  'Rebate eligibility check included',
+  'Average homeowner captures $1,200-$4,500 in rebates',
+  'Response within 48 hours, guaranteed',
+];
+---
+
+<section class="lead-section" id="quote">
+  <div class="section-shell lead-section__inner">
+    <div class="lead-section__copy">
+      <p class="section-eyebrow section-eyebrow--soft">Free Project Quotes</p>
+      <h2 class="lead-section__title">
+        Tell us your vision.<br />
+        We&apos;ll find your <em>perfect pro.</em>
+      </h2>
+      <p class="lead-section__description">
+        Most homeowners leave rebate money on the table because they do not know the right questions
+        to ask. Our matched contractors do. They have filed hundreds of LADWP and SGVMWD rebate
+        applications across the SGV.
+      </p>
+
+      <ul class="benefit-list">
+        {benefits.map((benefit) => (
+          <li>{benefit}</li>
+        ))}
+      </ul>
+    </div>
+
+    <form class="lead-form">
+      <h3 class="lead-form__title">Start Your Project</h3>
+      <p class="lead-form__subtitle">Free · No obligation · 2 minutes</p>
+
+      <div class="form-row">
+        <label class="field">
+          <span class="field__label">First Name</span>
+          <input class="field__control" type="text" name="firstName" placeholder="Maria" />
+        </label>
+
+        <label class="field">
+          <span class="field__label">Last Name</span>
+          <input class="field__control" type="text" name="lastName" placeholder="Gonzalez" />
+        </label>
+      </div>
+
+      <label class="field">
+        <span class="field__label">Email</span>
+        <input class="field__control" type="email" name="email" placeholder="maria@email.com" />
+      </label>
+
+      <label class="field">
+        <span class="field__label">Phone</span>
+        <input class="field__control" type="tel" name="phone" placeholder="(626) 555-0100" />
+      </label>
+
+      <div class="form-row">
+        <label class="field">
+          <span class="field__label">City</span>
+          <select class="field__control" name="city">
+            <option value="">Select city</option>
+            {cities.map((city) => (
+              <option>{city}</option>
+            ))}
+          </select>
+        </label>
+
+        <label class="field">
+          <span class="field__label">Lawn Size (sq ft)</span>
+          <select class="field__control" name="lawnSize">
+            {lawnSizes.map((size) => (
+              <option>{size}</option>
+            ))}
+          </select>
+        </label>
+      </div>
+
+      <label class="field">
+        <span class="field__label">Project Type</span>
+        <select class="field__control" name="projectType">
+          {projectTypes.map((projectType) => (
+            <option>{projectType}</option>
+          ))}
+        </select>
+      </label>
+
+      <label class="field">
+        <span class="field__label">Tell us more (optional)</span>
+        <textarea
+          class="field__control field__control--textarea"
+          name="details"
+          placeholder="Any details about your property, style preferences, or timeline."
+        ></textarea>
+      </label>
+
+      <button class="button button--primary button--submit" type="submit">
+        Match Me with Contractors
+      </button>
+      <p class="lead-form__note">Private. Your info is only shared with matched contractors.</p>
+    </form>
+  </div>
+</section>

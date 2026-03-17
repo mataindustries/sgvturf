@@ -1,0 +1,52 @@
+---
+const year = new Date().getUTCFullYear();
+
+const columns = [
+  {
+    title: 'Homeowners',
+    links: ['Get a Free Quote', 'Find Contractors', 'Rebate Guide', 'Project Calculator', 'Permit Info by City'],
+  },
+  {
+    title: 'Contractors',
+    links: ['Claim Your Listing', 'Pro Membership', 'Lead Connect', 'Advertise'],
+  },
+  {
+    title: 'Resources',
+    links: ['SGV City Guide', 'Water Rebates', 'Plant Library', 'Design Inspiration', 'Blog'],
+  },
+];
+---
+
+<footer class="site-footer">
+  <div class="section-shell">
+    <div class="site-footer__grid">
+      <div class="site-footer__intro">
+        <a class="brand-mark brand-mark--footer" href="#top">SGV<span>Turf</span></a>
+        <p class="site-footer__tagline">
+          The San Gabriel Valley&apos;s definitive resource for water-wise landscaping, turf
+          replacement, and xeriscaping.
+        </p>
+      </div>
+
+      {columns.map((column) => (
+        <div>
+          <p class="site-footer__title">{column.title}</p>
+          <ul class="site-footer__links">
+            {column.links.map((link) => (
+              <li>
+                <a href="#quote">{link}</a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+
+    <div class="site-footer__bottom">
+      <p class="site-footer__copy">© {year} SGVTurf.com · All rights reserved</p>
+      <p class="site-footer__copy">
+        Serving Pasadena, Arcadia, Covina, Pomona, and 30+ SGV cities
+      </p>
+    </div>
+  </div>
+</footer>

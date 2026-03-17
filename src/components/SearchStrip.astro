@@ -1,0 +1,50 @@
+---
+const services = [
+  'Service Type',
+  'Turf Removal',
+  'Artificial Turf',
+  'Drought-Tolerant Plants',
+  'Decomposed Granite',
+  'Drip Irrigation',
+  'Full Xeriscape Design',
+  'Permit Filing',
+];
+
+const cities = [
+  'City',
+  'Pasadena',
+  'Arcadia',
+  'Monrovia',
+  'Glendora',
+  'San Dimas',
+  'Covina',
+  'West Covina',
+  'El Monte',
+  'Alhambra',
+  'Temple City',
+  'Pomona',
+];
+---
+
+<section class="search-strip" id="find" aria-labelledby="find-pro-label">
+  <div class="section-shell search-strip__inner">
+    <p class="search-strip__label" id="find-pro-label">Find a Pro</p>
+
+    <form class="search-strip__form">
+      <select aria-label="Service type">
+        {services.map((service) => (
+          <option>{service}</option>
+        ))}
+      </select>
+
+      <select aria-label="City">
+        {cities.map((city) => (
+          <option>{city}</option>
+        ))}
+      </select>
+
+      <input type="text" placeholder="Project description (optional)" aria-label="Project description" />
+      <button class="button button--search" type="submit">Search</button>
+    </form>
+  </div>
+</section>

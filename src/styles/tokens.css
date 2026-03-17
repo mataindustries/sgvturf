@@ -1,0 +1,39 @@
+:root {
+  --font-body: 'Manrope', sans-serif;
+  --font-display: 'Playfair Display', serif;
+  --font-editorial: 'Libre Baskerville', serif;
+  --font-mono: 'DM Mono', monospace;
+
+  --color-sage: #7a8c6e;
+  --color-sage-light: #b5c4a8;
+  --color-sage-dark: #4a5c40;
+  --color-terracotta: #c8603a;
+  --color-terracotta-light: #e8927a;
+  --color-sand: #e8dfc8;
+  --color-sand-dark: #d4c8a8;
+  --color-soil: #2c1f14;
+  --color-cream: #f1eadc;
+  --color-paper: #f6f0e4;
+  --color-white: #fdfaf4;
+  --color-stone: #8c8070;
+  --color-olive: #6b7340;
+  --color-line: rgba(44, 31, 20, 0.12);
+  --color-line-strong: rgba(44, 31, 20, 0.2);
+  --color-shadow: rgba(55, 41, 29, 0.08);
+  --color-shadow-strong: rgba(55, 41, 29, 0.14);
+
+  --content-max: 1280px;
+  --page-gutter: clamp(1.5rem, 4vw, 5rem);
+  --section-space: clamp(3.5rem, 8vw, 6.25rem);
+  --section-gap: clamp(2rem, 4vw, 4rem);
+  --radius-sm: 2px;
+  --radius-pill: 999px;
+
+  --border-soft: 1px solid var(--color-line);
+  --border-panel: 1.5px solid var(--color-sand-dark);
+  --shadow-card: 0 18px 45px var(--color-shadow);
+  --shadow-lift: 0 14px 40px rgba(74, 92, 64, 0.11);
+
+  --transition-fast: 180ms ease;
+  --transition-base: 260ms ease;
+}

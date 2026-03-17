@@ -1,0 +1,75 @@
+---
+const plans = [
+  {
+    tier: 'Basic Listing',
+    price: 'Free',
+    period: 'Forever',
+    features: ['Directory profile page', '1 service category', 'Customer reviews', 'Contact form'],
+    emphasis: false,
+    cta: 'Claim Your Listing',
+  },
+  {
+    tier: 'Pro Listing',
+    price: '$149',
+    period: 'per month',
+    features: [
+      'Priority placement in search results',
+      'Up to 5 service categories',
+      'Featured badge on profile',
+      'Portfolio photo gallery',
+      'Verified license display',
+      'Rebate certification badge',
+    ],
+    emphasis: true,
+    cta: 'Start Pro · 30 Days Free',
+  },
+  {
+    tier: 'Lead Connect',
+    price: '$29',
+    period: 'per qualified lead',
+    features: [
+      'Receive homeowner project requests',
+      'Leads matched to your city and specialty',
+      'Full contact info delivered instantly',
+      'No monthly commitment',
+      'Only pay for leads you accept',
+    ],
+    emphasis: false,
+    cta: 'Connect to Leads',
+  },
+];
+---
+
+<section class="surface-section surface-section--white" id="list">
+  <div class="section-shell">
+    <div class="section-header">
+      <div>
+        <p class="section-eyebrow">For Contractors</p>
+        <h2 class="section-title">
+          Grow your SGV<br />
+          <em>customer base</em>
+        </h2>
+      </div>
+    </div>
+
+    <div class="pricing-grid">
+      {plans.map((plan) => (
+        <article class:list={['pricing-card', plan.emphasis && 'pricing-card--emphasis']}>
+          <p class="pricing-card__tier">{plan.tier}</p>
+          <div class="pricing-card__price">{plan.price}</div>
+          <div class="pricing-card__period">{plan.period}</div>
+
+          <ul class="pricing-card__features">
+            {plan.features.map((feature) => (
+              <li>{feature}</li>
+            ))}
+          </ul>
+
+          <a class:list={['button', 'button--pricing', plan.emphasis ? 'button--pricing-dark' : 'button--pricing-light']} href="#quote">
+            {plan.cta}
+          </a>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

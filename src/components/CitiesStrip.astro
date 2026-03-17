@@ -1,0 +1,34 @@
+---
+const cities = [
+  'Pasadena',
+  'Arcadia',
+  'Monrovia',
+  'Glendora',
+  'Covina',
+  'West Covina',
+  'El Monte',
+  'Alhambra',
+  'San Gabriel',
+  'Temple City',
+  'San Dimas',
+  'La Verne',
+  'Pomona',
+  'Diamond Bar',
+  'Rowland Heights',
+  'Hacienda Heights',
+];
+---
+
+<section class="cities-strip" id="cities" aria-label="Cities served">
+  <div class="section-shell cities-strip__inner">
+    <p class="cities-strip__label">Serving All SGV</p>
+    <div class="cities-strip__list">
+      {cities.map((city) => (
+        <a class="city-pill" href="#quote">
+          <span class="city-pill__dot"></span>
+          {city}
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

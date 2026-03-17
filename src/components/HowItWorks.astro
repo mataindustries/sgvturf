@@ -1,0 +1,46 @@
+---
+const steps = [
+  {
+    number: '01',
+    title: 'Describe Your Project',
+    description:
+      'Tell us your property size, preferred style, and timeline. We match you with contractors who specialize in exactly what you need: turf removal, native planting, DG pathways, or a full design-build.',
+  },
+  {
+    number: '02',
+    title: 'Get Vetted Quotes',
+    description:
+      'Up to 3 pre-screened SGV contractors respond within 48 hours. All are licensed, insured, and familiar with LADWP and local water authority rebate programs, so you capture every dollar you are owed.',
+  },
+  {
+    number: '03',
+    title: 'Choose & Transform',
+    description:
+      'Compare quotes, portfolios, and reviews side-by-side. Hire with confidence. We track your project and follow up to ensure it goes smoothly from permit to final walkthrough.',
+  },
+];
+---
+
+<section class="surface-section surface-section--cream">
+  <div class="section-shell">
+    <div class="section-header">
+      <div>
+        <p class="section-eyebrow">Simple Process</p>
+        <h2 class="section-title">
+          From overgrown lawn<br />
+          to <em>gorgeous xeriscape</em>
+        </h2>
+      </div>
+    </div>
+
+    <div class="steps-grid">
+      {steps.map((step) => (
+        <article class="step-card">
+          <div class="step-card__number">{step.number}</div>
+          <h3 class="step-card__title">{step.title}</h3>
+          <p class="step-card__description">{step.description}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
