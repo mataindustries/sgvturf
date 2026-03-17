@@ -1,0 +1,103 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import PageHero from '../../components/PageHero.astro';
+import CollectionCta from '../../components/CollectionCta.astro';
+import { cities } from '../../data/cities';
+import type { CityGuide } from '../../data/cities';
+
+export function getStaticPaths() {
+  return cities.map((city) => ({
+    params: { slug: city.slug },
+    props: { city },
+  }));
+}
+
+const { city } = Astro.props as { city: CityGuide };
+const nearbyGuides = cities.filter((entry) => city.nearbyCities.includes(entry.name));
+---
+
+<BaseLayout title={`${city.name} Landscaping Guide | SGV Turf`} description={city.metaDescription}>
+  <Nav />
+  <main>
+    <PageHero
+      eyebrow="City Guide"
+      description={city.intro}
+      meta={[city.nearbyCities.join(' · '), `${city.commonNeeds.length} common project themes`]}
+      actions={[
+        { href: '/cities/', label: 'Back to Cities', variant: 'ghost' },
+        { href: '/contractors/', label: 'Browse Contractor Profiles' },
+      ]}
+    >
+      <span slot="title">
+        {city.name}<br />
+        <em>landscape guide</em>
+      </span>
+    </PageHero>
+
+    <section class="surface-section surface-section--cream">
+      <div class="section-shell detail-grid">
+        <div class="detail-main">
+          <div class="detail-panel">
+            <p class="detail-panel__eyebrow">Overview</p>
+            <h2 class="detail-panel__title">{city.headline}</h2>
+            <div class="detail-richtext">
+              {city.narrative.map((paragraph) => (
+                <p>{paragraph}</p>
+              ))}
+            </div>
+          </div>
+
+          <div class="detail-panel">
+            <p class="detail-panel__eyebrow">Common Landscaping Needs</p>
+            <ul class="detail-list">
+              {city.commonNeeds.map((need) => (
+                <li>{need}</li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="detail-panel">
+            <p class="detail-panel__eyebrow">Local Notes</p>
+            <ul class="detail-list">
+              {city.localNotes.map((note) => (
+                <li>{note}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <aside class="detail-sidebar">
+          <div class="meta-block">
+            <p class="meta-block__title">Nearby Guides</p>
+            <div class="list-grid">
+              {nearbyGuides.map((guide) => (
+                <a href={`/cities/${guide.slug}/`}>{guide.name}</a>
+              ))}
+            </div>
+          </div>
+
+          <div class="meta-block">
+            <p class="meta-block__title">Best Paired With</p>
+            <p class="meta-block__text">
+              This city page works well alongside contractor profiles that match the lot conditions
+              and the editorial resources focused on front-yard planning and irrigation upgrades.
+            </p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <CollectionCta
+      eyebrow="Next Step"
+      title={city.ctaTitle}
+      text={city.ctaText}
+      primaryHref="/contractors/"
+      primaryLabel="Compare Profiles"
+      secondaryHref="/resources/"
+      secondaryLabel="Read Resources"
+    />
+  </main>
+  <Footer />
+</BaseLayout>

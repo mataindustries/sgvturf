@@ -1,0 +1,70 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import PageHero from '../../components/PageHero.astro';
+import CityCard from '../../components/CityCard.astro';
+import CollectionCta from '../../components/CollectionCta.astro';
+import { cities } from '../../data/cities';
+
+const title = 'SGV City Guides | SGV Turf';
+const description =
+  'Explore 12 seeded SGV city guides covering common landscaping needs, drought-smart planning considerations, and practical next steps.';
+---
+
+<BaseLayout title={title} description={description}>
+  <Nav />
+  <main>
+    <PageHero
+      eyebrow="Regional Planning"
+      description="Each city guide is written to feel local to the San Gabriel Valley while remaining generic and non-deceptive. The goal is to give homeowners a more grounded starting point before they compare actual contractors."
+      meta={['12 SGV cities', 'Common needs', 'Useful local context']}
+      actions={[
+        { href: '/contractors/', label: 'Browse Contractors', variant: 'ghost' },
+        { href: '/resources/', label: 'Read Resources' },
+      ]}
+    >
+      <span slot="title">
+        SGV city guides for<br />
+        <em>drought-smart planning</em>
+      </span>
+    </PageHero>
+
+    <section class="surface-section surface-section--white">
+      <div class="section-shell">
+        <div class="section-header">
+          <div>
+            <p class="section-eyebrow">Cities</p>
+            <h2 class="section-title">
+              Regional context for<br />
+              <em>real neighborhood conditions</em>
+            </h2>
+          </div>
+        </div>
+
+        <p class="collection-lede">
+          Foothill lots, compact historic blocks, and broader suburban front yards do not need the
+          same landscape strategy. These pages help frame those differences before you choose a
+          direction.
+        </p>
+
+        <div class="city-grid">
+          {cities.map((city) => (
+            <CityCard city={city} />
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <CollectionCta
+      eyebrow="Keep Researching"
+      title="Use the guides to narrow your project brief."
+      text="Once you know what your city context suggests, the contractor profiles and editorial resources become much easier to compare."
+      primaryHref="/contractors/"
+      primaryLabel="Compare Contractor Profiles"
+      secondaryHref="/resources/"
+      secondaryLabel="Browse Resources"
+    />
+  </main>
+  <Footer />
+</BaseLayout>

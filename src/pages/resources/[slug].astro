@@ -1,0 +1,125 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import PageHero from '../../components/PageHero.astro';
+import ResourceCard from '../../components/ResourceCard.astro';
+import CollectionCta from '../../components/CollectionCta.astro';
+import { resources } from '../../data/resources';
+import type { ResourceArticle } from '../../data/resources';
+
+export function getStaticPaths() {
+  return resources.map((article) => ({
+    params: { slug: article.slug },
+    props: { article },
+  }));
+}
+
+const { article } = Astro.props as { article: ResourceArticle };
+const relatedArticles = resources.filter((entry) => entry.slug !== article.slug).slice(0, 2);
+---
+
+<BaseLayout title={`${article.title} | SGV Turf`} description={article.metaDescription}>
+  <Nav />
+  <main>
+    <PageHero
+      eyebrow={article.category}
+      description={article.excerpt}
+      meta={[article.publishedLabel, article.readTime, article.tags.join(' · ')]}
+      actions={[
+        { href: '/resources/', label: 'Back to Resources', variant: 'ghost' },
+        { href: '/cities/', label: 'Explore City Guides' },
+      ]}
+    >
+      <span slot="title">{article.title}</span>
+    </PageHero>
+
+    <section class="surface-section surface-section--white">
+      <div class="section-shell article-grid">
+        <article class="article-main">
+          <div class="article-panel">
+            <p class="article-panel__eyebrow">Intro</p>
+            <p class="article-panel__copy">{article.intro}</p>
+          </div>
+
+          <div class="article-panel">
+            <p class="article-panel__eyebrow">Key Takeaways</p>
+            <ul class="article-list">
+              {article.keyTakeaways.map((takeaway) => (
+                <li>{takeaway}</li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="article-prose">
+            {article.sections.map((section) => (
+              <section class="article-section">
+                <h2>{section.heading}</h2>
+                {section.paragraphs.map((paragraph) => (
+                  <p>{paragraph}</p>
+                ))}
+                {section.bullets && (
+                  <ul class="article-list">
+                    {section.bullets.map((bullet) => (
+                      <li>{bullet}</li>
+                    ))}
+                  </ul>
+                )}
+              </section>
+            ))}
+          </div>
+        </article>
+
+        <aside class="article-sidebar">
+          <div class="meta-block">
+            <p class="meta-block__title">Article Topics</p>
+            <ul class="meta-list">
+              {article.tags.map((tag) => (
+                <li>{tag}</li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="meta-block">
+            <p class="meta-block__title">How to Use This</p>
+            <p class="meta-block__text">
+              Pair this article with the city guides if you want the planning advice translated into
+              different SGV lot types and neighborhood contexts.
+            </p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="surface-section surface-section--cream">
+      <div class="section-shell">
+        <div class="section-header">
+          <div>
+            <p class="section-eyebrow">More Reading</p>
+            <h2 class="section-title">
+              Continue with another<br />
+              <em>planning article</em>
+            </h2>
+          </div>
+        </div>
+
+        <div class="resource-list">
+          {relatedArticles.map((entry) => (
+            <ResourceCard article={entry} featured={false} />
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <CollectionCta
+      eyebrow="Next Step"
+      title={article.ctaTitle}
+      text={article.ctaText}
+      primaryHref="/resources/"
+      primaryLabel="Browse All Resources"
+      secondaryHref="/contractors/"
+      secondaryLabel="Compare Contractor Profiles"
+    />
+  </main>
+  <Footer />
+</BaseLayout>

@@ -1,0 +1,24 @@
+---
+import type { CityGuide } from '../data/cities';
+
+interface Props {
+  city: CityGuide;
+}
+
+const { city } = Astro.props;
+---
+
+<article class="city-guide-card">
+  <p class="city-guide-card__eyebrow">City Guide</p>
+  <h3 class="city-guide-card__title">{city.name}</h3>
+  <p class="city-guide-card__headline">{city.headline}</p>
+  <p class="city-guide-card__intro">{city.intro}</p>
+
+  <ul class="city-guide-card__list">
+    {city.commonNeeds.slice(0, 3).map((need) => (
+      <li>{need}</li>
+    ))}
+  </ul>
+
+  <a class="inline-link" href={`/cities/${city.slug}/`}>Read the Guide</a>
+</article>

@@ -1,0 +1,30 @@
+---
+import type { ContractorProfile } from '../data/contractors';
+
+interface Props {
+  contractor: ContractorProfile;
+}
+
+const { contractor } = Astro.props;
+---
+
+<article class:list={['contractor-card', contractor.featured && 'contractor-card--featured']}>
+  {contractor.featured && <div class="contractor-card__badge">Featured</div>}
+
+  <div class:list={['contractor-card__logo', `contractor-card__logo--${contractor.tone}`]}>
+    {contractor.initials}
+  </div>
+
+  <h3 class="contractor-card__name">{contractor.name}</h3>
+  <p class="contractor-card__city">{contractor.serviceAreas.join(' · ')}</p>
+  <p class="contractor-card__summary">{contractor.tagline}</p>
+
+  <div class="tag-list">
+    {contractor.specialties.map((specialty) => (
+      <span class="tag">{specialty}</span>
+    ))}
+  </div>
+
+  <p class="contractor-card__blurb">{contractor.trustBlurb}</p>
+  <a class="inline-link" href={`/contractors/${contractor.slug}/`}>View Sample Profile</a>
+</article>

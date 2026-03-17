@@ -1,22 +1,5 @@
 ---
-const cities = [
-  'Pasadena',
-  'Arcadia',
-  'Monrovia',
-  'Glendora',
-  'Covina',
-  'West Covina',
-  'El Monte',
-  'Alhambra',
-  'San Gabriel',
-  'Temple City',
-  'San Dimas',
-  'La Verne',
-  'Pomona',
-  'Diamond Bar',
-  'Rowland Heights',
-  'Hacienda Heights',
-];
+import { cities } from '../data/cities';
 ---
 
 <section class="cities-strip" id="cities" aria-label="Cities served">
@@ -24,9 +7,9 @@ const cities = [
     <p class="cities-strip__label">Serving All SGV</p>
     <div class="cities-strip__list">
       {cities.map((city) => (
-        <a class="city-pill" href="#quote">
+        <a class="city-pill" href={`/cities/${city.slug}/`}>
           <span class="city-pill__dot"></span>
-          {city}
+          {city.name}
         </a>
       ))}
     </div>

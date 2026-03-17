@@ -1,0 +1,46 @@
+---
+interface Action {
+  href: string;
+  label: string;
+  variant?: 'primary' | 'ghost';
+}
+
+interface Props {
+  eyebrow: string;
+  description: string;
+  meta?: string[];
+  actions?: Action[];
+}
+
+const { eyebrow, description, meta = [], actions = [] } = Astro.props;
+---
+
+<section class="page-hero">
+  <div class="section-shell page-hero__inner">
+    <div class="page-hero__copy">
+      <p class="page-hero__eyebrow">{eyebrow}</p>
+      <h1 class="page-hero__title">
+        <slot name="title" />
+      </h1>
+      <p class="page-hero__description">{description}</p>
+
+      {actions.length > 0 && (
+        <div class="page-hero__actions">
+          {actions.map((action) => (
+            <a class:list={['button', action.variant === 'ghost' ? 'button--ghost' : 'button--primary']} href={action.href}>
+              {action.label}
+            </a>
+          ))}
+        </div>
+      )}
+
+      {meta.length > 0 && (
+        <div class="page-hero__meta" aria-label="Page highlights">
+          {meta.map((item) => (
+            <span>{item}</span>
+          ))}
+        </div>
+      )}
+    </div>
+  </div>
+</section>

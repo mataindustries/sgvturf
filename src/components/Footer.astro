@@ -1,40 +1,27 @@
 ---
-const year = new Date().getUTCFullYear();
+import { footerColumns } from '../data/site';
 
-const columns = [
-  {
-    title: 'Homeowners',
-    links: ['Get a Free Quote', 'Find Contractors', 'Rebate Guide', 'Project Calculator', 'Permit Info by City'],
-  },
-  {
-    title: 'Contractors',
-    links: ['Claim Your Listing', 'Pro Membership', 'Lead Connect', 'Advertise'],
-  },
-  {
-    title: 'Resources',
-    links: ['SGV City Guide', 'Water Rebates', 'Plant Library', 'Design Inspiration', 'Blog'],
-  },
-];
+const year = new Date().getUTCFullYear();
 ---
 
 <footer class="site-footer">
   <div class="section-shell">
     <div class="site-footer__grid">
       <div class="site-footer__intro">
-        <a class="brand-mark brand-mark--footer" href="#top">SGV<span>Turf</span></a>
+        <a class="brand-mark brand-mark--footer" href="/">SGV<span>Turf</span></a>
         <p class="site-footer__tagline">
-          The San Gabriel Valley&apos;s definitive resource for water-wise landscaping, turf
-          replacement, and xeriscaping.
+          A regional editorial prototype for SGV homeowners exploring water-wise landscaping, turf
+          replacement, and drought-smart front yard planning.
         </p>
       </div>
 
-      {columns.map((column) => (
+      {footerColumns.map((column) => (
         <div>
           <p class="site-footer__title">{column.title}</p>
           <ul class="site-footer__links">
             {column.links.map((link) => (
               <li>
-                <a href="#quote">{link}</a>
+                <a href={link.href}>{link.label}</a>
               </li>
             ))}
           </ul>
@@ -45,7 +32,7 @@ const columns = [
     <div class="site-footer__bottom">
       <p class="site-footer__copy">© {year} SGVTurf.com · All rights reserved</p>
       <p class="site-footer__copy">
-        Serving Pasadena, Arcadia, Covina, Pomona, and 30+ SGV cities
+        Seeded with sample SGV city guides, contractor profiles, and editorial resources
       </p>
     </div>
   </div>

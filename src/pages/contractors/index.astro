@@ -1,0 +1,70 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import PageHero from '../../components/PageHero.astro';
+import ContractorCard from '../../components/ContractorCard.astro';
+import CollectionCta from '../../components/CollectionCta.astro';
+import { contractors } from '../../data/contractors';
+
+const title = 'SGV Sample Contractor Profiles | SGV Turf';
+const description =
+  'Browse sample SGV contractor profiles for drought-smart landscaping, turf removal, irrigation upgrades, and low-water front yard planning.';
+---
+
+<BaseLayout title={title} description={description}>
+  <Nav />
+  <main>
+    <PageHero
+      eyebrow="Sample Directory"
+      description="These seeded profiles are intentionally generic and non-verified. They are here to demonstrate how SGV Turf can organize specialties, service areas, and planning fit without leaning on fake reviews or deceptive trust signals."
+      meta={['6 sample profiles', 'Premium editorial styling', 'No fake ratings']}
+      actions={[
+        { href: '/cities/', label: 'Explore City Guides', variant: 'ghost' },
+        { href: '/resources/', label: 'Read Resources' },
+      ]}
+    >
+      <span slot="title">
+        Compare <em>contractor fits</em><br />
+        before you shortlist.
+      </span>
+    </PageHero>
+
+    <section class="surface-section surface-section--white">
+      <div class="section-shell">
+        <div class="section-header">
+          <div>
+            <p class="section-eyebrow">Seeded Profiles</p>
+            <h2 class="section-title">
+              Different specialties for<br />
+              <em>different SGV yards</em>
+            </h2>
+          </div>
+        </div>
+
+        <p class="collection-lede">
+          Use these profiles as a content benchmark: design-forward studios for Pasadena-adjacent
+          lots, practical planners for warm suburban yards, and foothill-aware concepts for more
+          complex sites.
+        </p>
+
+        <div class="contractor-grid">
+          {contractors.map((contractor) => (
+            <ContractorCard contractor={contractor} />
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <CollectionCta
+      eyebrow="Prototype Note"
+      title="The directory is illustrative at this stage."
+      text="The current build is focused on structure, editorial quality, and SGV-specific content seeding. Live submissions, verification workflows, and marketplace logic can be layered in later."
+      primaryHref="/#quote"
+      primaryLabel="Review the Inquiry Form"
+      secondaryHref="/resources/planning-a-drought-smart-front-yard-in-the-sgv/"
+      secondaryLabel="Read Planning Guide"
+    />
+  </main>
+  <Footer />
+</BaseLayout>

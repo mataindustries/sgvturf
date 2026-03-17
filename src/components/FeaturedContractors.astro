@@ -1,83 +1,27 @@
 ---
-const contractors = [
-  {
-    name: 'Pasadena DryLand Co.',
-    city: 'Pasadena · Arcadia · Temple City',
-    tags: ['Xeriscape Design', 'Rebate Filing', 'Native Plants'],
-    rating: '★★★★★',
-    count: '4.9 (87 reviews)',
-    quote:
-      'They handled everything: design, permit, and rebate paperwork. Our LADWP check arrived before they even finished planting.',
-    initials: 'PD',
-    tone: 'sage',
-    featured: true,
-  },
-  {
-    name: 'San Gabriel Valley Turf',
-    city: 'Covina · West Covina · Glendora',
-    tags: ['Artificial Turf', 'Decomposed Granite', 'Drip Systems'],
-    rating: '★★★★★',
-    count: '4.8 (62 reviews)',
-    quote:
-      'Fast crew, clean work. The DG and boulders look incredibly natural. Neighbors keep asking who did it.',
-    initials: 'SV',
-    tone: 'terracotta',
-    featured: true,
-  },
-  {
-    name: 'East SGV Groundworks',
-    city: 'Pomona · San Dimas · La Verne',
-    tags: ['Turf Removal', 'Irrigation'],
-    rating: '★★★★☆',
-    count: '4.6 (41 reviews)',
-    quote: 'Competitive pricing and they showed up on time every day. Solid work all around.',
-    initials: 'EG',
-    tone: 'olive',
-    featured: false,
-  },
-];
+import { contractors } from '../data/contractors';
+import ContractorCard from './ContractorCard.astro';
+
+const featuredContractors = contractors.filter((contractor) => contractor.featured).slice(0, 3);
 ---
 
 <section class="surface-section surface-section--white" id="directory">
   <div class="section-shell">
     <div class="section-header">
       <div>
-        <p class="section-eyebrow">Featured Listings</p>
+        <p class="section-eyebrow">Featured Profiles</p>
         <h2 class="section-title">
-          SGV&apos;s most trusted<br />
-          <em>xeriscape professionals</em>
+          Sample contractor profiles<br />
+          for <em>smart SGV shortlists</em>
         </h2>
       </div>
 
-      <a class="button button--ghost section-header__action" href="#quote">View All 140+</a>
+      <a class="button button--ghost section-header__action" href="/contractors/">Browse All 6</a>
     </div>
 
     <div class="contractor-grid">
-      {contractors.map((contractor) => (
-        <article class:list={['contractor-card', contractor.featured && 'contractor-card--featured']}>
-          {contractor.featured && <div class="contractor-card__badge">Featured</div>}
-
-          <div class:list={['contractor-card__logo', `contractor-card__logo--${contractor.tone}`]}>
-            {contractor.initials}
-          </div>
-
-          <h3 class="contractor-card__name">{contractor.name}</h3>
-          <p class="contractor-card__city">{contractor.city}</p>
-
-          <div class="tag-list">
-            {contractor.tags.map((tag) => (
-              <span class="tag">{tag}</span>
-            ))}
-          </div>
-
-          <div class="contractor-card__rating">
-            <span class="contractor-card__stars">{contractor.rating}</span>
-            <span class="contractor-card__count">{contractor.count}</span>
-          </div>
-
-          <blockquote class="contractor-card__quote">{contractor.quote}</blockquote>
-          <a class="inline-link" href="#quote">Request a Quote</a>
-        </article>
+      {featuredContractors.map((contractor) => (
+        <ContractorCard contractor={contractor} />
       ))}
     </div>
   </div>

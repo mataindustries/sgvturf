@@ -1,43 +1,6 @@
 ---
-const articles = [
-  {
-    category: 'Rebates & Money',
-    title: 'The Complete 2025 SGV Water Rebate Guide: How to Claim Up to $5,000 for Your Turf Removal',
-    excerpt:
-      'LADWP, SGVMWD, and your local water district all have programs running simultaneously, but most homeowners only claim one. Here is how to stack them.',
-    meta: 'Updated Jan 2025 · 8 min read',
-    featured: true,
-    id: 'rebates',
-  },
-  {
-    category: 'Plant Palette',
-    title: '15 Native Plants That Thrive in the SGV Heat',
-    excerpt:
-      'California poppies, Cleveland sage, and deer grass are just the start. A curated list for the inland foothills climate.',
-    meta: 'Dec 2024 · 5 min read',
-  },
-  {
-    category: 'Permits & Process',
-    title: 'Do You Need a Permit for Turf Replacement in Your SGV City?',
-    excerpt:
-      'It depends on your municipality. We mapped out the requirements city-by-city so you are not surprised.',
-    meta: 'Nov 2024 · 4 min read',
-  },
-  {
-    category: 'Design Styles',
-    title: 'Decomposed Granite vs. River Rock: Which is Right for Your Yard?',
-    excerpt:
-      'A side-by-side comparison of cost, maintenance, drainage, and curb appeal with examples from real SGV projects.',
-    meta: 'Oct 2024 · 6 min read',
-  },
-  {
-    category: 'Artificial Turf',
-    title: 'Is Artificial Turf Worth It? An Honest Look at Cost & Heat',
-    excerpt:
-      'Surface temps, water savings, and longevity, with the real numbers from SGV homeowners who made the switch.',
-    meta: 'Sep 2024 · 7 min read',
-  },
-];
+import { resources } from '../data/resources';
+import ResourceCard from './ResourceCard.astro';
 ---
 
 <section class="surface-section surface-section--cream" id="resources">
@@ -51,17 +14,12 @@ const articles = [
         </h2>
       </div>
 
-      <a class="button button--ghost section-header__action" href="#rebates">All Resources</a>
+      <a class="button button--ghost section-header__action" href="/resources/">All Resources</a>
     </div>
 
     <div class="editorial-grid">
-      {articles.map((article) => (
-        <article class:list={['editorial-card', article.featured && 'editorial-card--featured']} id={article.id}>
-          <p class="editorial-card__category">{article.category}</p>
-          <h3 class="editorial-card__title">{article.title}</h3>
-          <p class="editorial-card__excerpt">{article.excerpt}</p>
-          <p class="editorial-card__meta">{article.meta}</p>
-        </article>
+      {resources.map((article) => (
+        <ResourceCard article={article} />
       ))}
     </div>
   </div>

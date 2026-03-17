@@ -1,0 +1,126 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import PageHero from '../../components/PageHero.astro';
+import ResourceCard from '../../components/ResourceCard.astro';
+import CollectionCta from '../../components/CollectionCta.astro';
+import { contractors } from '../../data/contractors';
+import { resources } from '../../data/resources';
+import type { ContractorProfile } from '../../data/contractors';
+
+export function getStaticPaths() {
+  return contractors.map((contractor) => ({
+    params: { slug: contractor.slug },
+    props: { contractor },
+  }));
+}
+
+const { contractor } = Astro.props as { contractor: ContractorProfile };
+const relatedResources = resources.slice(0, 2);
+---
+
+<BaseLayout title={`${contractor.name} | SGV Turf`} description={contractor.metaDescription}>
+  <Nav />
+  <main>
+    <PageHero
+      eyebrow="Sample Contractor Profile"
+      description={contractor.summary}
+      meta={[contractor.serviceAreas.join(' · '), contractor.specialties.join(' · ')]}
+      actions={[
+        { href: '/contractors/', label: 'Back to Directory', variant: 'ghost' },
+        { href: '/#quote', label: 'Use the Inquiry Form' },
+      ]}
+    >
+      <span slot="title">
+        {contractor.name}<br />
+        <em>profile notes</em>
+      </span>
+    </PageHero>
+
+    <section class="surface-section surface-section--cream">
+      <div class="section-shell detail-grid">
+        <div class="detail-main">
+          <div class="detail-panel">
+            <p class="detail-panel__eyebrow">Positioning</p>
+            <h2 class="detail-panel__title">{contractor.tagline}</h2>
+            <p class="detail-panel__copy">{contractor.trustBlurb}</p>
+          </div>
+
+          <div class="detail-panel">
+            <p class="detail-panel__eyebrow">Why This Profile Exists</p>
+            <div class="detail-richtext">
+              <p>{contractor.summary}</p>
+              <p>{contractor.disclaimer}</p>
+            </div>
+          </div>
+
+          <div class="detail-panel">
+            <p class="detail-panel__eyebrow">Best Fit</p>
+            <ul class="detail-list">
+              {contractor.fitHighlights.map((highlight) => (
+                <li>{highlight}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <aside class="detail-sidebar">
+          <div class="meta-block">
+            <p class="meta-block__title">Service Areas</p>
+            <ul class="meta-list">
+              {contractor.serviceAreas.map((area) => (
+                <li>{area}</li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="meta-block">
+            <p class="meta-block__title">Specialties</p>
+            <ul class="meta-list">
+              {contractor.specialties.map((specialty) => (
+                <li>{specialty}</li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="meta-block">
+            <p class="meta-block__title">Important Note</p>
+            <p class="meta-block__text">{contractor.disclaimer}</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="surface-section surface-section--white">
+      <div class="section-shell">
+        <div class="section-header">
+          <div>
+            <p class="section-eyebrow">Related Reading</p>
+            <h2 class="section-title">
+              Pair a contractor profile<br />
+              with <em>planning guidance</em>
+            </h2>
+          </div>
+        </div>
+
+        <div class="resource-list">
+          {relatedResources.map((article) => (
+            <ResourceCard article={article} featured={false} />
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <CollectionCta
+      eyebrow="Next Step"
+      title={contractor.ctaTitle}
+      text={contractor.ctaText}
+      primaryHref="/contractors/"
+      primaryLabel="Browse More Profiles"
+      secondaryHref="/cities/"
+      secondaryLabel="Compare City Guides"
+    />
+  </main>
+  <Footer />
+</BaseLayout>

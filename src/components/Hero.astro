@@ -1,8 +1,12 @@
 ---
+import { cities } from '../data/cities';
+import { contractors } from '../data/contractors';
+import { resources } from '../data/resources';
+
 const stats = [
-  { value: '140+', label: 'Vetted Pros' },
-  { value: '34', label: 'SGV Cities' },
-  { value: '$2.1M', label: 'Rebates Captured' },
+  { value: `${contractors.length}`, label: 'Sample Profiles' },
+  { value: `${cities.length}`, label: 'City Guides' },
+  { value: `${resources.length}`, label: 'Editorial Reads' },
 ];
 ---
 
@@ -16,13 +20,14 @@ const stats = [
         turf pros.
       </h1>
       <p class="hero__lede">
-        The definitive directory for turf replacement and xeriscaping in the SGV from Pasadena to
-        Pomona. Vetted contractors, local rebate guidance, and project quotes in one place.
+        An editorial-style SGV reference for drought-smart landscaping: sample contractor
+        profiles, city-specific planning notes, and practical resources for homeowners thinking
+        beyond the lawn.
       </p>
 
       <div class="hero__actions">
-        <a class="button button--primary" href="#quote">Get a Free Quote</a>
-        <a class="button button--ghost" href="#directory">Browse Contractors</a>
+        <a class="button button--primary" href="/#quote">Start Planning</a>
+        <a class="button button--ghost" href="/contractors/">Browse Contractors</a>
       </div>
 
       <div class="hero__stats" aria-label="SGV Turf highlights">

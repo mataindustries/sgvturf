@@ -1,0 +1,18 @@
+---
+import type { ResourceArticle } from '../data/resources';
+
+interface Props {
+  article: ResourceArticle;
+  featured?: boolean;
+}
+
+const { article, featured = article.featured } = Astro.props;
+---
+
+<article class:list={['editorial-card', featured && 'editorial-card--featured']}>
+  <p class="editorial-card__category">{article.category}</p>
+  <h3 class="editorial-card__title">{article.title}</h3>
+  <p class="editorial-card__excerpt">{article.excerpt}</p>
+  <p class="editorial-card__meta">{article.publishedLabel} · {article.readTime}</p>
+  <a class="inline-link" href={`/resources/${article.slug}/`}>Read Article</a>
+</article>

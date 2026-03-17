@@ -1,0 +1,64 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import PageHero from '../../components/PageHero.astro';
+import ResourceCard from '../../components/ResourceCard.astro';
+import CollectionCta from '../../components/CollectionCta.astro';
+import { resources } from '../../data/resources';
+
+const title = 'SGV Landscaping Resources | SGV Turf';
+const description =
+  'Read seeded editorial resources for SGV homeowners considering drought-smart landscaping, irrigation upgrades, and turf replacement planning.';
+---
+
+<BaseLayout title={title} description={description}>
+  <Nav />
+  <main>
+    <PageHero
+      eyebrow="Editorial Library"
+      description="These articles are seeded as realistic, local-feeling homeowner resources for the SGV. They stay generic on purpose and focus on planning clarity, not on unverifiable claims or location-specific regulations."
+      meta={['4 articles', 'Drought-smart topics', 'Homeowner-focused']}
+      actions={[
+        { href: '/cities/', label: 'Explore City Guides', variant: 'ghost' },
+        { href: '/contractors/', label: 'Browse Profiles' },
+      ]}
+    >
+      <span slot="title">
+        Editorial resources for<br />
+        <em>SGV homeowners</em>
+      </span>
+    </PageHero>
+
+    <section class="surface-section surface-section--cream">
+      <div class="section-shell">
+        <div class="section-header">
+          <div>
+            <p class="section-eyebrow">Articles</p>
+            <h2 class="section-title">
+              Helpful reading before<br />
+              <em>you make the yard plan</em>
+            </h2>
+          </div>
+        </div>
+
+        <div class="editorial-grid">
+          {resources.map((article) => (
+            <ResourceCard article={article} />
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <CollectionCta
+      eyebrow="Use the Library"
+      title="Read the article, then pressure-test it against the city pages."
+      text="The resource section is strongest when you move between general planning guidance and SGV-specific local context."
+      primaryHref="/cities/"
+      primaryLabel="Compare City Guides"
+      secondaryHref="/contractors/"
+      secondaryLabel="Browse Contractor Profiles"
+    />
+  </main>
+  <Footer />
+</BaseLayout>
