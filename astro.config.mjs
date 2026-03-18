@@ -2,7 +2,6 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
-import cloudflare from '@astrojs/cloudflare';
 
 const configuredSite = process.env.PUBLIC_SITE_URL?.trim();
 
@@ -28,12 +27,5 @@ export default defineConfig({
         }),
       ]
     : [],
-  adapter: cloudflare({
-    inspectorPort: false,
-    prerenderEnvironment: 'node',
-    platformProxy: {
-      enabled: true,
-    },
-    imageService: 'cloudflare',
-  }),
+
 });
