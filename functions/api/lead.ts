@@ -172,6 +172,7 @@ const verifyTurnstileToken = async (lead: LeadSubmission, env: LeadEnv) => {
   // make call
   return { success: true, skipped: false };
 };
+
 const forwardLead = async (
   lead: LeadSubmission,
   env: LeadEnv,
@@ -210,7 +211,7 @@ const forwardLead = async (
 };
 
   // Placeholder for future email, webhook, D1, KV, or CRM integrations.
-};
+
 
 export const onRequest: PagesFunction<LeadEnv> = async (context) => {
   const { request, env } = context;
