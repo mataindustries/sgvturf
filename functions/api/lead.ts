@@ -169,18 +169,45 @@ const verifyTurnstileToken = async (lead: LeadSubmission, env: LeadEnv) => {
     return { success: true, skipped: true };
   }
 
-  // Placeholder for a future Turnstile siteverify call.
+  // make call
   return { success: true, skipped: false };
 };
-
 const forwardLead = async (
   lead: LeadSubmission,
   env: LeadEnv,
   rateLimitKey: string,
 ) => {
-  void lead;
-  void env;
-  void rateLimitKey;
+  if (!env.LEAD_WEBHOOK_URL) {
+    console.log('Lead received but no webhook configured', {
+      rateLimitKey,
+      lead,
+    });
+    return;
+  }
+
+  const response = await fetch(env.LEAD_WEBHOOK_URL, {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json',
+    },
+    body: JSON.stringify({
+      submittedAt: new Date().toISOString(),
+      rateLimitKey,
+      name: lead.name,
+      email: lead.email,
+      phone: lead.phone,
+      city: lead.city,
+      projectType: lead.projectType,
+      lawnSize: lead.lawnSize,
+      message: lead.message,
+      sourcePage: lead.sourcePage,
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error(`Lead webhook failed with status ${response.status}`);
+  }
+};
 
   // Placeholder for future email, webhook, D1, KV, or CRM integrations.
 };
