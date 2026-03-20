@@ -15,7 +15,7 @@ export const defaultSocialImage = '/social-default.svg';
 export const siteRegionName = 'San Gabriel Valley, California';
 
 export const siteTagline =
-  'A regional editorial prototype for SGV homeowners exploring water-wise landscaping, turf replacement, and drought-smart front yard planning.';
+  'A regional SGV resource for water-wise landscaping, turf replacement, and drought-smart front yard planning.';
 
 export const primaryNavLinks = [
   { href: '/contractors/', label: 'Find Contractors' },
@@ -42,7 +42,7 @@ export const footerColumns = [
       { href: '/contractors/', label: 'Sample Contractor Profiles' },
       { href: '/resources/artificial-turf-versus-low-water-planting-for-sgv-homes/', label: 'Turf vs. Planting' },
       { href: '/resources/sgv-irrigation-upgrades-that-make-low-water-landscapes-work/', label: 'Irrigation Planning' },
-      { href: '/#list', label: 'For Contractors' },
+      { href: '/contractors/#founder-offer', label: 'For Contractors' },
     ],
   },
   {

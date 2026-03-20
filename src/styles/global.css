@@ -1638,6 +1638,50 @@ svg {
   align-items: center;
 }
 
+.founder-offer {
+  display: grid;
+  gap: 2rem;
+}
+
+.founder-offer__title,
+.founder-offer__section-title {
+  max-width: 36rem;
+}
+
+.founder-offer__subhead {
+  max-width: 48rem;
+  margin-bottom: 0;
+}
+
+.founder-offer__card {
+  display: flex;
+  flex-direction: column;
+}
+
+.founder-offer__card-copy {
+  margin: 0 0 1.6rem;
+  font-family: var(--font-editorial);
+  font-size: 0.94rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.76);
+}
+
+.founder-offer__note {
+  margin: 1rem 0 0;
+  font-size: 0.76rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.64);
+}
+
+.founder-offer__meta-list {
+  margin: 0;
+}
+
+.founder-offer__faq-panel,
+.founder-offer__cta {
+  margin-top: 0.25rem;
+}
+
 .pricing-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }

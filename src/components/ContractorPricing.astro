@@ -1,80 +1,219 @@
 ---
-const plans = [
+import FAQItem from './FAQItem.astro';
+
+interface Props {
+  sectionId?: string;
+  primaryHref?: string;
+  primaryLabel?: string;
+  bottomPrimaryHref?: string;
+  bottomPrimaryLabel?: string;
+}
+
+const {
+  sectionId = 'list',
+  primaryHref = '/contractors/#founder-offer',
+  primaryLabel = 'Claim Founder Spot',
+  bottomPrimaryHref = primaryHref,
+  bottomPrimaryLabel = primaryLabel,
+} = Astro.props;
+
+const included = [
+  'Contractor profile page built for your business',
+  'Placement on up to 3 relevant SGV city pages',
+  'Homepage featured visibility',
+  'Logo, specialties, and service areas added for you',
+  'Up to 8 project photos',
+  'Direct lead forwarding from SGV Turf',
+];
+
+const founderTerms = [
+  'Live in 72 hours or full refund',
+  'No long-term contract',
+  'Founder pricing for the first 30 days',
+  'Small first-wave rollout',
+];
+
+const steps = [
   {
-    tier: 'Directory Preview',
-    price: 'Free',
-    period: 'Concept tier',
-    features: [
-      'Profile page placeholder',
-      '1 specialty category',
-      'Service-area highlights',
-      'Inquiry form placeholder',
-    ],
-    emphasis: false,
-    cta: 'Reserve Interest',
+    number: '01',
+    title: 'Send your info',
+    description:
+      'Share your logo, service areas, specialties, contact info, and a few project photos.',
   },
   {
-    tier: 'Editorial Feature',
-    price: '$149',
-    period: 'future concept',
-    features: [
-      'Priority placement concept',
-      'Up to 5 specialty categories',
-      'Featured homepage placement',
-      'Expanded project gallery module',
-      'Credential fields reserved for later verification',
-      'Editorial highlight consideration',
-    ],
-    emphasis: true,
-    cta: 'See Future Packaging',
+    number: '02',
+    title: 'I build your presence',
+    description:
+      'Your SGV Turf profile and matching city-page placement get packaged for launch.',
   },
   {
-    tier: 'Lead Workflow',
-    price: '$29',
-    period: 'future concept',
-    features: [
-      'Matched inquiry routing placeholder',
-      'City and specialty matching logic',
-      'Lead review queue reserved for backend work',
-      'Flexible participation concept',
-      'Acceptance workflow to be defined',
-    ],
-    emphasis: false,
-    cta: 'Review Workflow',
+    number: '03',
+    title: 'Start receiving inquiries',
+    description:
+      'Leads from the site are forwarded directly so you can respond fast.',
+  },
+];
+
+const trustPoints = [
+  'Local-first visibility in a niche SGV landscape category',
+  'Cleaner presentation than a generic directory listing',
+  'City-page placement aligned with where you actually work',
+  'Founder pricing before the platform expands further',
+];
+
+const faqs = [
+  {
+    question: 'What do I need to send?',
+    answer:
+      'Your logo, business name, service areas, specialties, phone/email, and a few project photos.',
+  },
+  {
+    question: 'How fast can I go live?',
+    answer:
+      'Most founder profiles can be live within 72 hours once I have your materials.',
+  },
+  {
+    question: 'Is this a long-term contract?',
+    answer: 'No. The founder offer is meant to be simple and low-friction.',
+  },
+  {
+    question: 'Do you guarantee leads?',
+    answer:
+      'No. SGV Turf is an early local discovery and inquiry platform. The founder offer is about premium placement, visibility, and direct lead forwarding as traffic grows.',
+  },
+  {
+    question: 'Who is this best for?',
+    answer:
+      'Contractors doing xeriscape, turf replacement, hardscape, drainage, irrigation, and drought-smart yard work in the San Gabriel Valley.',
   },
 ];
 ---
 
-<section class="surface-section surface-section--white" id="list">
-  <div class="section-shell">
+<section class="surface-section surface-section--white" id={sectionId}>
+  <div class="section-shell founder-offer">
     <div class="section-header">
       <div>
-        <p class="section-eyebrow">For Contractors</p>
-        <h2 class="section-title">
-          Preview how SGV Turf could<br />
-          <em>package contractor presence</em>
-        </h2>
+        <p class="section-eyebrow">FOR CONTRACTORS</p>
+        <h2 class="section-title founder-offer__title">Get your SGV Turf founder spot live this week.</h2>
+        <p class="collection-lede founder-offer__subhead">
+          A fast, premium local placement for SGV landscapers, xeriscape installers, turf pros,
+          and hardscape contractors who want early visibility on a drought-smart discovery site
+          built for the San Gabriel Valley.
+        </p>
       </div>
     </div>
 
-    <div class="pricing-grid">
-      {plans.map((plan) => (
-        <article class:list={['pricing-card', plan.emphasis && 'pricing-card--emphasis']}>
-          <p class="pricing-card__tier">{plan.tier}</p>
-          <div class="pricing-card__price">{plan.price}</div>
-          <div class="pricing-card__period">{plan.period}</div>
+    <div class="detail-grid founder-offer__grid">
+      <div class="detail-main">
+        <article class="detail-panel">
+          <p class="detail-panel__eyebrow">Offer</p>
+          <h3 class="detail-panel__title">Founding Contractor Spot</h3>
+          <p class="detail-panel__copy">
+            Get your business packaged and published on SGV Turf while founder pricing is still
+            open.
+          </p>
+        </article>
 
-          <ul class="pricing-card__features">
-            {plan.features.map((feature) => (
-              <li>{feature}</li>
+        <article class="detail-panel">
+          <p class="detail-panel__eyebrow">What&apos;s Included</p>
+          <ul class="detail-list">
+            {included.map((item) => (
+              <li>{item}</li>
             ))}
           </ul>
+        </article>
 
-          <a class:list={['button', 'button--pricing', plan.emphasis ? 'button--pricing-dark' : 'button--pricing-light']} href="#quote">
-            {plan.cta}
+        <article class="detail-panel">
+          <p class="detail-panel__eyebrow">Founder Terms</p>
+          <ul class="detail-list">
+            {founderTerms.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        </article>
+      </div>
+
+      <aside class="detail-sidebar founder-offer__sidebar">
+        <article class="pricing-card pricing-card--emphasis founder-offer__card">
+          <p class="pricing-card__tier">Founding Contractor Spot</p>
+          <div class="pricing-card__price">$99</div>
+          <div class="pricing-card__period">Founder offer</div>
+          <p class="founder-offer__card-copy">
+            Get your business packaged and published on SGV Turf while founder pricing is still
+            open.
+          </p>
+
+          <ul class="pricing-card__features">
+            <li>Profile page built around your business</li>
+            <li>Up to 3 relevant city-page placements</li>
+            <li>Homepage featured visibility</li>
+            <li>Direct lead forwarding from SGV Turf</li>
+          </ul>
+
+          <a class="button button--pricing button--pricing-dark" href={primaryHref}>
+            {primaryLabel}
           </a>
+
+          <p class="founder-offer__note">
+            Best fit for contractors serving the San Gabriel Valley and nearby foothill
+            communities.
+          </p>
+        </article>
+
+        <div class="meta-block">
+          <p class="meta-block__title">WHY EARLY CONTRACTORS JOIN</p>
+          <ul class="meta-list founder-offer__meta-list">
+            {trustPoints.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        </div>
+      </aside>
+    </div>
+
+    <div class="section-header founder-offer__section-header">
+      <div>
+        <p class="section-eyebrow">HOW IT WORKS</p>
+        <h3 class="section-title founder-offer__section-title">
+          Simple founder setup. Fast local visibility.
+        </h3>
+      </div>
+    </div>
+
+    <div class="steps-grid">
+      {steps.map((step) => (
+        <article class="step-card">
+          <div class="step-card__number">{step.number}</div>
+          <h4 class="step-card__title">{step.title}</h4>
+          <p class="step-card__description">{step.description}</p>
         </article>
       ))}
+    </div>
+
+    <article class="detail-panel founder-offer__faq-panel">
+      <p class="detail-panel__eyebrow">FAQ</p>
+      <h3 class="detail-panel__title">Short answers before you claim a founder spot.</h3>
+      <div class="faq-list">
+        {faqs.map((item, index) => (
+          <FAQItem question={item.question} answer={item.answer} open={index === 0} />
+        ))}
+      </div>
+    </article>
+
+    <div class="collection-cta founder-offer__cta" id="founder-offer-cta">
+      <div>
+        <p class="section-eyebrow">Founder Rollout</p>
+        <h3 class="collection-cta__title">
+          Opening a small first group of SGV founding contractors.
+        </h3>
+        <p class="collection-cta__text">
+          Get your profile live, featured, and ready for local visibility.
+        </p>
+      </div>
+
+      <div class="collection-cta__actions">
+        <a class="button button--primary" href={bottomPrimaryHref}>{bottomPrimaryLabel}</a>
+      </div>
     </div>
   </div>
 </section>
