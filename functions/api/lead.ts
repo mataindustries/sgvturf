@@ -3,6 +3,7 @@ interface LeadEnv {
   LEAD_WEBHOOK_URL?: string;
 }
 
+
 interface LeadSubmission {
   name: string;
   email: string;
