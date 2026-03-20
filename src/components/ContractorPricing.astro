@@ -12,13 +12,13 @@ interface Props {
 const {
   sectionId = 'list',
   primaryHref = '/contractors/#founder-offer',
-  primaryLabel = 'Claim Founder Spot',
+  primaryLabel = 'View Founder Offer',
   bottomPrimaryHref = primaryHref,
   bottomPrimaryLabel = primaryLabel,
 } = Astro.props;
 
 const included = [
-  'Contractor profile page built for your business',
+  'Contractor profile page created for your business',
   'Placement on up to 3 relevant SGV city pages',
   'Homepage featured visibility',
   'Logo, specialties, and service areas added for you',
@@ -29,7 +29,7 @@ const included = [
 const founderTerms = [
   'Live in 72 hours or full refund',
   'No long-term contract',
-  'Founder pricing for the first 30 days',
+  'Founder pricing during the opening rollout',
   'Small first-wave rollout',
 ];
 
@@ -42,9 +42,9 @@ const steps = [
   },
   {
     number: '02',
-    title: 'I build your presence',
+    title: 'We shape your profile',
     description:
-      'Your SGV Turf profile and matching city-page placement get packaged for launch.',
+      'Your SGV Turf profile and matching city-page placement are prepared for launch.',
   },
   {
     number: '03',
@@ -58,7 +58,7 @@ const trustPoints = [
   'Local-first visibility in a niche SGV landscape category',
   'Cleaner presentation than a generic directory listing',
   'City-page placement aligned with where you actually work',
-  'Founder pricing before the platform expands further',
+  'Early placement before the directory fills out',
 ];
 
 const faqs = [
@@ -79,7 +79,7 @@ const faqs = [
   {
     question: 'Do you guarantee leads?',
     answer:
-      'No. SGV Turf is an early local discovery and inquiry platform. The founder offer is about premium placement, visibility, and direct lead forwarding as traffic grows.',
+      'No. The founder offer is designed around visibility, placement, and direct inquiry forwarding as the audience grows.',
   },
   {
     question: 'Who is this best for?',
@@ -96,9 +96,9 @@ const faqs = [
         <p class="section-eyebrow">FOR CONTRACTORS</p>
         <h2 class="section-title founder-offer__title">Get your SGV Turf founder spot live this week.</h2>
         <p class="collection-lede founder-offer__subhead">
-          A fast, premium local placement for SGV landscapers, xeriscape installers, turf pros,
-          and hardscape contractors who want early visibility on a drought-smart discovery site
-          built for the San Gabriel Valley.
+          A polished local placement for SGV landscapers, xeriscape installers, turf pros, and
+          hardscape contractors who want early visibility with homeowners planning water-wise
+          projects across the San Gabriel Valley.
         </p>
       </div>
     </div>
@@ -109,8 +109,7 @@ const faqs = [
           <p class="detail-panel__eyebrow">Offer</p>
           <h3 class="detail-panel__title">Founding Contractor Spot</h3>
           <p class="detail-panel__copy">
-            Get your business packaged and published on SGV Turf while founder pricing is still
-            open.
+            Reserve founder pricing and launch with a polished SGV Turf presence.
           </p>
         </article>
 
@@ -139,8 +138,7 @@ const faqs = [
           <div class="pricing-card__price">$99</div>
           <div class="pricing-card__period">Founder offer</div>
           <p class="founder-offer__card-copy">
-            Get your business packaged and published on SGV Turf while founder pricing is still
-            open.
+            Reserve founder pricing and launch with a polished SGV Turf presence.
           </p>
 
           <ul class="pricing-card__features">
@@ -175,7 +173,7 @@ const faqs = [
       <div>
         <p class="section-eyebrow">HOW IT WORKS</p>
         <h3 class="section-title founder-offer__section-title">
-          Simple founder setup. Fast local visibility.
+          Simple founder setup. Clear local visibility.
         </h3>
       </div>
     </div>
@@ -192,7 +190,7 @@ const faqs = [
 
     <article class="detail-panel founder-offer__faq-panel">
       <p class="detail-panel__eyebrow">FAQ</p>
-      <h3 class="detail-panel__title">Short answers before you claim a founder spot.</h3>
+      <h3 class="detail-panel__title">Short answers before you apply for a founder spot.</h3>
       <div class="faq-list">
         {faqs.map((item, index) => (
           <FAQItem question={item.question} answer={item.answer} open={index === 0} />
@@ -204,10 +202,10 @@ const faqs = [
       <div>
         <p class="section-eyebrow">Founder Rollout</p>
         <h3 class="collection-cta__title">
-          Opening a small first group of SGV founding contractors.
+          Opening a limited first group of SGV founding contractors.
         </h3>
         <p class="collection-cta__text">
-          Get your profile live, featured, and ready for local visibility.
+          Start with a short intake and we can shape the right founder setup from there.
         </p>
       </div>
 

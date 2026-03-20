@@ -9,7 +9,7 @@ import { createBreadcrumbSchema } from '../lib/seo';
 
 const title = 'Thank You | SGV Turf';
 const description =
-  'Thank-you page for SGV Turf inquiry submissions, including careful next-step guidance and links back to core browsing surfaces.';
+  'Thank-you page for SGV Turf project-brief submissions with next-step links into city guides, contractor profiles, and rebate guidance.';
 
 const breadcrumbs = [
   { label: 'Home', href: '/' },
@@ -30,7 +30,7 @@ const structuredData = createBreadcrumbSchema(
   description={description}
   canonicalUrl="/thanks/"
   ogTitle="Thank You | SGV Turf"
-  ogDescription="Confirmation page for SGV Turf project-brief submissions with careful next-step guidance."
+  ogDescription="Confirmation page for SGV Turf project-brief submissions with clear next-step planning guidance."
   structuredData={structuredData}
   noindex={true}
 >
@@ -38,11 +38,11 @@ const structuredData = createBreadcrumbSchema(
   <Breadcrumbs items={breadcrumbs} />
   <main id="main-content">
     <PageHero
-      eyebrow="Submission Received"
-      description="Your project brief has been recorded through the current SGV Turf intake flow. This confirms receipt only. It does not imply instant contractor matching, guaranteed incentives, or a fully automated marketplace process."
-      meta={['Structured intake saved', 'Editorial prototype remains careful', 'No instant routing implied']}
+      eyebrow="Project Brief Received"
+      description="Your project brief is in. SGV Turf can now use it to organize your inquiry while you continue comparing contractor profiles, rebate options, and city-specific planning notes."
+      meta={['Project brief received', 'Next-step planning ready', 'City and rebate guidance available']}
       actions={[
-        { href: '/contractors/', label: 'Browse Contractors' },
+        { href: '/contractors/', label: 'Browse Contractor Profiles' },
         { href: '/rebates/', label: 'Review Rebates', variant: 'ghost' },
       ]}
     >
@@ -57,20 +57,20 @@ const structuredData = createBreadcrumbSchema(
         <div class="detail-main">
           <div class="detail-panel">
             <p class="detail-panel__eyebrow">Confirmation</p>
-            <h2 class="detail-panel__title">The submission is in the system.</h2>
+            <h2 class="detail-panel__title">Your brief is on file.</h2>
             <p class="detail-panel__copy">
-              SGV Turf now has the intake details you submitted, including your city, project type,
-              and any notes you added. The current build is still a lightweight editorial product,
-              so this step should be read as a saved inquiry rather than a live marketplace handoff.
+              SGV Turf has the details you submitted, including your city, project type, and any
+              notes you added. Use this as your planning baseline while you refine scope, compare
+              approaches, and prepare for contractor conversations.
             </p>
           </div>
 
           <div class="detail-panel">
             <p class="detail-panel__eyebrow">What Happens Next</p>
             <ul class="detail-list">
-              <li>Your brief can be used as structured intake for later workflow integrations.</li>
-              <li>Any future outreach or routing logic can be layered onto this same submission flow.</li>
-              <li>For now, the strongest next move is still comparing city context, contractors, and rebate guidance.</li>
+              <li>Use your brief as a reference point while comparing contractor profiles and project approaches.</li>
+              <li>Review city notes and rebate guidance to sharpen priorities before the first contractor call.</li>
+              <li>Bring the same scope, goals, and budget context into every conversation so comparisons stay cleaner.</li>
             </ul>
           </div>
         </div>
@@ -88,8 +88,8 @@ const structuredData = createBreadcrumbSchema(
           <div class="meta-block">
             <p class="meta-block__title">Good to Know</p>
             <p class="meta-block__text">
-              Rebate amounts remain estimated, contractor profiles remain seeded examples, and no
-              response timeline is promised on this prototype.
+              Rebate amounts remain estimated, and final contractor fit should always be confirmed
+              directly before work begins.
             </p>
           </div>
         </aside>
@@ -98,8 +98,8 @@ const structuredData = createBreadcrumbSchema(
 
     <CollectionCta
       eyebrow="Continue Planning"
-      title="Use the rest of the site to sharpen the brief."
-      text="City pages help with local context, contractor profiles help with positioning, and the rebates hub helps frame budget expectations without implying guaranteed incentives."
+      title="Use the rest of the site to sharpen the scope."
+      text="City pages help with local context, contractor profiles help you compare approaches, and the rebates hub helps frame budget expectations before the first contractor call."
       primaryHref="/cities/"
       primaryLabel="Explore City Guides"
       secondaryHref="/resources/"

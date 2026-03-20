@@ -9,9 +9,9 @@ import ContractorPricing from '../../components/ContractorPricing.astro';
 import { contractors } from '../../data/contractors';
 import { createBreadcrumbSchema } from '../../lib/seo';
 
-const title = 'SGV Sample Contractor Profiles | SGV Turf';
+const title = 'SGV Contractor Profiles | SGV Turf';
 const description =
-  'Browse sample SGV contractor profiles for drought-smart landscaping, turf removal, irrigation upgrades, and low-water front yard planning.';
+  'Browse SGV contractor profiles for drought-smart landscaping, turf removal, irrigation upgrades, and low-water front yard planning.';
 
 const breadcrumbs = [
   { label: 'Home', href: '/' },
@@ -31,17 +31,17 @@ const structuredData = createBreadcrumbSchema(
   title={title}
   description={description}
   canonicalUrl="/contractors/"
-  ogTitle="SGV Sample Contractor Profiles | SGV Turf"
-  ogDescription="Review carefully worded sample contractor profiles for different SGV yard types, specialties, and planning fits."
+  ogTitle="SGV Contractor Profiles | SGV Turf"
+  ogDescription="Review SGV contractor profiles for different yard types, specialties, and planning fits."
   structuredData={structuredData}
 >
   <Nav />
   <Breadcrumbs items={breadcrumbs} />
   <main id="main-content">
     <PageHero
-      eyebrow="Sample Directory"
-      description="These seeded profiles are intentionally generic and non-verified. They are here to demonstrate how SGV Turf can organize specialties, service areas, and planning fit without leaning on fake reviews or deceptive trust signals."
-      meta={['6 sample profiles', 'Premium editorial styling', 'No fake ratings']}
+      eyebrow="Contractor Profiles"
+      description="These editorial profiles are designed to help you compare specialties, service areas, and project fit with a clearer sense of what to look for."
+      meta={['6 contractor profiles', 'Premium editorial framing', 'Organized by specialty']}
       actions={[
         { href: '/cities/', label: 'Explore City Guides', variant: 'ghost' },
         { href: '/resources/', label: 'Read Resources' },
@@ -57,7 +57,7 @@ const structuredData = createBreadcrumbSchema(
       <div class="section-shell">
         <div class="section-header">
           <div>
-            <p class="section-eyebrow">Seeded Profiles</p>
+            <p class="section-eyebrow">Profile Collection</p>
             <h2 class="section-title">
               Different specialties for<br />
               <em>different SGV yards</em>
@@ -66,8 +66,8 @@ const structuredData = createBreadcrumbSchema(
         </div>
 
         <p class="collection-lede">
-          Use these profiles as a content benchmark: design-forward studios for Pasadena-adjacent
-          lots, practical planners for warm suburban yards, and foothill-aware concepts for more
+          Use these profiles as reference points: design-forward studios for Pasadena-adjacent
+          lots, practical planners for warm suburban yards, and foothill-aware approaches for more
           complex sites.
         </p>
 
@@ -81,7 +81,9 @@ const structuredData = createBreadcrumbSchema(
     <ContractorPricing
       sectionId="founder-offer"
       primaryHref="/#quote"
+      primaryLabel="Apply for Founder Spot"
       bottomPrimaryHref="/#quote"
+      bottomPrimaryLabel="Request Founder Details"
     />
   </main>
   <Footer />

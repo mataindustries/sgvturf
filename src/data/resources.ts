@@ -75,7 +75,7 @@ export const resources: ResourceArticle[] = [
     ],
     ctaTitle: 'Ready to compare front-yard approaches?',
     ctaText:
-      'Use the city and contractor pages to see which sample profiles match compact lots, larger suburban frontages, or foothill-style landscapes.',
+      'Use the city and contractor pages to see which profiles match compact lots, larger suburban frontages, or foothill-style landscapes.',
     metaDescription:
       'Editorial SGV resource on planning a drought-smart front yard with better curb appeal, lower water use, and a clearer design structure.',
   },
@@ -129,7 +129,7 @@ export const resources: ResourceArticle[] = [
     ],
     ctaTitle: 'Need help deciding what belongs where?',
     ctaText:
-      'Compare sample contractor profiles by specialty to find examples oriented toward planting-first designs, turf zones, or blended layouts.',
+      'Compare contractor profiles by specialty to find approaches oriented toward planting-first designs, turf zones, or blended layouts.',
     metaDescription:
       'Editorial SGV guide comparing artificial turf and low-water planting for homeowners weighing heat, maintenance, and long-term curb appeal.',
   },
@@ -178,7 +178,7 @@ export const resources: ResourceArticle[] = [
     ],
     ctaTitle: 'Looking for irrigation-aware project examples?',
     ctaText:
-      'The city and contractor pages highlight sample profiles that emphasize irrigation retrofits, lower-maintenance planting, and practical system planning.',
+      'The city and contractor pages highlight profiles that emphasize irrigation retrofits, lower-maintenance planting, and practical system planning.',
     metaDescription:
       'Editorial SGV article on irrigation upgrades, hydrozoning, and why low-water landscapes need a better system plan to perform well.',
   },
@@ -227,7 +227,7 @@ export const resources: ResourceArticle[] = [
     ],
     ctaTitle: 'Want a clearer benchmark for a refined result?',
     ctaText:
-      'Browse the sample contractor profiles and city guides to compare which approaches align with compact historic lots, larger suburban yards, or foothill-facing properties.',
+      'Browse the contractor profiles and city guides to compare which approaches align with compact historic lots, larger suburban yards, or foothill-facing properties.',
     metaDescription:
       'Editorial SGV guide to what makes a drought-smart yard feel premium after turf removal, including restraint, edges, and architectural fit.',
   },

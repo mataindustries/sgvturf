@@ -36,9 +36,9 @@ export const cities: CityGuide[] = [
     nearbyCities: ['South Pasadena', 'San Marino', 'Arcadia'],
     ctaTitle: 'Planning a Pasadena-style refresh?',
     ctaText:
-      'Browse sample contractor profiles that fit design-forward front yards, irrigation upgrades, and polished drought-tolerant planting plans.',
+      'Browse contractor profiles that fit design-forward front yards, irrigation upgrades, and polished drought-tolerant planting plans.',
     metaDescription:
-      'Generic Pasadena landscaping guide for SGV homeowners considering turf removal, xeriscaping, and drought-smart front yard upgrades.',
+      'Pasadena landscaping guide for SGV homeowners considering turf removal, xeriscaping, and drought-smart front yard upgrades.',
   },
   {
     slug: 'arcadia',
@@ -63,9 +63,9 @@ export const cities: CityGuide[] = [
     nearbyCities: ['Pasadena', 'Temple City', 'Monrovia'],
     ctaTitle: 'Looking for an Arcadia-ready concept?',
     ctaText:
-      'Use the contractor directory to compare sample profiles built around larger lots, premium curb appeal, and practical irrigation planning.',
+      'Use the contractor directory to compare profiles built around larger lots, premium curb appeal, and practical irrigation planning.',
     metaDescription:
-      'Generic Arcadia city guide for drought-smart landscaping, large-lot turf removal, and premium xeriscape planning in the SGV.',
+      'Arcadia city guide for drought-smart landscaping, large-lot turf removal, and premium xeriscape planning in the SGV.',
   },
   {
     slug: 'monrovia',
@@ -90,9 +90,9 @@ export const cities: CityGuide[] = [
     nearbyCities: ['Arcadia', 'Duarte', 'Bradbury'],
     ctaTitle: 'Comparing options for Monrovia homes?',
     ctaText:
-      'See sample profiles suited to foothill lots, layered planting, and drought-smart updates that still feel settled and neighborhood-specific.',
+      'See profiles suited to foothill lots, layered planting, and drought-smart updates that still feel settled and neighborhood-specific.',
     metaDescription:
-      'Generic Monrovia landscaping guide covering foothill planting, turf replacement, and water-wise front yard planning.',
+      'Monrovia landscaping guide covering foothill planting, turf replacement, and water-wise front yard planning.',
   },
   {
     slug: 'south-pasadena',
@@ -117,9 +117,9 @@ export const cities: CityGuide[] = [
     nearbyCities: ['Pasadena', 'Alhambra', 'San Gabriel'],
     ctaTitle: 'Need a more tailored South Pasadena look?',
     ctaText:
-      'Explore sample contractor profiles geared toward compact lots, architectural sensitivity, and lower-water planting that still feels classic.',
+      'Explore contractor profiles geared toward compact lots, architectural sensitivity, and lower-water planting that still feels classic.',
     metaDescription:
-      'Generic South Pasadena city page for homeowners planning tasteful turf replacement and drought-smart landscape upgrades.',
+      'South Pasadena city page for homeowners planning tasteful turf replacement and drought-smart landscape upgrades.',
   },
   {
     slug: 'san-gabriel',
@@ -144,9 +144,9 @@ export const cities: CityGuide[] = [
     nearbyCities: ['Temple City', 'Alhambra', 'Rosemead'],
     ctaTitle: 'Planning a practical San Gabriel update?',
     ctaText:
-      'Review sample profiles oriented around efficient irrigation, lower-maintenance planting, and straightforward front-yard upgrades.',
+      'Review profiles oriented around efficient irrigation, lower-maintenance planting, and straightforward front-yard upgrades.',
     metaDescription:
-      'Generic San Gabriel landscaping guide for simple, drought-smart front yard improvements and turf replacement planning.',
+      'San Gabriel landscaping guide for simple, drought-smart front yard improvements and turf replacement planning.',
   },
   {
     slug: 'temple-city',
@@ -171,9 +171,9 @@ export const cities: CityGuide[] = [
     nearbyCities: ['San Gabriel', 'Arcadia', 'Rosemead'],
     ctaTitle: 'Comparing Temple City-friendly styles?',
     ctaText:
-      'Browse polished sample profiles that fit sunny lots, practical family yards, and lower-maintenance front-yard upgrades.',
+      'Browse polished profiles that fit sunny lots, practical family yards, and lower-maintenance front-yard upgrades.',
     metaDescription:
-      'Generic Temple City guide for turf replacement, practical xeriscape planning, and low-maintenance SGV landscaping.',
+      'Temple City guide for turf replacement, practical xeriscape planning, and low-maintenance SGV landscaping.',
   },
   {
     slug: 'alhambra',
@@ -198,9 +198,9 @@ export const cities: CityGuide[] = [
     nearbyCities: ['South Pasadena', 'San Gabriel', 'Monterey Park'],
     ctaTitle: 'Need a smarter layout for an Alhambra lot?',
     ctaText:
-      'Explore sample directory profiles focused on compact-yard planning, crisp hardscape, and low-water planting that stays composed.',
+      'Explore contractor profiles focused on compact-yard planning, crisp hardscape, and low-water planting that stays composed.',
     metaDescription:
-      'Generic Alhambra city guide for compact-yard turf removal, xeriscaping, and drought-smart hardscape planning.',
+      'Alhambra city guide for compact-yard turf removal, xeriscaping, and drought-smart hardscape planning.',
   },
   {
     slug: 'el-monte',
@@ -225,9 +225,9 @@ export const cities: CityGuide[] = [
     nearbyCities: ['South El Monte', 'Baldwin Park', 'Temple City'],
     ctaTitle: 'Looking for durable El Monte options?',
     ctaText:
-      'Compare sample contractor profiles shaped around exposed lots, lower-maintenance planting, and practical drought-smart upgrades.',
+      'Compare contractor profiles shaped around exposed lots, lower-maintenance planting, and practical drought-smart upgrades.',
     metaDescription:
-      'Generic El Monte guide for durable water-wise landscaping, irrigation retrofits, and practical turf replacement planning.',
+      'El Monte guide for durable water-wise landscaping, irrigation retrofits, and practical turf replacement planning.',
   },
   {
     slug: 'covina',
@@ -252,9 +252,9 @@ export const cities: CityGuide[] = [
     nearbyCities: ['West Covina', 'Charter Oak', 'Glendora'],
     ctaTitle: 'Planning a Covina conversion?',
     ctaText:
-      'Browse sample profiles geared toward sunny inland lots, stronger site organization, and water-wise planting with year-round presence.',
+      'Browse profiles geared toward sunny inland lots, stronger site organization, and water-wise planting with year-round presence.',
     metaDescription:
-      'Generic Covina landscaping guide for sunny SGV properties, turf removal, and low-water yard planning.',
+      'Covina landscaping guide for sunny SGV properties, turf removal, and low-water yard planning.',
   },
   {
     slug: 'west-covina',
@@ -279,9 +279,9 @@ export const cities: CityGuide[] = [
     nearbyCities: ['Covina', 'Walnut', 'Baldwin Park'],
     ctaTitle: 'Need a lower-maintenance West Covina plan?',
     ctaText:
-      'Use the contractor directory to compare polished sample profiles for suburban yards, irrigation refreshes, and warm-climate planting.',
+      'Use the contractor directory to compare polished profiles for suburban yards, irrigation refreshes, and warm-climate planting.',
     metaDescription:
-      'Generic West Covina city page for suburban turf replacement, drought-tolerant planting, and efficient landscape planning.',
+      'West Covina city page for suburban turf replacement, drought-tolerant planting, and efficient landscape planning.',
   },
   {
     slug: 'glendora',
@@ -306,9 +306,9 @@ export const cities: CityGuide[] = [
     nearbyCities: ['San Dimas', 'Covina', 'Azusa'],
     ctaTitle: 'Looking for a Glendora-appropriate approach?',
     ctaText:
-      'Review sample profiles that fit foothill conditions, drainage-aware design, and layered drought-smart planting.',
+      'Review profiles that fit foothill conditions, drainage-aware design, and layered drought-smart planting.',
     metaDescription:
-      'Generic Glendora guide for foothill-friendly xeriscaping, slope-aware landscape updates, and SGV turf replacement.',
+      'Glendora guide for foothill-friendly xeriscaping, slope-aware landscape updates, and SGV turf replacement.',
   },
   {
     slug: 'san-dimas',
@@ -333,9 +333,9 @@ export const cities: CityGuide[] = [
     nearbyCities: ['Glendora', 'La Verne', 'Claremont'],
     ctaTitle: 'Comparing ideas for San Dimas properties?',
     ctaText:
-      'Explore sample contractor profiles built around foothill heat, drainage-aware planning, and durable water-wise materials.',
+      'Explore contractor profiles built around foothill heat, drainage-aware planning, and durable water-wise materials.',
     metaDescription:
-      'Generic San Dimas landscaping guide for foothill-edge turf replacement, low-water planting, and practical xeriscape planning.',
+      'San Dimas landscaping guide for foothill-edge turf replacement, low-water planting, and practical xeriscape planning.',
   },
 ];
 

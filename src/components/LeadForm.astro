@@ -5,26 +5,26 @@ import { lawnSizes, leadFormProjectTypes as projectTypes } from '../data/site';
 const sourcePage = Astro.url.pathname;
 
 const benefits = [
-  'Reference city-specific planning notes before you talk to a pro',
-  'Use rebate guidance and editorial resources to frame the project scope',
-  'Send a structured intake without implying instant contractor matching',
-  'Keep the brief organized for later workflow or backend integrations',
-  'No sign-in required to submit the current SGV Turf inquiry form',
+  'Reference city planning notes before you talk to a contractor',
+  'Use rebate guidance and editorial resources to shape the project scope',
+  'Keep your inquiry organized in one place',
+  'Bring clearer priorities, timing, and goals into later conversations',
+  'No sign-in required',
 ];
 ---
 
 <section class="lead-section" id="quote">
   <div class="section-shell lead-section__inner">
     <div class="lead-section__copy">
-      <p class="section-eyebrow section-eyebrow--soft">Free Project Quotes</p>
+      <p class="section-eyebrow section-eyebrow--soft">Project Brief</p>
       <h2 class="lead-section__title">
         Capture your project brief.<br />
         Use it to <em>compare smarter.</em>
       </h2>
       <p class="lead-section__description">
-        This intake now saves a real submission through the current Cloudflare Pages flow. It is
-        still a careful, lightweight project brief, not a promise of instant routing, guaranteed
-        rebates, or a fully operational contractor marketplace.
+        Share a few details about your project, city, and goals so SGV Turf can organize your
+        inquiry and help shape the next step. Use city planning notes, rebate guidance, and
+        editorial resources to build a clearer project scope before talking with a contractor.
       </p>
 
       <ul class="benefit-list">
@@ -36,7 +36,7 @@ const benefits = [
 
     <form class="lead-form" action="/api/lead" method="post" data-lead-form>
       <h3 class="lead-form__title">Outline Your Project</h3>
-      <p class="lead-form__subtitle">Structured intake · No instant matching promises</p>
+      <p class="lead-form__subtitle">A clear starting point for the next step.</p>
 
       <label class="field">
         <span class="field__label">Name</span>
@@ -124,8 +124,8 @@ const benefits = [
       </button>
       <p class="lead-form__status" data-form-status hidden></p>
       <p class="lead-form__note">
-        Submitted through the current SGV Turf intake endpoint. No guaranteed rebates, live
-        contractor routing, or verified review system implied.
+        SGV Turf uses this brief to organize your inquiry and support next-step planning. Final
+        rebate eligibility and contractor fit should always be confirmed directly.
       </p>
     </form>
   </div>

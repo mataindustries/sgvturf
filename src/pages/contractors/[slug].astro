@@ -39,7 +39,7 @@ const structuredData = createBreadcrumbSchema(
   title={`${contractor.name} | SGV Turf`}
   description={contractor.metaDescription}
   canonicalUrl={`/contractors/${contractor.slug}/`}
-  ogTitle={`${contractor.name} Sample Profile | SGV Turf`}
+  ogTitle={`${contractor.name} Profile | SGV Turf`}
   ogDescription={contractor.summary}
   structuredData={structuredData}
 >
@@ -47,17 +47,17 @@ const structuredData = createBreadcrumbSchema(
   <Breadcrumbs items={breadcrumbs} />
   <main id="main-content">
     <PageHero
-      eyebrow="Sample Contractor Profile"
+      eyebrow="Contractor Profile"
       description={contractor.summary}
       meta={[contractor.serviceAreas.join(' · '), contractor.specialties.join(' · ')]}
       actions={[
         { href: '/contractors/', label: 'Back to Directory', variant: 'ghost' },
-        { href: '/#quote', label: 'Use the Inquiry Form' },
+        { href: '/#quote', label: 'Start My Project Brief' },
       ]}
     >
       <span slot="title">
         {contractor.name}<br />
-        <em>profile notes</em>
+        <em>profile</em>
       </span>
     </PageHero>
 
@@ -71,7 +71,7 @@ const structuredData = createBreadcrumbSchema(
           </div>
 
           <div class="detail-panel">
-            <p class="detail-panel__eyebrow">Why This Profile Exists</p>
+            <p class="detail-panel__eyebrow">Profile Perspective</p>
             <div class="detail-richtext">
               <p>{contractor.summary}</p>
               <p>{contractor.disclaimer}</p>
@@ -108,7 +108,7 @@ const structuredData = createBreadcrumbSchema(
           </div>
 
           <div class="meta-block">
-            <p class="meta-block__title">Important Note</p>
+            <p class="meta-block__title">Editorial Note</p>
             <p class="meta-block__text">{contractor.disclaimer}</p>
           </div>
         </aside>
@@ -140,7 +140,7 @@ const structuredData = createBreadcrumbSchema(
       title={contractor.ctaTitle}
       text={contractor.ctaText}
       primaryHref="/contractors/"
-      primaryLabel="Browse More Profiles"
+      primaryLabel="Browse Contractor Profiles"
       secondaryHref="/cities/"
       secondaryLabel="Compare City Guides"
     />
