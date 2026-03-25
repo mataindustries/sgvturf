@@ -13,24 +13,29 @@ const stats = [
 ---
 
 <section class="hero" id="top">
-  <div class="hero__grid">
+  <div class="hero__media" aria-hidden="true">
+    <img
+      class="hero__image"
+      src="/img/sgv-turf-drought-tolerant-front-yard-san-gabriel-valley.jpg"
+      alt=""
+      loading="eager"
+      fetchpriority="high"
+      decoding="async"
+    />
+    <div class="hero__wash"></div>
+  </div>
+
+  <div class="section-shell hero__grid">
     <div class="hero__copy">
-      <div class="hero__eyebrow">San Gabriel Valley project planning</div>
-      <h1 class="hero__title">
-        Ditch the lawn.<br />
-        Shape a more<br />
-        <em>water-wise</em> yard.
-      </h1>
+      <div class="hero__eyebrow">San Gabriel Valley front-yard planning</div>
+      <h1 class="hero__title">Ditch the lawn. Build a better SGV yard.</h1>
       <p class="hero__lede">
-        An SGV planning reference for lower-water landscaping: city-specific notes, contractor
-        profiles, rebate guidance, and practical resources for homeowners thinking beyond the lawn.
+        Find drought-smart landscape ideas, local contractor placement, and rebate guidance for
+        front-yard projects across the San Gabriel Valley.
       </p>
 
       <div class="hero__actions">
-        <a class="button button--primary" href="/#quote">Start Planning</a>
-        <a class="button button--ghost" href="/cities/">Explore City Guides</a>
-        <a class="button button--ghost" href="/rebates/">Explore Rebates</a>
-        <a class="button button--ghost" href="/resources/">Read Resources</a>
+        <a class="button button--primary" href="/#quote">Start Your Project Brief</a>
       </div>
 
       <div class="hero__stats" aria-label="SGV Turf highlights">
@@ -41,43 +46,6 @@ const stats = [
           </div>
         ))}
       </div>
-    </div>
-
-    <div class="hero__art" aria-hidden="true">
-      <div class="hero__wash"></div>
-      <div class="hero__badge">
-        <span>SGV Turf</span>
-        <span>City Guides</span>
-        <span>Project Briefs</span>
-      </div>
-
-      <svg class="hero__scene" viewBox="0 0 600 520" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMax meet">
-        <ellipse cx="120" cy="480" rx="90" ry="20" fill="rgba(44,56,32,0.6)" />
-        <path d="M120 460 Q80 380 40 340 Q60 360 100 390 Q90 330 120 280 Q130 340 120 390 Q150 360 185 340 Q160 380 120 460Z" fill="#3d5230" />
-        <path d="M120 460 Q120 380 120 280" stroke="#2c3820" stroke-width="2" opacity="0.4" />
-        <ellipse cx="60" cy="490" rx="50" ry="14" fill="rgba(44,56,32,0.4)" />
-        <circle cx="60" cy="476" r="22" fill="#506840" />
-        <circle cx="60" cy="476" r="14" fill="#5c7848" />
-        <circle cx="60" cy="476" r="8" fill="#6b8858" />
-        <path d="M300 520 Q285 420 270 340" stroke="#7a9060" stroke-width="3" opacity="0.8" />
-        <path d="M300 520 Q310 430 330 350" stroke="#7a9060" stroke-width="3" opacity="0.8" />
-        <path d="M300 520 Q290 440 280 360 Q275 340 265 320" stroke="#8fa870" stroke-width="2" opacity="0.6" />
-        <path d="M300 520 Q315 440 335 360 Q340 340 350 318" stroke="#8fa870" stroke-width="2" opacity="0.6" />
-        <path d="M300 520 Q295 450 288 370" stroke="#5c7440" stroke-width="2" opacity="0.7" />
-        <rect x="0" y="490" width="600" height="30" fill="#4a3828" opacity="0.5" />
-        <rect x="460" y="360" width="28" height="140" rx="14" fill="#4a6038" />
-        <rect x="488" y="400" width="20" height="60" rx="10" fill="#4a6038" />
-        <rect x="440" y="420" width="20" height="50" rx="10" fill="#4a6038" />
-        <ellipse cx="474" cy="358" rx="16" ry="8" fill="#5a7048" />
-        <ellipse cx="200" cy="504" rx="18" ry="6" fill="#6b5840" opacity="0.4" />
-        <ellipse cx="380" cy="508" rx="14" ry="5" fill="#6b5840" opacity="0.3" />
-        <ellipse cx="500" cy="502" rx="20" ry="6" fill="#6b5840" opacity="0.4" />
-        <circle cx="220" cy="490" r="16" fill="#608050" />
-        <circle cx="220" cy="490" r="9" fill="#7a9868" />
-        <circle cx="400" cy="488" r="12" fill="#506840" />
-        <circle cx="400" cy="488" r="7" fill="#688a58" />
-        <ellipse cx="500" cy="120" rx="80" ry="80" fill="rgba(200,96,58,0.08)" />
-      </svg>
     </div>
   </div>
 </section>
