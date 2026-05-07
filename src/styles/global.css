@@ -344,9 +344,24 @@ svg {
   background: #24301c;
 }
 
+.hero::after {
+  content: '';
+  position: absolute;
+  top: 8%;
+  right: -7%;
+  z-index: 1;
+  width: min(56vw, 50rem);
+  height: min(78vh, 42rem);
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 48% 38%, rgba(245, 239, 224, 0.14), transparent 34%),
+    radial-gradient(circle at 58% 54%, rgba(181, 196, 168, 0.16), transparent 52%);
+  filter: blur(2px);
+}
+
 .hero__grid {
   position: relative;
-  z-index: 1;
+  z-index: 3;
   display: flex;
   align-items: center;
   min-height: clamp(31rem, 90svh, 46rem);
@@ -357,7 +372,7 @@ svg {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  max-width: 42rem;
+  max-width: min(41rem, 52vw);
   padding:
     clamp(4rem, 10vw, 6.5rem)
     clamp(1.4rem, 2vw, 2rem)
@@ -372,7 +387,7 @@ svg {
   inset: 0;
   pointer-events: none;
   background:
-    linear-gradient(135deg, rgba(18, 24, 15, 0.8) 0%, rgba(24, 31, 19, 0.52) 56%, rgba(24, 31, 19, 0.18) 100%);
+    linear-gradient(135deg, rgba(18, 24, 15, 0.84) 0%, rgba(24, 31, 19, 0.58) 58%, rgba(24, 31, 19, 0.16) 100%);
   border: 1px solid rgba(246, 240, 228, 0.14);
   border-radius: var(--radius-lg);
   box-shadow: 0 26px 60px rgba(21, 16, 11, 0.22);
@@ -476,28 +491,32 @@ svg {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(20, 28, 17, 0.3) 0%, rgba(20, 28, 17, 0.18) 24%, rgba(20, 28, 17, 0.55) 100%),
-    linear-gradient(90deg, rgba(20, 28, 17, 0.9) 0%, rgba(32, 43, 24, 0.66) 34%, rgba(32, 43, 24, 0.22) 62%, rgba(20, 28, 17, 0.3) 100%),
-    radial-gradient(circle at 76% 20%, rgba(189, 116, 72, 0.18) 0, transparent 18rem);
+    linear-gradient(180deg, rgba(20, 28, 17, 0.26) 0%, rgba(20, 28, 17, 0.14) 24%, rgba(20, 28, 17, 0.5) 100%),
+    linear-gradient(90deg, rgba(20, 28, 17, 0.92) 0%, rgba(32, 43, 24, 0.7) 32%, rgba(32, 43, 24, 0.24) 58%, rgba(20, 28, 17, 0.26) 100%),
+    radial-gradient(circle at 78% 36%, rgba(245, 239, 224, 0.13) 0, transparent 24rem),
+    radial-gradient(circle at 76% 20%, rgba(189, 116, 72, 0.22) 0, transparent 20rem);
 }
 
 .hero__yard-stage {
   position: absolute;
-  top: clamp(5rem, 10vh, 6.5rem);
-  right: max(var(--page-gutter), 2rem);
-  bottom: clamp(2rem, 6vh, 3.4rem);
-  z-index: 1;
-  width: min(45vw, 39rem);
-  min-height: 25rem;
+  top: clamp(4.6rem, 8vh, 5.8rem);
+  right: max(2.2rem, calc(var(--page-gutter) * 0.62));
+  bottom: clamp(1.7rem, 5vh, 2.8rem);
+  z-index: 2;
+  width: clamp(32rem, 49vw, 45rem);
+  min-height: 27rem;
   overflow: hidden;
   pointer-events: none;
   isolation: isolate;
-  border: 1px solid rgba(245, 239, 224, 0.2);
-  border-radius: var(--radius-lg, 28px);
+  border: 1px solid rgba(253, 250, 244, 0.34);
+  border-radius: var(--radius-lg, 30px);
   background: #4a5c40;
+  transform: perspective(1200px) rotateY(-3deg) rotateZ(0.6deg);
+  transform-origin: center right;
   box-shadow:
-    0 32px 78px rgba(21, 16, 11, 0.3),
-    inset 0 1px 0 rgba(245, 239, 224, 0.16);
+    0 42px 105px rgba(12, 18, 10, 0.46),
+    0 18px 42px rgba(44, 31, 20, 0.24),
+    inset 0 1px 0 rgba(253, 250, 244, 0.32);
 }
 
 .hero__yard-stage::before,
@@ -511,18 +530,20 @@ svg {
 
 .hero__yard-stage::before {
   background:
-    linear-gradient(180deg, rgba(245, 239, 224, 0.14), rgba(245, 239, 224, 0) 34%),
-    radial-gradient(circle at 76% 18%, rgba(200, 96, 58, 0.22), transparent 14rem),
-    radial-gradient(circle at 22% 78%, rgba(44, 31, 20, 0.14), transparent 13rem);
+    linear-gradient(180deg, rgba(253, 250, 244, 0.18), rgba(253, 250, 244, 0) 34%),
+    linear-gradient(115deg, rgba(253, 250, 244, 0.08), transparent 28%),
+    radial-gradient(circle at 76% 18%, rgba(200, 96, 58, 0.18), transparent 15rem),
+    radial-gradient(circle at 22% 78%, rgba(44, 31, 20, 0.18), transparent 13rem);
   mix-blend-mode: screen;
 }
 
 .hero__yard-stage::after {
-  border: 1px solid rgba(44, 31, 20, 0.18);
+  border: 1px solid rgba(44, 31, 20, 0.16);
   border-radius: inherit;
   box-shadow:
-    inset 0 0 62px rgba(20, 28, 17, 0.22),
-    inset 0 1px 0 rgba(245, 239, 224, 0.18);
+    inset 0 0 74px rgba(20, 28, 17, 0.24),
+    inset 0 1px 0 rgba(253, 250, 244, 0.28),
+    inset 0 -1px 0 rgba(44, 31, 20, 0.24);
 }
 
 .hero-illustration {
@@ -549,7 +570,7 @@ svg {
   inset: 0;
   z-index: 0;
   overflow: hidden;
-  opacity: 0.74;
+  opacity: 0.54;
 }
 
 .plant-shapes svg {
@@ -562,8 +583,8 @@ svg {
 
 .hero-badge {
   position: absolute;
-  top: 1.2rem;
-  right: 1.2rem;
+  top: 1rem;
+  right: 1rem;
   z-index: 3;
   display: flex;
   align-items: center;
@@ -573,9 +594,10 @@ svg {
   padding: 1rem;
   border-radius: 50%;
   background: var(--color-terracotta);
+  border: 1px solid rgba(253, 250, 244, 0.22);
   box-shadow:
-    0 16px 32px rgba(44, 31, 20, 0.24),
-    inset 0 1px 0 rgba(245, 239, 224, 0.18);
+    0 18px 38px rgba(44, 31, 20, 0.3),
+    inset 0 1px 0 rgba(253, 250, 244, 0.24);
   animation: spin-slow 24s linear infinite;
 }
 
@@ -2028,7 +2050,8 @@ svg {
   .hero__yard-stage {
     right: 1.5rem;
     width: min(48vw, 32rem);
-    opacity: 0.96;
+    opacity: 0.98;
+    transform: perspective(1000px) rotateY(-2deg) rotateZ(0.4deg);
   }
 
   .search-strip__inner,
@@ -2074,20 +2097,31 @@ svg {
 }
 
 @media (max-width: 780px) {
+  .hero::after {
+    top: auto;
+    right: -16%;
+    bottom: 0;
+    width: 112vw;
+    height: 22rem;
+    opacity: 0.72;
+  }
+
   .hero {
-    min-height: 41rem;
+    min-height: 48rem;
   }
 
   .hero__grid {
-    min-height: 41rem;
+    min-height: 48rem;
+    align-items: flex-start;
   }
 
   .hero__copy {
     max-width: none;
+    justify-content: flex-start;
     padding:
       clamp(4rem, 18vw, 5rem)
       1.15rem
-      13.5rem;
+      18rem;
   }
 
   .hero__copy::before {
@@ -2100,12 +2134,13 @@ svg {
 
   .hero__yard-stage {
     top: auto;
-    right: 1.15rem;
-    bottom: 1.15rem;
-    width: min(86vw, 32rem);
-    height: 16.25rem;
+    right: 1rem;
+    bottom: 1.2rem;
+    width: min(88vw, 32rem);
+    height: 16rem;
     min-height: 0;
-    opacity: 0.88;
+    opacity: 0.94;
+    transform: none;
   }
 
   .hero-badge {
@@ -2200,18 +2235,18 @@ svg {
   }
 
   .hero {
-    min-height: 43rem;
+    min-height: 49rem;
   }
 
   .hero__grid {
-    min-height: 43rem;
+    min-height: 49rem;
   }
 
   .hero__copy {
     padding:
       4.25rem
       1rem
-      13rem;
+      17.25rem;
   }
 
   .hero__copy::before {
@@ -2224,11 +2259,11 @@ svg {
   }
 
   .hero__yard-stage {
-    right: 0.8rem;
-    bottom: 0.9rem;
-    width: min(88vw, 27rem);
-    height: 14.25rem;
-    opacity: 0.86;
+    right: 0.75rem;
+    bottom: 1rem;
+    width: min(89vw, 27rem);
+    height: 14rem;
+    opacity: 0.95;
   }
 
   .hero-badge {
