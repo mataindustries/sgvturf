@@ -474,7 +474,7 @@ svg {
 }
 
 .hero__media {
-  --reveal-left: 58%;
+  --reveal-left: 50%;
 
   position: absolute;
   inset: 0;
@@ -495,7 +495,7 @@ svg {
   inset: 0;
   overflow: hidden;
   clip-path: inset(0 0 0 var(--reveal-left));
-  animation: hero-photo-reveal 20s cubic-bezier(0.45, 0, 0.2, 1) infinite alternate;
+  animation: hero-photo-reveal 9s cubic-bezier(0.45, 0, 0.2, 1) infinite;
   will-change: clip-path;
 }
 
@@ -510,21 +510,39 @@ svg {
   bottom: 0;
   left: var(--reveal-left);
   z-index: 1;
-  width: 1px;
+  width: 2px;
   background: linear-gradient(
     180deg,
     rgba(253, 250, 244, 0),
-    rgba(253, 250, 244, 0.62) 18%,
-    rgba(253, 250, 244, 0.76) 52%,
-    rgba(253, 250, 244, 0.38) 82%,
+    rgba(224, 229, 207, 0.62) 16%,
+    rgba(253, 250, 244, 0.82) 48%,
+    rgba(181, 196, 168, 0.56) 84%,
     rgba(253, 250, 244, 0)
   );
   box-shadow:
-    0 0 22px rgba(253, 250, 244, 0.22),
-    0 0 58px rgba(44, 31, 20, 0.2);
-  transform: translateX(-0.5px);
-  animation: hero-reveal-line 20s cubic-bezier(0.45, 0, 0.2, 1) infinite alternate;
+    0 0 12px rgba(253, 250, 244, 0.24),
+    0 0 30px rgba(181, 196, 168, 0.18),
+    0 0 54px rgba(44, 31, 20, 0.2);
+  transform: translateX(-1px);
+  animation: hero-reveal-line 9s cubic-bezier(0.45, 0, 0.2, 1) infinite;
   will-change: left;
+}
+
+.hero__reveal-line::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -18px;
+  width: 38px;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    rgba(253, 250, 244, 0),
+    rgba(253, 250, 244, 0.08) 48%,
+    rgba(181, 196, 168, 0.08) 54%,
+    rgba(253, 250, 244, 0)
+  );
 }
 
 .hero__wash {
@@ -1938,22 +1956,38 @@ svg {
 }
 
 @keyframes hero-photo-reveal {
-  from {
-    clip-path: inset(0 0 0 62%);
+  0% {
+    clip-path: inset(0 0 0 50%);
   }
 
-  to {
-    clip-path: inset(0 0 0 52%);
+  22% {
+    clip-path: inset(0 0 0 42%);
+  }
+
+  66% {
+    clip-path: inset(0 0 0 68%);
+  }
+
+  100% {
+    clip-path: inset(0 0 0 50%);
   }
 }
 
 @keyframes hero-reveal-line {
-  from {
-    left: 62%;
+  0% {
+    left: 50%;
   }
 
-  to {
-    left: 52%;
+  22% {
+    left: 42%;
+  }
+
+  66% {
+    left: 68%;
+  }
+
+  100% {
+    left: 50%;
   }
 }
 
@@ -2041,7 +2075,7 @@ svg {
   }
 
   .hero__media {
-    --reveal-left: 55%;
+    --reveal-left: 52%;
   }
 
   .hero__grid {
