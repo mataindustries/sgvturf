@@ -1,0 +1,76 @@
+<script>
+  const attributionKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'gclid', 'gbraid', 'wbraid', 'msclkid'];
+  interface FormPayload {
+    ok?: boolean;
+    message?: string;
+    errors?: Record<string, string>;
+  }
+
+  const track = (name: string, params: Record<string, unknown> = {}) =>
+    window.SGVTurfAnalytics?.track(name, params);
+  document.querySelectorAll('[data-submission-form]').forEach((node) => {
+    if (!(node instanceof HTMLFormElement) || node.dataset.enhanced === 'true') return;
+    node.dataset.enhanced = 'true';
+    const status = node.querySelector<HTMLElement>('[data-form-status]');
+    const button = node.querySelector('[data-submit-button]');
+    const defaultLabel = button?.textContent || 'Submit';
+    const query = new URLSearchParams(window.location.search);
+    const stored = JSON.parse(sessionStorage.getItem('sgvturf_attribution') || '{}');
+    attributionKeys.forEach((key) => {
+      const value = query.get(key) || stored[key] || '';
+      if (value) stored[key] = value;
+      const input = node.elements.namedItem(key);
+      if (input instanceof HTMLInputElement) input.value = value;
+    });
+    sessionStorage.setItem('sgvturf_attribution', JSON.stringify(stored));
+    let started = false;
+    node.addEventListener('focusin', () => {
+      if (started) return;
+      started = true;
+      track(node.dataset.startEvent || 'form_start', { source_page: window.location.pathname });
+    });
+    const showStatus = (state: string, message: string) => {
+      if (!status) return;
+      status.hidden = !message;
+      status.dataset.state = state;
+      status.textContent = message;
+    };
+    const clearErrors = () => {
+      node.querySelectorAll('[data-field-error]').forEach((item) => item.textContent = '');
+      node.querySelectorAll('[aria-invalid="true"]').forEach((item) => item.removeAttribute('aria-invalid'));
+    };
+    const applyErrors = (errors: Record<string, string> = {}) => {
+      Object.entries(errors).forEach(([name, message]) => {
+        const field = node.elements.namedItem(name);
+        const error = node.querySelector(`[data-field-error="${name}"]`);
+        if (field instanceof HTMLElement) field.setAttribute('aria-invalid', 'true');
+        if (error) error.textContent = String(message);
+      });
+    };
+    node.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      clearErrors();
+      if (!node.reportValidity()) return;
+      showStatus('pending', 'Sending securely…');
+      if (button instanceof HTMLButtonElement) { button.disabled = true; button.textContent = 'Sending…'; }
+      try {
+        const response = await fetch(node.action, { method: 'POST', headers: { Accept: 'application/json' }, body: new FormData(node) });
+        const payload = await response.json().catch(() => null) as FormPayload | null;
+        if (!response.ok || !payload?.ok) {
+          applyErrors(payload?.errors || {});
+          showStatus('error', payload?.message || 'Delivery could not be confirmed. Please review the form and try again.');
+          track(node.dataset.errorEvent || 'form_submit_error', { source_page: window.location.pathname, status_code: response.status });
+          return;
+        }
+        showStatus('success', payload.message || 'Delivery confirmed.');
+        node.reset();
+        track(node.dataset.successEvent || 'form_submit_success', { source_page: window.location.pathname });
+      } catch {
+        showStatus('error', 'A network problem prevented confirmed delivery. Your submission was not marked received; please try again.');
+        track(node.dataset.errorEvent || 'form_submit_error', { source_page: window.location.pathname, error_type: 'network' });
+      } finally {
+        if (button instanceof HTMLButtonElement) { button.disabled = false; button.textContent = defaultLabel; }
+      }
+    });
+  });
+</script>

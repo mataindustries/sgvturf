@@ -1,37 +1,12 @@
 ---
-import { cityOptions } from '../data/cities';
-import { searchServices } from '../data/site';
-
-const cities = ['City', ...cityOptions];
 ---
 
-<section class="search-strip" id="find" aria-labelledby="find-pro-label">
+<section class="search-strip" id="find" aria-labelledby="find-project-label">
   <div class="section-shell search-strip__inner">
     <div class="search-strip__copy">
-      <p class="search-strip__label" id="find-pro-label">Quick Compare</p>
-      <p class="search-strip__note">Use this to sort contractor profiles by city, service, and scope.</p>
+      <p class="search-strip__label" id="find-project-label">Plan an SGV yard project</p>
+      <p class="search-strip__note">Share one free project brief so SGV Turf can organize your request and check available independent-contractor fit.</p>
     </div>
-
-    <form class="search-strip__form" action="/contractors/" method="get">
-      <select aria-label="Service type" name="service">
-        {searchServices.map((service) => (
-          <option value={service}>{service}</option>
-        ))}
-      </select>
-
-      <select aria-label="City" name="city">
-        {cities.map((city) => (
-          <option value={city}>{city}</option>
-        ))}
-      </select>
-
-      <input
-        type="text"
-        name="notes"
-        placeholder="Project description (optional)"
-        aria-label="Project description"
-      />
-      <button class="button button--search" type="submit">Browse Profiles</button>
-    </form>
+    <a class="button button--search" href="/sgv-yard-project/">Start Free Project Brief</a>
   </div>
 </section>

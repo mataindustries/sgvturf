@@ -1,13 +1,12 @@
 ---
 import { cities } from '../data/cities';
-import { contractors } from '../data/contractors';
 import { rebateEntries } from '../data/rebates';
 import { resources } from '../data/resources';
 
 const stats = [
-  { value: `${contractors.length}`, label: 'Contractor Profiles' },
+  { value: 'Opening', label: 'Verified Roster' },
   { value: `${cities.length}`, label: 'City Guides' },
-  { value: `${rebateEntries.length}`, label: 'Rebate Lanes' },
+  { value: `${rebateEntries.length}`, label: 'Official Rebate Sources' },
   { value: `${resources.length}`, label: 'Editorial Reads' },
 ];
 ---
@@ -41,12 +40,12 @@ const stats = [
       <div class="hero__eyebrow">San Gabriel Valley front-yard planning</div>
       <h1 class="hero__title">Ditch the lawn. Build a better SGV yard.</h1>
       <p class="hero__lede">
-        Find drought-smart landscape ideas, local contractor placement, and rebate guidance for
+        Find drought-smart landscape ideas, honest referral guidance, and official-source rebate planning for
         front-yard projects across the San Gabriel Valley.
       </p>
 
       <div class="hero__actions">
-        <a class="button button--primary" href="/#quote">Start Your Project Brief</a>
+        <a class="button button--primary" href="/sgv-yard-project/">Start Your Free Project Brief</a>
       </div>
 
       <div class="hero__stats" aria-label="SGV Turf highlights">

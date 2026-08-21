@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Footer from '../../components/Footer.astro';
+import PageHero from '../../components/PageHero.astro';
+import ContractorPricing from '../../components/ContractorPricing.astro';
+import ContractorApplicationForm from '../../components/ContractorApplicationForm.astro';
+import { createBreadcrumbSchema } from '../../lib/seo';
+
+const structuredData = createBreadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Contractors', path: '/contractors/' }, { name: 'Founding Partner Intake', path: '/contractors/join/' }], Astro.site);
+---
+
+<BaseLayout title="SGVTurf Founding Contractor Pilot | Apply" description="Review the temporary first-3 SGV contractor pilot and submit a verified real-business application." canonicalUrl="/contractors/join/" ogTitle="Founding Contractor Pilot | SGVTurf" ogDescription="$0 setup, 30-day founding placement, optional continuation, no automatic renewal, contract, or results guarantee." structuredData={structuredData}>
+  <Nav />
+  <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Contractors', href: '/contractors/' }, { label: 'Join' }]} />
+  <main id="main-content" data-view-event="contractor_join_view">
+    <PageHero eyebrow="For Verified SGV Contractors" description="SGVTurf is a regional planning, editorial, and contractor-referral resource. It does not perform landscape installation. This intake is for real independent businesses interested in the temporary founding pilot." meta={['First 3 verified contractors', '$0 setup', '30-day placement']} actions={[{ href: '#contractor-application', label: 'Apply' }, { href: '#founding-pilot', label: 'Review Pilot', variant: 'ghost' }]}><span slot="title">Help build the first<br /><em>verified SGV roster.</em></span></PageHero>
+    <ContractorPricing />
+    <section class="surface-section surface-section--cream"><div class="section-shell form-focus"><div><p class="section-eyebrow">What to provide</p><h2 class="section-title">A short intake for a <em>real-business profile.</em></h2><p class="collection-lede">Provide the legal business name, public contact information, website, service areas, specialties, license number/status when applicable, logo, and 4–8 owned project photos. This form accepts shareable photo links only; photo and logo collection can follow acceptance.</p><p class="collection-lede">Partners are expected to keep information accurate, respond promptly to forwarded inquiries, and permit anonymized campaign outcomes to be used in a case study.</p><p class="collection-lede">If delivery fails, save your answers and retry after SGVTurf confirms the intake channel. No separate public email or phone is verified in this repository, so none is presented as a fallback.</p></div><ContractorApplicationForm /></div></section>
+  </main>
+  <Footer />
+  <script>
+    if (!sessionStorage.getItem('sgvturf_contractor_join_view')) {
+      sessionStorage.setItem('sgvturf_contractor_join_view', '1');
+      window.SGVTurfAnalytics?.track('contractor_join_view', { page_path: window.location.pathname });
+    }
+  </script>
+</BaseLayout>

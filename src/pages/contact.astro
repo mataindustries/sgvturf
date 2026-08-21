@@ -1,0 +1,6 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'; import Nav from '../components/Nav.astro'; import Footer from '../components/Footer.astro'; import PageHero from '../components/PageHero.astro'; import ContactForm from '../components/ContactForm.astro';
+---
+<BaseLayout title="Contact SGVTurf" description="Contact the SGVTurf regional yard-planning and contractor-referral resource." canonicalUrl="/contact/">
+  <Nav /><main id="main-content"><PageHero eyebrow="Contact" description="Use this form for SGVTurf questions that do not fit the homeowner project brief or founding contractor application." meta={['Planning resource', 'Referral questions', 'No installation services']}><span slot="title">Contact<br /><em>SGVTurf.</em></span></PageHero><section class="surface-section surface-section--cream"><div class="section-shell form-focus"><div><h2 class="section-title">Choose the <em>right intake.</em></h2><p class="collection-lede">For a yard project, use the <a class="text-link" href="/sgv-yard-project/">homeowner project brief</a>. Contractors should use the <a class="text-link" href="/contractors/join/">founding partner intake</a>. SGVTurf does not perform landscape installations.</p></div><ContactForm /></div></section></main><Footer />
+</BaseLayout>

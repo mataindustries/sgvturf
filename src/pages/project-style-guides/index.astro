@@ -1,0 +1,32 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Footer from '../../components/Footer.astro';
+import PageHero from '../../components/PageHero.astro';
+import ContractorCard from '../../components/ContractorCard.astro';
+import { projectStyleGuides } from '../../data/contractors';
+import { createBreadcrumbSchema } from '../../lib/seo';
+
+const structuredData = createBreadcrumbSchema([
+  { name: 'Home', path: '/' },
+  { name: 'Project Style Guides', path: '/project-style-guides/' },
+], Astro.site);
+---
+
+<BaseLayout title="Illustrative SGV Project Style Guides | SGV Turf" description="Explore clearly labeled illustrative planning archetypes for SGV yard projects. These guides are not contractors or businesses." canonicalUrl="/project-style-guides/" ogTitle="Illustrative SGV Project Style Guides | SGV Turf" ogDescription="Planning archetypes for comparing yard styles and scopes—not contractor listings." structuredData={structuredData}>
+  <Nav />
+  <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Project Style Guides' }]} />
+  <main id="main-content">
+    <PageHero eyebrow="Project Style Guides" description="These editorial examples preserve useful planning ideas without representing real companies, verified partners, directory members, or businesses accepting leads." meta={['Illustrative only', 'Not contractor listings', 'Planning reference']} actions={[{ href: '/sgv-yard-project/', label: 'Start My Project Brief' }]}>
+      <span slot="title">Compare project approaches<br /><em>without fake listings.</em></span>
+    </PageHero>
+    <section class="surface-section surface-section--white">
+      <div class="section-shell">
+        <p class="archetype-disclosure archetype-disclosure--prominent">Illustrative planning archetypes — not contractors or businesses.</p>
+        <div class="contractor-grid">{projectStyleGuides.map((guide) => <ContractorCard guide={guide} />)}</div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

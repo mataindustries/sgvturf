@@ -3,12 +3,12 @@ export const siteName = 'SGV Turf';
 export const defaultTitle = 'SGV Turf | San Gabriel Valley Drought-Smart Landscape Planning';
 
 export const defaultDescription =
-  'An editorial SGV reference for homeowners comparing drought-smart landscaping ideas, contractor profiles, rebate guidance, and project-planning resources.';
+  'A regional SGV planning, editorial, and contractor-referral resource for drought-smart yard projects.';
 
 export const defaultOgTitle = 'SGV Turf | SGV Turf Removal, Xeriscape, and Rebate Planning';
 
 export const defaultOgDescription =
-  'Explore SGV city guides, contractor profiles, rebate guidance, and practical water-wise landscape resources for lower-water yard projects.';
+  'Explore SGV city guides, project style guides, official-source rebate guidance, and a free yard project brief.';
 
 export const defaultSocialImage = '/social-default.svg';
 
@@ -18,7 +18,7 @@ export const siteTagline =
   'A regional SGV resource for water-wise landscaping, turf replacement, and drought-smart front yard planning.';
 
 export const primaryNavLinks = [
-  { href: '/contractors/', label: 'Find Contractors' },
+  { href: '/sgv-yard-project/', label: 'Start a Project' },
   { href: '/rebates/', label: 'Rebates' },
   { href: '/resources/', label: 'Resources' },
   { href: '/cities/', label: 'Cities' },
@@ -29,26 +29,27 @@ export const footerColumns = [
   {
     title: 'Homeowners',
     links: [
-      { href: '/#quote', label: 'Start a Project Brief' },
-      { href: '/rebates/', label: 'Estimated Rebates' },
-      { href: '/contractors/', label: 'Find Contractors' },
+      { href: '/sgv-yard-project/', label: 'Start a Project Brief' },
+      { href: '/rebates/', label: 'Rebate Guidance' },
+      { href: '/contractors/', label: 'Verified Contractor Roster' },
       { href: '/cities/', label: 'City Guides' },
       { href: '/resources/', label: 'Planning Resources' },
     ],
   },
   {
-    title: 'Directory',
+    title: 'Planning & Partners',
     links: [
-      { href: '/contractors/', label: 'Contractor Profiles' },
+      { href: '/project-style-guides/', label: 'Project Style Guides' },
+      { href: '/contractors/', label: 'Verified Contractor Roster' },
       { href: '/resources/artificial-turf-versus-low-water-planting-for-sgv-homes/', label: 'Turf vs. Planting' },
       { href: '/resources/sgv-irrigation-upgrades-that-make-low-water-landscapes-work/', label: 'Irrigation Planning' },
-      { href: '/contractors/#founder-offer', label: 'Founding Contractors' },
+      { href: '/contractors/join/', label: 'Founding Contractor Pilot' },
     ],
   },
   {
     title: 'Resources',
     links: [
-      { href: '/rebates/', label: 'Rebate Hub' },
+      { href: '/rebates/', label: 'Official-Source Rebates' },
       { href: '/resources/', label: 'Editorial Library' },
       { href: '/cities/pasadena/', label: 'Pasadena Guide' },
       { href: '/cities/glendora/', label: 'Glendora Guide' },
@@ -58,10 +59,10 @@ export const footerColumns = [
 ];
 
 export const footerMetaLinks = [
-  { href: '/cities/', label: 'City guides' },
-  { href: '/contractors/', label: 'Contractor profiles' },
-  { href: '/rebates/', label: 'Estimated rebates' },
-  { href: '/resources/', label: 'Editorial resources' },
+  { href: '/about/', label: 'About' },
+  { href: '/contact/', label: 'Contact' },
+  { href: '/privacy/', label: 'Privacy' },
+  { href: '/how-it-works/', label: 'Referral disclosure' },
 ];
 
 export const searchServices = [
