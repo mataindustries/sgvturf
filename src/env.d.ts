@@ -9,5 +9,8 @@ interface Window {
 	gtag?: (...args: unknown[]) => void;
 	SGVTurfAnalytics?: {
 		track: (eventName: string, params?: Record<string, unknown>) => void;
+		attribution: (params?: Record<string, unknown>) => Record<string, unknown>;
+		captureAttribution: () => Record<string, string>;
 	};
+	__sgvTurfClickTrackingBound?: boolean;
 }

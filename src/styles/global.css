@@ -279,6 +279,50 @@ svg {
   flex: 1;
 }
 
+.site-nav__toggle {
+  display: none;
+  align-items: center;
+  gap: 0.65rem;
+  min-height: 2.6rem;
+  border: 1px solid var(--color-sand-dark);
+  border-radius: var(--radius-sm);
+  padding: 0.65rem 0.85rem;
+  background: rgba(253, 250, 244, 0.72);
+  color: var(--color-soil);
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.site-nav__toggle-icon,
+.site-nav__toggle-icon::before,
+.site-nav__toggle-icon::after {
+  display: block;
+  width: 1rem;
+  height: 1px;
+  background: currentColor;
+  transition: transform var(--transition-fast);
+}
+
+.site-nav__toggle-icon {
+  position: relative;
+}
+
+.site-nav__toggle-icon::before,
+.site-nav__toggle-icon::after {
+  content: '';
+  position: absolute;
+  left: 0;
+}
+
+.site-nav__toggle-icon::before { top: -0.3rem; }
+.site-nav__toggle-icon::after { top: 0.3rem; }
+
+.site-nav__toggle[aria-expanded='true'] .site-nav__toggle-icon { background: transparent; }
+.site-nav__toggle[aria-expanded='true'] .site-nav__toggle-icon::before { top: 0; transform: rotate(45deg); }
+.site-nav__toggle[aria-expanded='true'] .site-nav__toggle-icon::after { top: 0; transform: rotate(-45deg); }
+
 .site-nav__links {
   display: flex;
   align-items: center;
@@ -306,6 +350,17 @@ svg {
   min-height: 2.6rem;
   padding-inline: 1.35rem;
   color: var(--color-white) !important;
+}
+
+.button--hero-ghost {
+  color: var(--color-white);
+  border-color: rgba(246, 240, 228, 0.55);
+  background: rgba(20, 27, 17, 0.25);
+}
+
+.button--hero-ghost:hover {
+  color: var(--color-white);
+  border-color: var(--color-white);
 }
 
 .breadcrumbs {
@@ -345,7 +400,7 @@ svg {
 .hero {
   position: relative;
   overflow: hidden;
-  min-height: clamp(31rem, 90svh, 46rem);
+  min-height: clamp(31rem, 76svh, 42rem);
   background: #24301c;
 }
 
@@ -369,7 +424,7 @@ svg {
   z-index: 3;
   display: flex;
   align-items: center;
-  min-height: clamp(31rem, 90svh, 46rem);
+  min-height: clamp(31rem, 76svh, 42rem);
 }
 
 .hero__copy {
@@ -1175,6 +1230,15 @@ svg {
 .ad-hero__note {
   margin: 1rem 0 0;
   font-size: 0.76rem;
+  color: var(--color-stone);
+}
+
+.privacy-reassurance {
+  margin: 1.25rem 0 0;
+  padding-left: 1rem;
+  border-left: 3px solid var(--color-sage);
+  font-size: 0.88rem;
+  line-height: 1.7;
   color: var(--color-stone);
 }
 
@@ -2192,19 +2256,6 @@ svg {
     align-items: stretch;
   }
 
-  .site-nav__inner,
-  .site-nav__menu {
-    align-items: stretch;
-  }
-
-  .site-nav__inner {
-    flex-direction: column;
-  }
-
-  .site-nav__menu {
-    justify-content: space-between;
-  }
-
   .steps-grid,
   .contractor-grid,
   .city-grid,
@@ -2227,6 +2278,18 @@ svg {
 }
 
 @media (max-width: 780px) {
+  .site-nav__inner {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.65rem 1rem;
+    min-height: 3.65rem;
+    padding-block: 0.5rem;
+  }
+
+  .site-nav__toggle {
+    display: inline-flex;
+  }
+
   .hero::after {
     top: auto;
     right: -16%;
@@ -2237,7 +2300,7 @@ svg {
   }
 
   .hero {
-    min-height: 43rem;
+    min-height: 39rem;
   }
 
   .hero__media {
@@ -2245,7 +2308,7 @@ svg {
   }
 
   .hero__grid {
-    min-height: 43rem;
+    min-height: 39rem;
     align-items: flex-start;
   }
 
@@ -2272,18 +2335,29 @@ svg {
   }
 
   .site-nav__menu {
-    flex-direction: column;
-    gap: 0.9rem;
+    display: none;
+    grid-column: 1 / -1;
+    width: 100%;
+    padding: 0.35rem 0 0.55rem;
+  }
+
+  .site-nav__menu--open {
+    display: grid;
+    gap: 0.6rem;
   }
 
   .site-nav__links {
+    display: grid;
     width: 100%;
-    gap: 0.8rem 1rem;
+    gap: 0;
   }
 
   .site-nav__links a {
-    display: inline-flex;
-    padding: 0.45rem 0;
+    display: flex;
+    min-height: 2.5rem;
+    align-items: center;
+    border-bottom: var(--border-soft);
+    padding: 0.45rem 0.25rem;
   }
 
   .button--nav {
@@ -2331,8 +2405,8 @@ svg {
     font-size: 0.64rem;
   }
   .site-nav__inner {
-    gap: 1rem;
-    padding-block: 0.8rem;
+    gap: 0.5rem 0.75rem;
+    padding-block: 0.4rem;
   }
 
   .section-header__action {
@@ -2362,11 +2436,11 @@ svg {
   }
 
   .hero {
-    min-height: 43rem;
+    min-height: 39rem;
   }
 
   .hero__grid {
-    min-height: 43rem;
+    min-height: 39rem;
   }
 
   .hero__copy {

@@ -5,6 +5,7 @@ interface Props {
   text: string;
   primaryHref: string;
   primaryLabel: string;
+  primaryAnalyticsEvent?: 'primary_cta_click' | 'contractor_cta_click';
   secondaryHref?: string;
   secondaryLabel?: string;
 }
@@ -15,6 +16,7 @@ const {
   text,
   primaryHref,
   primaryLabel,
+  primaryAnalyticsEvent,
   secondaryHref,
   secondaryLabel,
 } = Astro.props;
@@ -30,7 +32,7 @@ const {
       </div>
 
       <div class="collection-cta__actions">
-        <a class="button button--primary" href={primaryHref}>{primaryLabel}</a>
+        <a class="button button--primary" href={primaryHref} data-analytics-event={primaryAnalyticsEvent}>{primaryLabel}</a>
         {secondaryHref && secondaryLabel && (
           <a class="button button--ghost" href={secondaryHref}>{secondaryLabel}</a>
         )}

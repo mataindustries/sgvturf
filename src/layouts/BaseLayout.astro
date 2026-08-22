@@ -80,13 +80,40 @@ const jsonLdEntries = toJsonLd(structuredData);
       window.gtag = window.gtag || gtag;
       window.gtag('js', new Date());
       window.gtag('config', gaMeasurementId);
+      const attributionMap = {
+        source: 'utm_source',
+        medium: 'utm_medium',
+        campaign: 'utm_campaign',
+        content: 'utm_content',
+        term: 'utm_term',
+        gclid: 'gclid',
+        gbraid: 'gbraid',
+        wbraid: 'wbraid',
+        msclkid: 'msclkid',
+      };
+      const captureAttribution = () => {
+        let stored = {};
+        try { stored = JSON.parse(sessionStorage.getItem('sgvturf_attribution') || '{}'); } catch { stored = {}; }
+        const query = new URLSearchParams(window.location.search);
+        Object.entries(attributionMap).forEach(([field, queryName]) => {
+          const value = query.get(queryName);
+          if (value) stored[field] = value.slice(0, 300);
+        });
+        sessionStorage.setItem('sgvturf_attribution', JSON.stringify(stored));
+        return stored;
+      };
       window.SGVTurfAnalytics = window.SGVTurfAnalytics || {
         track(eventName, params) {
           if (typeof window.gtag === 'function') {
             window.gtag('event', eventName, params || {});
           }
         },
+        attribution(params) {
+          return { ...captureAttribution(), ...(params || {}) };
+        },
+        captureAttribution,
       };
+      window.SGVTurfAnalytics.captureAttribution();
     </script>
     <title>{title}</title>
     {jsonLdEntries.map((entry) => (
@@ -100,5 +127,19 @@ const jsonLdEntries = toJsonLd(structuredData);
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
     <slot />
+    <script is:inline>
+      if (!window.__sgvTurfClickTrackingBound) {
+        window.__sgvTurfClickTrackingBound = true;
+        document.addEventListener('click', (event) => {
+          const link = event.target instanceof Element ? event.target.closest('[data-analytics-event]') : null;
+          const eventName = link?.getAttribute('data-analytics-event');
+          if (!eventName) return;
+          window.SGVTurfAnalytics?.track(
+            eventName,
+            window.SGVTurfAnalytics.attribution({ page_path: window.location.pathname }),
+          );
+        });
+      }
+    </script>
   </body>
 </html>

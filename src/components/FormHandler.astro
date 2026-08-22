@@ -1,5 +1,5 @@
 <script>
-  const attributionKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'gclid', 'gbraid', 'wbraid', 'msclkid'];
+  const attributionKeys = ['source', 'medium', 'campaign', 'content', 'term', 'gclid', 'gbraid', 'wbraid', 'msclkid'];
   interface FormPayload {
     ok?: boolean;
     message?: string;
@@ -7,22 +7,32 @@
   }
 
   const track = (name: string, params: Record<string, unknown> = {}) =>
-    window.SGVTurfAnalytics?.track(name, params);
+    window.SGVTurfAnalytics?.track(name, window.SGVTurfAnalytics.attribution(params));
   document.querySelectorAll('[data-submission-form]').forEach((node) => {
     if (!(node instanceof HTMLFormElement) || node.dataset.enhanced === 'true') return;
     node.dataset.enhanced = 'true';
     const status = node.querySelector<HTMLElement>('[data-form-status]');
     const button = node.querySelector('[data-submit-button]');
     const defaultLabel = button?.textContent || 'Submit';
-    const query = new URLSearchParams(window.location.search);
-    const stored = JSON.parse(sessionStorage.getItem('sgvturf_attribution') || '{}');
-    attributionKeys.forEach((key) => {
-      const value = query.get(key) || stored[key] || '';
-      if (value) stored[key] = value;
-      const input = node.elements.namedItem(key);
-      if (input instanceof HTMLInputElement) input.value = value;
-    });
-    sessionStorage.setItem('sgvturf_attribution', JSON.stringify(stored));
+    const hydrateMetadata = () => {
+      const stored = window.SGVTurfAnalytics?.captureAttribution() || {};
+      attributionKeys.forEach((key) => {
+        const input = node.elements.namedItem(key);
+        if (input instanceof HTMLInputElement) input.value = stored[key] || '';
+      });
+      const landingPage = node.elements.namedItem('landingPage');
+      if (landingPage instanceof HTMLInputElement) landingPage.value = window.location.pathname;
+      const referrer = node.elements.namedItem('referrer');
+      if (referrer instanceof HTMLInputElement) {
+        try {
+          const url = new URL(document.referrer);
+          referrer.value = `${url.origin}${url.pathname}`;
+        } catch {
+          referrer.value = '';
+        }
+      }
+    };
+    hydrateMetadata();
     let started = false;
     node.addEventListener('focusin', () => {
       if (started) return;
@@ -51,7 +61,9 @@
       event.preventDefault();
       clearErrors();
       if (!node.reportValidity()) return;
+      hydrateMetadata();
       showStatus('pending', 'Sending securely…');
+      node.setAttribute('aria-busy', 'true');
       if (button instanceof HTMLButtonElement) { button.disabled = true; button.textContent = 'Sending…'; }
       try {
         const response = await fetch(node.action, { method: 'POST', headers: { Accept: 'application/json' }, body: new FormData(node) });
@@ -59,16 +71,18 @@
         if (!response.ok || !payload?.ok) {
           applyErrors(payload?.errors || {});
           showStatus('error', payload?.message || 'Delivery could not be confirmed. Please review the form and try again.');
-          track(node.dataset.errorEvent || 'form_submit_error', { source_page: window.location.pathname, status_code: response.status });
+          if (response.status >= 500) track(node.dataset.errorEvent || 'form_delivery_error', { page_path: window.location.pathname, status_code: response.status });
           return;
         }
         showStatus('success', payload.message || 'Delivery confirmed.');
         node.reset();
-        track(node.dataset.successEvent || 'form_submit_success', { source_page: window.location.pathname });
+        hydrateMetadata();
+        track(node.dataset.successEvent || 'form_success', { page_path: window.location.pathname });
       } catch {
         showStatus('error', 'A network problem prevented confirmed delivery. Your submission was not marked received; please try again.');
-        track(node.dataset.errorEvent || 'form_submit_error', { source_page: window.location.pathname, error_type: 'network' });
+        track(node.dataset.errorEvent || 'form_delivery_error', { page_path: window.location.pathname, error_type: 'network' });
       } finally {
+        node.removeAttribute('aria-busy');
         if (button instanceof HTMLButtonElement) { button.disabled = false; button.textContent = defaultLabel; }
       }
     });

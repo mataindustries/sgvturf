@@ -3,6 +3,7 @@ interface Action {
   href: string;
   label: string;
   variant?: 'primary' | 'ghost';
+  analyticsEvent?: 'primary_cta_click' | 'contractor_cta_click';
 }
 
 interface Props {
@@ -27,7 +28,7 @@ const { eyebrow, description, meta = [], actions = [] } = Astro.props;
       {actions.length > 0 && (
         <div class="page-hero__actions">
           {actions.map((action) => (
-            <a class:list={['button', action.variant === 'ghost' ? 'button--ghost' : 'button--primary']} href={action.href}>
+            <a class:list={['button', action.variant === 'ghost' ? 'button--ghost' : 'button--primary']} href={action.href} data-analytics-event={action.analyticsEvent}>
               {action.label}
             </a>
           ))}

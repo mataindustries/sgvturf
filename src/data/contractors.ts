@@ -43,7 +43,7 @@ export const projectStyleGuides: ProjectStyleGuide[] = [
     metaDescription:
       'Illustrative SGV project style guide for design-forward drought-smart yards in foothill and character-home neighborhoods.',
     disclaimer:
-      'Illustrative planning archetype — not a contractor or business.',
+      'Planning example — not a real business.',
   },
   {
     slug: 'citrus-belt-landscape-atelier',
@@ -69,7 +69,7 @@ export const projectStyleGuides: ProjectStyleGuide[] = [
     metaDescription:
       'Illustrative SGV project style guide focused on suburban yard refreshes, irrigation upgrades, and drought-smart planting plans.',
     disclaimer:
-      'Illustrative planning archetype — not a contractor or business.',
+      'Planning example — not a real business.',
   },
   {
     slug: 'mission-garden-works',
@@ -95,7 +95,7 @@ export const projectStyleGuides: ProjectStyleGuide[] = [
     metaDescription:
       'Illustrative SGV project style guide centered on practical turf removal, drip irrigation, and low-maintenance residential landscape updates.',
     disclaimer:
-      'Illustrative planning archetype — not a contractor or business.',
+      'Planning example — not a real business.',
   },
   {
     slug: 'arroyo-outdoor-edit',
@@ -121,7 +121,7 @@ export const projectStyleGuides: ProjectStyleGuide[] = [
     metaDescription:
       'Illustrative SGV project style guide for compact-lot planning, entry hardscape improvements, and refined low-water landscaping.',
     disclaimer:
-      'Illustrative planning archetype — not a contractor or business.',
+      'Planning example — not a real business.',
   },
   {
     slug: 'canyon-line-xeriscapes',
@@ -147,7 +147,7 @@ export const projectStyleGuides: ProjectStyleGuide[] = [
     metaDescription:
       'Illustrative SGV project style guide for foothill properties, drainage-aware xeriscaping, and slope-sensitive landscape planning.',
     disclaimer:
-      'Illustrative planning archetype — not a contractor or business.',
+      'Planning example — not a real business.',
   },
   {
     slug: 'valley-ground-plan',
@@ -173,6 +173,6 @@ export const projectStyleGuides: ProjectStyleGuide[] = [
     metaDescription:
       'Illustrative SGV project style guide focused on heat-tolerant planting, durable hardscape, and lower-maintenance suburban landscape updates.',
     disclaimer:
-      'Illustrative planning archetype — not a contractor or business.',
+      'Planning example — not a real business.',
   },
 ];

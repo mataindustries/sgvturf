@@ -1,12 +1,10 @@
 ---
 import ProjectBriefForm from './ProjectBriefForm.astro';
 
-interface Props { sourcePage?: string; }
-const { sourcePage = Astro.url.pathname } = Astro.props;
 const benefits = [
   'Tell SGVTurf about the yard, city, goals, size, timing, and desired work',
-  'SGVTurf organizes the request and checks available independent-contractor fit',
-  'Available contractors may contact you directly to discuss scope and estimates',
+  'SGVTurf organizes the essentials into a contractor-ready starting scope',
+  'Use the brief to compare options, rebate questions, and proposals consistently',
 ];
 ---
 
@@ -18,6 +16,6 @@ const benefits = [
       <p class="lead-section__description">SGVTurf is a regional planning and referral resource. It does not perform landscape installation, and contractor availability is not guaranteed.</p>
       <ul class="benefit-list">{benefits.map((benefit) => <li>{benefit}</li>)}</ul>
     </div>
-    <ProjectBriefForm sourcePage={sourcePage} />
+    <ProjectBriefForm />
   </div>
 </section>

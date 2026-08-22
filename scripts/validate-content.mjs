@@ -11,28 +11,67 @@ const walk = (directory) => {
   }
 };
 walk(sourceRoot);
-const source = files.map((file) => readFileSync(file, 'utf8')).join('\n');
 
+const sourceByFile = new Map(files.map((file) => [file, readFileSync(file, 'utf8')]));
+const source = [...sourceByFile.values()].join('\n');
 const required = [
-  'Illustrative planning archetype — not a contractor or business.',
-  'SGVTurf is preparing a limited paid ChatGPT Ads beta test, pending platform approval.',
-  'homeowner_project_brief',
-  'contractor_partner_application',
-  'project_brief_submit_success',
-  'contractor_application_submit_success',
+  'Simpler yard care for SGV homeowners',
+  'Less lawn. Better yard.',
+  'Build My Free Yard Brief',
+  'Replace your SGV lawn without guessing.',
+  'Planning example — not a real business.',
+  'Founding SGV Contractor Test',
+  'Free placement for the initial 30-day traffic test',
+  'homeowner',
+  'contractor',
+  'landing_view',
+  'primary_cta_click',
+  'project_form_start',
+  'project_form_success',
+  'contractor_cta_click',
+  'contractor_form_start',
+  'contractor_form_success',
+  'form_delivery_error',
+  'landingPage',
+  'referrer',
+  'term',
 ];
-for (const value of required) if (!source.includes(value)) throw new Error(`Missing required readiness content: ${value}`);
+for (const value of required) {
+  if (!source.includes(value)) throw new Error(`Missing required paid-traffic content: ${value}`);
+}
 
 const forbidden = [
-  '$750 to $3,500',
-  '$600 to $2,800',
-  '$400 to $2,400',
-  'Upper SGV Regional District Programs',
-  'Valley County Water District',
+  ['$', '99'].join(''),
+  ['6', 'Contractor Profiles'].join(' '),
+  ['6', 'contractor profiles'].join(' '),
   'Suggested Contractor Profiles',
-  '6 contractor profiles',
+  'Ditch the lawn. Build a better SGV yard.',
+  ['This repository', 'contains no verified'].join(' '),
+  ['No separate public email or phone', 'is verified in this repository'].join(' '),
   'href="/#quote"',
 ];
-for (const value of forbidden) if (source.includes(value)) throw new Error(`Found retired or unsupported content: ${value}`);
+for (const value of forbidden) {
+  if (source.includes(value)) throw new Error(`Found retired or unsupported content: ${value}`);
+}
 
-console.log(`Validated required trust, funnel, analytics, and rebate content across ${files.length} source files.`);
+const exampleNames = [
+  'Foothill Dryscape Studio',
+  'Citrus Belt Landscape Atelier',
+  'Mission Garden Works',
+  'Arroyo Outdoor Edit',
+  'Canyon Line Xeriscapes',
+  'Valley Ground Plan',
+];
+for (const [file, contents] of sourceByFile) {
+  if (file.endsWith('/data/contractors.ts') || file.includes('/project-style-guides/')) continue;
+  for (const name of exampleNames) {
+    if (contents.includes(name)) throw new Error(`Planning example leaked outside style-guide content: ${name} in ${file}`);
+  }
+}
+
+const homepage = readFileSync(new URL('../src/pages/index.astro', import.meta.url), 'utf8');
+for (const retiredComponent of ['SearchStrip', 'CitiesStrip', 'LeadForm', 'ContractorPricing']) {
+  if (homepage.includes(retiredComponent)) throw new Error(`Homepage still includes out-of-scope section: ${retiredComponent}`);
+}
+
+console.log(`Validated conversion copy, honest directory state, founder offer, forms, and measurement across ${files.length} source files.`);

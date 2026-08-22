@@ -16,7 +16,7 @@ const { guide } = Astro.props;
   </div>
 
   <h3 class="contractor-card__name">{guide.name}</h3>
-  <p class="archetype-disclosure">Illustrative planning archetype — not a contractor or business.</p>
+  <p class="archetype-disclosure">Planning example — not a real business.</p>
   <p class="contractor-card__city">Relevant SGV settings: {guide.serviceAreas.join(' · ')}</p>
   <p class="contractor-card__summary">{guide.tagline}</p>
 
@@ -27,5 +27,5 @@ const { guide } = Astro.props;
   </div>
 
   <p class="contractor-card__blurb">{guide.trustBlurb}</p>
-  <a class="inline-link" href={`/project-style-guides/${guide.slug}/`} aria-label={`View the ${guide.name} illustrative planning archetype`}>View Style Guide</a>
+  <a class="inline-link" href={`/project-style-guides/${guide.slug}/`} aria-label={`View the ${guide.name} planning example, which is not a real business`}>View Style Guide</a>
 </article>

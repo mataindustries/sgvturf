@@ -17,7 +17,7 @@ const structuredData = createBreadcrumbSchema([
   <Nav />
   <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Contractors' }]} />
   <main id="main-content">
-    <PageHero eyebrow="Verified Contractor Directory" description="Only verified real businesses supplied to SGV Turf will appear here. The founding roster is opening now, and no placeholder businesses are being used." meta={['0 published listings', 'Verified businesses only', 'Founding roster opening']} actions={[{ href: '/sgv-yard-project/', label: 'Start a Project Brief' }, { href: '/contractors/join/', label: 'For Contractors', variant: 'ghost' }]}>
+    <PageHero eyebrow="Verified Contractor Directory" description="Only verified real businesses supplied to SGV Turf will appear here. The founding roster is opening now, and no placeholder businesses are being used." meta={['0 published listings', 'Verified businesses only', 'Founding roster opening']} actions={[{ href: '/sgv-yard-project/', label: 'Start a Project Brief', analyticsEvent: 'primary_cta_click' }, { href: '/contractors/join/', label: 'For Contractors', variant: 'ghost', analyticsEvent: 'contractor_cta_click' }]}>
       <span slot="title">An honest directory,<br /><em>ready for real partners.</em></span>
     </PageHero>
     <section class="surface-section surface-section--white">
@@ -30,7 +30,7 @@ const structuredData = createBreadcrumbSchema([
         </div>
       </div>
     </section>
-    <CollectionCta eyebrow="Founding Partner Spots" title="Are you an established SGV landscape contractor?" text="Review the temporary 30-day founding pilot and submit a short real-business intake." primaryHref="/contractors/join/" primaryLabel="Apply for a Founding Spot" />
+    <CollectionCta eyebrow="Founding SGV Contractor Test" title="Are you an established SGV landscape contractor?" text="Review the free initial 30-day traffic test and submit a short real-business intake." primaryHref="/contractors/join/" primaryLabel="Apply for the Free Test" primaryAnalyticsEvent="contractor_cta_click" />
   </main>
   <Footer />
 </BaseLayout>

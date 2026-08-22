@@ -3,17 +3,18 @@ import { cityOptions } from '../data/cities';
 import { lawnSizes, leadFormProjectTypes } from '../data/site';
 import FormHandler from './FormHandler.astro';
 
-interface Props { formId?: string; sourcePage?: string; }
-const { formId = 'project-brief-form', sourcePage = Astro.url.pathname } = Astro.props;
+interface Props { formId?: string; }
+const { formId = 'project-brief-form' } = Astro.props;
 const timings = ['As soon as practical', 'Within 1–3 months', 'Within 3–6 months', '6+ months / researching'];
-const attributionFields = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'gclid', 'gbraid', 'wbraid', 'msclkid'];
+const attributionFields = ['source', 'medium', 'campaign', 'content', 'term', 'gclid', 'gbraid', 'wbraid', 'msclkid'];
 ---
 
-<form id={formId} class="lead-form" action="/api/lead" method="post" data-submission-form data-start-event="project_brief_start" data-success-event="project_brief_submit_success" data-error-event="project_brief_submit_error">
+<form id={formId} class="lead-form" action="/api/lead" method="post" data-submission-form data-start-event="project_form_start" data-success-event="project_form_success" data-error-event="form_delivery_error">
   <h2 class="lead-form__title">Free SGV Yard Project Brief</h2>
   <p class="lead-form__subtitle">Required fields are marked “required.”</p>
-  <input type="hidden" name="submissionType" value="homeowner_project_brief" />
-  <input type="hidden" name="sourcePage" value={sourcePage} />
+  <input type="hidden" name="submissionType" value="homeowner" />
+  <input type="hidden" name="landingPage" value={Astro.url.pathname} />
+  <input type="hidden" name="referrer" value="" />
   {attributionFields.map((name) => <input type="hidden" name={name} value="" />)}
 
   <div class="form-row">
@@ -26,7 +27,7 @@ const attributionFields = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_cont
   </div>
   <div class="form-row">
     <label class="field"><span class="field__label">City — required</span><select class="field__control" name="city" autocomplete="address-level2" required><option value="">Select city</option>{cityOptions.map((city) => <option value={city}>{city}</option>)}</select><span class="field__error" data-field-error="city"></span></label>
-    <label class="field"><span class="field__label">Approximate yard size — required</span><select class="field__control" name="yardSize" required><option value="">Select size</option>{lawnSizes.map((size) => <option value={size}>{size} sq ft</option>)}</select><span class="field__error" data-field-error="yardSize"></span></label>
+    <label class="field"><span class="field__label">Approximate yard size — required</span><select class="field__control" name="lawnSize" required><option value="">Select size</option>{lawnSizes.map((size) => <option value={size}>{size} sq ft</option>)}</select><span class="field__error" data-field-error="lawnSize"></span></label>
   </div>
   <div class="form-row">
     <label class="field"><span class="field__label">Project type — required</span><select class="field__control" name="projectType" required><option value="">Select project type</option>{leadFormProjectTypes.map((item) => <option value={item}>{item}</option>)}</select><span class="field__error" data-field-error="projectType"></span></label>
@@ -41,7 +42,7 @@ const attributionFields = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_cont
   <span class="field__error" data-field-error="sharingConsent"></span>
 
   <div class="field field--hidden" aria-hidden="true"><label>Leave this field blank<input type="text" name="faxNumber" tabindex="-1" autocomplete="off" /></label></div>
-  <button class="button button--primary button--submit" type="submit" data-submit-button>Send My Free Project Brief</button>
+  <button class="button button--primary button--submit" type="submit" data-submit-button>Build My Free Yard Brief</button>
   <p class="lead-form__status" data-form-status aria-live="polite" hidden></p>
   <p class="lead-form__note">See the <a class="text-link" href="/privacy/">Privacy Policy</a> and <a class="text-link" href="/how-it-works/">Referral Disclosure</a>. No contractor response, estimate, availability, or result is guaranteed.</p>
 </form>

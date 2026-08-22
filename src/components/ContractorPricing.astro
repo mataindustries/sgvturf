@@ -4,30 +4,27 @@ interface Props { sectionId?: string; primaryHref?: string; primaryLabel?: strin
 const { sectionId = 'founding-pilot', primaryHref = '/contractors/join/#contractor-application', primaryLabel = 'Apply for a Founding Spot' } = Astro.props;
 const included = [
   'First 3 verified SGV contractors',
-  '$0 setup charge',
-  '30-day founding placement',
-  'Custom real-business profile',
-  'Placement on up to 3 relevant SGV city pages',
-  'Homepage visibility during the pilot when appropriate',
-  'Direct forwarding of matching inquiries when lead routing is operational',
-  'Optional continuation at $99 after the pilot',
-  'No automatic renewal',
-  'No contract',
-  'No traffic, lead-volume, or revenue guarantee',
+  'Free profile creation',
+  'Free placement for the initial 30-day traffic test',
+  'Direct forwarding of relevant inquiries',
+  'Campaign and inquiry results shared after the test',
+  'No guaranteed lead volume',
+  'No long-term contract',
+  'Optional paid continuation discussed only after results exist',
 ];
 const faqs = [
-  { question: 'Is there an upfront charge?', answer: 'No. The temporary founding pilot has a $0 setup charge and a 30-day founding placement.' },
-  { question: 'Does the pilot renew automatically?', answer: 'No. Continuation at $99 after the pilot is optional, with no automatic renewal and no contract.' },
-  { question: 'Are leads or campaign launch guaranteed?', answer: 'No. SGVTurf does not guarantee traffic, lead volume, revenue, or campaign approval. Direct inquiry forwarding applies only when routing is operational and an inquiry is potentially relevant.' },
+  { question: 'Is the founding test free?', answer: 'Yes. Profile creation and placement are free for the initial 30-day traffic test. Any paid continuation is discussed only after results exist.' },
+  { question: 'Is there a long-term commitment?', answer: 'No. There is no long-term contract and no automatic paid continuation.' },
+  { question: 'Are leads or campaign launch guaranteed?', answer: 'No. SGVTurf does not guarantee campaign approval, traffic, inquiry volume, or revenue. Relevant inquiries are forwarded directly when routing is operational.' },
 ];
 ---
 
 <section class="surface-section surface-section--white" id={sectionId}>
   <div class="section-shell founder-offer">
-    <div class="section-header"><div><p class="section-eyebrow">Founding Ad-Test Partner Pilot</p><h2 class="section-title founder-offer__title">A temporary first-3 offer with <em>clear limits.</em></h2><p class="collection-lede founder-offer__subhead">SGVTurf is a regional planning and referral resource, not a landscape installer. Independent contractors perform the work and remain responsible for their business information, estimates, terms, licensing, and workmanship.</p></div></div>
+    <div class="section-header"><div><p class="section-eyebrow">Founding SGV Contractor Test</p><h2 class="section-title founder-offer__title">A free first test with <em>clear limits.</em></h2><p class="collection-lede founder-offer__subhead">SGVTurf is a regional planning and referral resource, not a landscape installer. Independent contractors perform the work and remain responsible for their business information, estimates, terms, licensing, and workmanship.</p></div></div>
     <div class="detail-grid founder-offer__grid">
       <div class="detail-main"><article class="detail-panel"><p class="detail-panel__eyebrow">Exact Pilot Structure</p><ul class="detail-list">{included.map((item) => <li>{item}</li>)}</ul></article><article class="detail-panel"><p class="detail-panel__eyebrow">Campaign Status</p><h3 class="detail-panel__title">Pending platform approval</h3><p class="detail-panel__copy">SGVTurf is preparing a limited paid ChatGPT Ads beta test, pending platform approval.</p></article></div>
-      <aside class="detail-sidebar"><article class="pricing-card pricing-card--emphasis founder-offer__card"><p class="pricing-card__tier">First 3 verified SGV contractors</p><div class="pricing-card__price">$0</div><div class="pricing-card__period">setup · 30-day founding placement</div><ul class="pricing-card__features"><li>Custom verified business profile</li><li>Up to 3 relevant city pages</li><li>Optional $99 continuation</li><li>No renewal, contract, or results guarantee</li></ul><a class="button button--pricing button--pricing-dark" href={primaryHref}>{primaryLabel}</a></article></aside>
+      <aside class="detail-sidebar"><article class="pricing-card pricing-card--emphasis founder-offer__card"><p class="pricing-card__tier">First 3 verified SGV contractors</p><div class="pricing-card__price">Free</div><div class="pricing-card__period">profile · initial 30-day traffic test</div><ul class="pricing-card__features"><li>Direct relevant inquiries</li><li>Campaign and inquiry results shared</li><li>Paid continuation only after results</li><li>No long-term contract or lead guarantee</li></ul><a class="button button--pricing button--pricing-dark" href={primaryHref} data-analytics-event="contractor_cta_click">{primaryLabel}</a></article></aside>
     </div>
     <article class="detail-panel"><p class="detail-panel__eyebrow">FAQ</p><div class="faq-list">{faqs.map((item, index) => <FAQItem question={item.question} answer={item.answer} open={index === 0} />)}</div></article>
   </div>

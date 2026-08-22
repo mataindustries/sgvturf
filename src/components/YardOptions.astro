@@ -1,0 +1,42 @@
+---
+const options = [
+  {
+    title: 'Lawn-to-garden conversion',
+    text: 'Replace unused lawn with lower-water planting, practical paths, and a plan that can be checked against current utility rules before work begins.',
+    link: '/rebates/',
+    label: 'Check Rebate Context',
+  },
+  {
+    title: 'Planting and irrigation refresh',
+    text: 'Keep the useful parts of the yard while simplifying planting zones, improving irrigation logic, and reducing weekly upkeep.',
+    link: '/resources/sgv-irrigation-upgrades-that-make-low-water-landscapes-work/',
+    label: 'Plan the Systems',
+  },
+  {
+    title: 'Mixed-use or low-maintenance surface',
+    text: 'Evaluate hardscape, usable open space, and artificial turf honestly. Artificial turf is not eligible for the regional turf-replacement rebate.',
+    link: '/resources/artificial-turf-versus-low-water-planting-for-sgv-homes/',
+    label: 'Compare Materials',
+  },
+];
+---
+
+<section class="surface-section surface-section--white" id="yard-options">
+  <div class="section-shell">
+    <div class="section-header">
+      <div>
+        <p class="section-eyebrow">Three planning options</p>
+        <h2 class="section-title">Choose the yard direction that<br /><em>fits real life.</em></h2>
+      </div>
+    </div>
+    <div class="steps-grid">
+      {options.map((option) => (
+        <article class="step-card">
+          <h3 class="step-card__title">{option.title}</h3>
+          <p class="step-card__description">{option.text}</p>
+          <a class="inline-link" href={option.link}>{option.label}</a>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
