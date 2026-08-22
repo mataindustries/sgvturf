@@ -1,0 +1,90 @@
+<script>
+  const attributionKeys = ['source', 'medium', 'campaign', 'content', 'term', 'gclid', 'gbraid', 'wbraid', 'msclkid'];
+  interface FormPayload {
+    ok?: boolean;
+    message?: string;
+    errors?: Record<string, string>;
+  }
+
+  const track = (name: string, params: Record<string, unknown> = {}) =>
+    window.SGVTurfAnalytics?.track(name, window.SGVTurfAnalytics.attribution(params));
+  document.querySelectorAll('[data-submission-form]').forEach((node) => {
+    if (!(node instanceof HTMLFormElement) || node.dataset.enhanced === 'true') return;
+    node.dataset.enhanced = 'true';
+    const status = node.querySelector<HTMLElement>('[data-form-status]');
+    const button = node.querySelector('[data-submit-button]');
+    const defaultLabel = button?.textContent || 'Submit';
+    const hydrateMetadata = () => {
+      const stored = window.SGVTurfAnalytics?.captureAttribution() || {};
+      attributionKeys.forEach((key) => {
+        const input = node.elements.namedItem(key);
+        if (input instanceof HTMLInputElement) input.value = stored[key] || '';
+      });
+      const landingPage = node.elements.namedItem('landingPage');
+      if (landingPage instanceof HTMLInputElement) landingPage.value = window.location.pathname;
+      const referrer = node.elements.namedItem('referrer');
+      if (referrer instanceof HTMLInputElement) {
+        try {
+          const url = new URL(document.referrer);
+          referrer.value = `${url.origin}${url.pathname}`;
+        } catch {
+          referrer.value = '';
+        }
+      }
+    };
+    hydrateMetadata();
+    let started = false;
+    node.addEventListener('focusin', () => {
+      if (started) return;
+      started = true;
+      track(node.dataset.startEvent || 'form_start', { source_page: window.location.pathname });
+    });
+    const showStatus = (state: string, message: string) => {
+      if (!status) return;
+      status.hidden = !message;
+      status.dataset.state = state;
+      status.textContent = message;
+    };
+    const clearErrors = () => {
+      node.querySelectorAll('[data-field-error]').forEach((item) => item.textContent = '');
+      node.querySelectorAll('[aria-invalid="true"]').forEach((item) => item.removeAttribute('aria-invalid'));
+    };
+    const applyErrors = (errors: Record<string, string> = {}) => {
+      Object.entries(errors).forEach(([name, message]) => {
+        const field = node.elements.namedItem(name);
+        const error = node.querySelector(`[data-field-error="${name}"]`);
+        if (field instanceof HTMLElement) field.setAttribute('aria-invalid', 'true');
+        if (error) error.textContent = String(message);
+      });
+    };
+    node.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      clearErrors();
+      if (!node.reportValidity()) return;
+      hydrateMetadata();
+      showStatus('pending', 'Sending securely…');
+      node.setAttribute('aria-busy', 'true');
+      if (button instanceof HTMLButtonElement) { button.disabled = true; button.textContent = 'Sending…'; }
+      try {
+        const response = await fetch(node.action, { method: 'POST', headers: { Accept: 'application/json' }, body: new FormData(node) });
+        const payload = await response.json().catch(() => null) as FormPayload | null;
+        if (!response.ok || !payload?.ok) {
+          applyErrors(payload?.errors || {});
+          showStatus('error', payload?.message || 'Delivery could not be confirmed. Please review the form and try again.');
+          if (response.status >= 500) track(node.dataset.errorEvent || 'form_delivery_error', { page_path: window.location.pathname, status_code: response.status });
+          return;
+        }
+        showStatus('success', payload.message || 'Delivery confirmed.');
+        node.reset();
+        hydrateMetadata();
+        track(node.dataset.successEvent || 'form_success', { page_path: window.location.pathname });
+      } catch {
+        showStatus('error', 'A network problem prevented confirmed delivery. Your submission was not marked received; please try again.');
+        track(node.dataset.errorEvent || 'form_delivery_error', { page_path: window.location.pathname, error_type: 'network' });
+      } finally {
+        node.removeAttribute('aria-busy');
+        if (button instanceof HTMLButtonElement) { button.disabled = false; button.textContent = defaultLabel; }
+      }
+    });
+  });
+</script>

@@ -8,7 +8,12 @@ import { primaryNavLinks } from '../data/site';
       SGV<span>Turf</span>
     </a>
 
-    <div class="site-nav__menu">
+    <button class="site-nav__toggle" type="button" aria-expanded="false" aria-controls="primary-menu">
+      <span>Menu</span>
+      <span class="site-nav__toggle-icon" aria-hidden="true"></span>
+    </button>
+
+    <div class="site-nav__menu" id="primary-menu">
       <ul class="site-nav__links">
         {primaryNavLinks.map((link) => (
           <li>
@@ -17,7 +22,37 @@ import { primaryNavLinks } from '../data/site';
         ))}
       </ul>
 
-      <a class="button button--primary button--nav" href="/contractors/#founder-offer">For Contractors</a>
+      <a class="button button--primary button--nav" href="/contractors/join/" data-analytics-event="contractor_cta_click">For Contractors</a>
     </div>
   </div>
 </nav>
+
+<script>
+  const nav = document.querySelector<HTMLElement>('.site-nav');
+  const toggle = nav?.querySelector<HTMLButtonElement>('.site-nav__toggle');
+  const menu = nav?.querySelector<HTMLElement>('.site-nav__menu');
+
+  const closeMenu = () => {
+    if (!toggle || !menu) return;
+    toggle.setAttribute('aria-expanded', 'false');
+    menu.classList.remove('site-nav__menu--open');
+  };
+
+  toggle?.addEventListener('click', () => {
+    const willOpen = toggle.getAttribute('aria-expanded') !== 'true';
+    toggle.setAttribute('aria-expanded', String(willOpen));
+    menu?.classList.toggle('site-nav__menu--open', willOpen);
+  });
+  menu?.addEventListener('click', (event) => {
+    if ((event.target as Element).closest('a')) closeMenu();
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && toggle?.getAttribute('aria-expanded') === 'true') {
+      closeMenu();
+      toggle.focus();
+    }
+  });
+  window.addEventListener('resize', () => {
+    if (window.matchMedia('(min-width: 781px)').matches) closeMenu();
+  });
+</script>

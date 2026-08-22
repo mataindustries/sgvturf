@@ -1,0 +1,12 @@
+---
+import FormHandler from './FormHandler.astro';
+---
+<form class="lead-form" action="/api/lead" method="post" data-submission-form data-start-event="contact_form_start" data-success-event="contact_form_success" data-error-event="form_delivery_error">
+  <h2 class="lead-form__title">Contact SGVTurf</h2><p class="lead-form__subtitle">Required fields are marked</p>
+  <input type="hidden" name="submissionType" value="contact" /><input type="hidden" name="landingPage" value={Astro.url.pathname} /><input type="hidden" name="referrer" value="" />
+  <div class="form-row"><label class="field"><span class="field__label">Name — required</span><input class="field__control" name="name" autocomplete="name" required /><span class="field__error" data-field-error="name"></span></label><label class="field"><span class="field__label">Email — required</span><input class="field__control" type="email" name="email" autocomplete="email" required /><span class="field__error" data-field-error="email"></span></label></div>
+  <label class="field"><span class="field__label">Message — required</span><textarea class="field__control field__control--textarea" name="message" maxlength="3000" required></textarea><span class="field__error" data-field-error="message"></span></label>
+  <div class="field field--hidden" aria-hidden="true"><label>Leave blank<input name="faxNumber" tabindex="-1" autocomplete="off" /></label></div>
+  <button class="button button--primary button--submit" type="submit" data-submit-button>Send Message</button><p class="lead-form__status" data-form-status aria-live="polite" hidden></p><p class="lead-form__note">Send us a message and we’ll respond within one business day.</p>
+</form>
+<FormHandler />

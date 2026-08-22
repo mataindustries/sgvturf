@@ -1,30 +1,31 @@
 ---
-import type { ContractorProfile } from '../data/contractors';
+import type { ProjectStyleGuide } from '../data/contractors';
 
 interface Props {
-  contractor: ContractorProfile;
+  guide: ProjectStyleGuide;
 }
 
-const { contractor } = Astro.props;
+const { guide } = Astro.props;
 ---
 
-<article class:list={['contractor-card', contractor.featured && 'contractor-card--featured']}>
-  {contractor.featured && <div class="contractor-card__badge">Featured</div>}
+<article class:list={['contractor-card', guide.featured && 'contractor-card--featured']}>
+  <div class="contractor-card__badge">Planning Archetype</div>
 
-  <div class:list={['contractor-card__logo', `contractor-card__logo--${contractor.tone}`]}>
-    {contractor.initials}
+  <div class:list={['contractor-card__logo', `contractor-card__logo--${guide.tone}`]} aria-hidden="true">
+    {guide.initials}
   </div>
 
-  <h3 class="contractor-card__name">{contractor.name}</h3>
-  <p class="contractor-card__city">{contractor.serviceAreas.join(' · ')}</p>
-  <p class="contractor-card__summary">{contractor.tagline}</p>
+  <h3 class="contractor-card__name">{guide.name}</h3>
+  <p class="archetype-disclosure">Planning example — not a real business.</p>
+  <p class="contractor-card__city">Relevant SGV settings: {guide.serviceAreas.join(' · ')}</p>
+  <p class="contractor-card__summary">{guide.tagline}</p>
 
   <div class="tag-list">
-    {contractor.specialties.map((specialty) => (
+    {guide.specialties.map((specialty) => (
       <span class="tag">{specialty}</span>
     ))}
   </div>
 
-  <p class="contractor-card__blurb">{contractor.trustBlurb}</p>
-  <a class="inline-link" href={`/contractors/${contractor.slug}/`}>View Profile</a>
+  <p class="contractor-card__blurb">{guide.trustBlurb}</p>
+  <a class="inline-link" href={`/project-style-guides/${guide.slug}/`} aria-label={`View the ${guide.name} planning example, which is not a real business`}>View Style Guide</a>
 </article>

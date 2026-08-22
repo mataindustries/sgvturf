@@ -1,28 +1,27 @@
 ---
-import { contractors } from '../data/contractors';
-import ContractorCard from './ContractorCard.astro';
-
-const featuredContractors = contractors.filter((contractor) => contractor.featured).slice(0, 3);
 ---
 
 <section class="surface-section surface-section--white" id="directory">
   <div class="section-shell">
     <div class="section-header">
       <div>
-        <p class="section-eyebrow">Featured Profiles</p>
+        <p class="section-eyebrow">Founding Partner Spots</p>
         <h2 class="section-title">
-          Contractor profiles<br />
-          for <em>smart SGV shortlists</em>
+          The verified contractor roster<br />
+          is <em>opening now</em>
         </h2>
       </div>
 
-      <a class="button button--ghost section-header__action" href="/contractors/">Browse All 6</a>
+      <a class="button button--ghost section-header__action" href="/contractors/">View Directory</a>
     </div>
 
-    <div class="contractor-grid">
-      {featuredContractors.map((contractor) => (
-        <ContractorCard contractor={contractor} />
-      ))}
+    <div class="empty-state">
+      <p class="empty-state__title">No verified contractor profiles are published yet.</p>
+      <p class="empty-state__copy">The founding roster is opening now. SGV Turf will publish only verified real businesses; planning examples remain separate and never count as contractors.</p>
+      <div class="collection-cta__actions">
+        <a class="button button--primary" href="/sgv-yard-project/" data-analytics-event="primary_cta_click">Build My Free Yard Brief</a>
+        <a class="button button--ghost" href="/project-style-guides/">Browse Planning Examples</a>
+      </div>
     </div>
   </div>
 </section>

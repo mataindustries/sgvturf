@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Footer from '../../components/Footer.astro';
+import PageHero from '../../components/PageHero.astro';
+import ContractorPricing from '../../components/ContractorPricing.astro';
+import ContractorApplicationForm from '../../components/ContractorApplicationForm.astro';
+import { createBreadcrumbSchema } from '../../lib/seo';
+
+const structuredData = createBreadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Contractors', path: '/contractors/' }, { name: 'Founding Partner Intake', path: '/contractors/join/' }], Astro.site);
+---
+
+<BaseLayout title="Founding SGV Contractor Test | Apply" description="Apply for the free initial 30-day traffic test for the first three verified SGV contractors." canonicalUrl="/contractors/join/" ogTitle="Founding SGV Contractor Test | SGVTurf" ogDescription="Free profile creation and initial 30-day placement, with no long-term contract or guaranteed lead volume." structuredData={structuredData}>
+  <Nav />
+  <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Contractors', href: '/contractors/' }, { label: 'Join' }]} />
+  <main id="main-content">
+    <PageHero eyebrow="Founding SGV Contractor Test" description="SGVTurf is a regional planning, editorial, and contractor-referral resource. It does not perform landscape installation. This free initial test is for real independent SGV businesses interested in helping establish the first verified roster." meta={['First 3 verified contractors', 'Free profile creation', 'Initial 30-day test']} actions={[{ href: '#contractor-application', label: 'Apply for the Free Test', analyticsEvent: 'contractor_cta_click' }, { href: '#founding-pilot', label: 'Review Test Details', variant: 'ghost' }]}><span slot="title">Help build the first<br /><em>verified SGV roster.</em></span></PageHero>
+    <ContractorPricing />
+    <section class="surface-section surface-section--cream"><div class="section-shell form-focus"><div><p class="section-eyebrow">What to provide</p><h2 class="section-title">A short intake for a <em>real-business profile.</em></h2><p class="collection-lede">Provide the real business identity and public contact information, website, service areas, specialties, relevant license number/status, logo, and owned project photos. This form accepts shareable photo links only; photo and logo collection can follow acceptance.</p><p class="collection-lede">Applicants must permit publication of submitted materials, keep information accurate, respond promptly to relevant forwarded inquiries, and permit anonymized campaign outcomes to be used in a case study.</p><p class="collection-lede">SGVTurf is preparing a limited paid ChatGPT Ads beta test, pending platform approval. No campaign launch, inquiry volume, or paid continuation is guaranteed.</p></div><ContractorApplicationForm /></div></section>
+  </main>
+  <Footer />
+</BaseLayout>

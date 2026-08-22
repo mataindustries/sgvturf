@@ -1,16 +1,18 @@
 ---
 import { resources } from '../data/resources';
 import ResourceCard from './ResourceCard.astro';
+
+const selectedResources = resources.slice(0, 3);
 ---
 
 <section class="surface-section surface-section--cream" id="resources">
   <div class="section-shell">
     <div class="section-header">
       <div>
-        <p class="section-eyebrow">The SGV Turf Guide</p>
+        <p class="section-eyebrow">Selected planning resources</p>
         <h2 class="section-title">
-          Everything you need to<br />
-          <em>plan your project</em>
+          Practical guidance for<br />
+          <em>a clearer yard plan.</em>
         </h2>
       </div>
 
@@ -18,7 +20,7 @@ import ResourceCard from './ResourceCard.astro';
     </div>
 
     <div class="editorial-grid">
-      {resources.map((article) => (
+      {selectedResources.map((article) => (
         <ResourceCard article={article} />
       ))}
     </div>

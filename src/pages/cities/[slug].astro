@@ -6,7 +6,6 @@ import Footer from '../../components/Footer.astro';
 import PageHero from '../../components/PageHero.astro';
 import CollectionCta from '../../components/CollectionCta.astro';
 import { cities } from '../../data/cities';
-import { contractors } from '../../data/contractors';
 import { rebateEntries } from '../../data/rebates';
 import type { CityGuide } from '../../data/cities';
 import { createBreadcrumbSchema, createServiceSchema } from '../../lib/seo';
@@ -20,13 +19,6 @@ export function getStaticPaths() {
 
 const { city } = Astro.props as { city: CityGuide };
 const nearbyGuides = cities.filter((entry) => city.nearbyCities.includes(entry.name));
-const relatedContractors = contractors
-  .filter(
-    (entry) =>
-      entry.serviceAreas.includes(city.name) ||
-      entry.serviceAreas.some((area) => city.nearbyCities.includes(area)),
-  )
-  .slice(0, 3);
 const directRebateMatches = rebateEntries.filter((entry) => entry.coverageCities.includes(city.name));
 const nearbyRebateMatches = rebateEntries.filter((entry) =>
   entry.coverageCities.some((coverageCity) => city.nearbyCities.includes(coverageCity)),
@@ -35,8 +27,8 @@ const planningRebateMatches =
   directRebateMatches.length > 0 ? directRebateMatches : nearbyRebateMatches.slice(0, 2);
 const rebateSummary =
   planningRebateMatches.length > 0
-    ? `${planningRebateMatches.map((entry) => entry.districtName).join(' and ')} look like the closest SGV-style rebate lanes for ${city.name}. Keep them as planning references only until current utility terms are confirmed.`
-    : `Use the rebates hub as an estimate-only planning reference while you confirm which current district or utility program actually applies to ${city.name}.`;
+    ? `${planningRebateMatches.map((entry) => entry.districtName).join(' and ')} may provide an official starting point for ${city.name}, but the property owner must confirm the water provider, current eligibility, and any required approval.`
+    : `Use the rebates hub to find official-source guidance while you confirm which current district or utility program actually applies to ${city.name}.`;
 const breadcrumbs = [
   { label: 'Home', href: '/' },
   { label: 'Cities', href: '/cities/' },
@@ -81,7 +73,7 @@ const structuredData = [
       meta={[city.nearbyCities.join(' · '), `${city.commonNeeds.length} common project themes`]}
       actions={[
         { href: '/cities/', label: 'Back to Cities', variant: 'ghost' },
-        { href: '/rebates/', label: 'Review Estimated Rebates' },
+        { href: '/rebates/', label: 'Review Rebate Sources' },
       ]}
     >
       <span slot="title">
@@ -126,22 +118,12 @@ const structuredData = [
           <div class="meta-block">
             <p class="meta-block__title">Plan From This City Page</p>
             <div class="list-grid">
-              <a href="/contractors/">Compare contractor profiles</a>
-              <a href="/rebates/">Review estimated rebate guidance</a>
-              <a href="/#quote">Start my project brief</a>
+              <a href="/contractors/">Check the verified contractor roster</a>
+              <a href="/project-style-guides/">Compare illustrative project styles</a>
+              <a href="/rebates/">Review official-source rebate guidance</a>
+              <a href="/sgv-yard-project/">Start my project brief</a>
             </div>
           </div>
-
-          {relatedContractors.length > 0 && (
-            <div class="meta-block">
-              <p class="meta-block__title">Suggested Contractor Profiles</p>
-              <div class="list-grid">
-                {relatedContractors.map((entry) => (
-                  <a href={`/contractors/${entry.slug}/`}>{entry.name}</a>
-                ))}
-              </div>
-            </div>
-          )}
 
           <div class="meta-block">
             <p class="meta-block__title">Nearby Guides</p>
@@ -156,7 +138,7 @@ const structuredData = [
             <p class="meta-block__title">Rebate Planning</p>
             <p class="meta-block__text">{rebateSummary}</p>
             <a class="inline-link meta-block__link" href="/rebates/">
-              Review estimated rebates
+              Review rebate sources
             </a>
           </div>
         </aside>
@@ -167,10 +149,10 @@ const structuredData = [
       eyebrow="Next Step"
       title={city.ctaTitle}
       text={city.ctaText}
-      primaryHref="/#quote"
+      primaryHref="/sgv-yard-project/"
       primaryLabel="Start Inquiry Flow"
       secondaryHref="/contractors/"
-      secondaryLabel="Compare Profiles"
+      secondaryLabel="View Verified Roster"
     />
   </main>
   <Footer />

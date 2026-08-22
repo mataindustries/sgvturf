@@ -20,12 +20,6 @@ if (configuredSite) {
 export default defineConfig({
   site,
   trailingSlash: 'always',
-  integrations: site
-    ? [
-        sitemap({
-          filter: (page) => !page.endsWith('/thanks/'),
-        }),
-      ]
-    : [],
+  integrations: site ? [sitemap()] : [],
 
 });

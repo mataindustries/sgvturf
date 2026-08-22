@@ -1,6 +1,6 @@
 # SGV Turf
 
-Editorial Astro site for SGV homeowners comparing drought-smart landscape ideas, sample contractor positioning, estimated rebate planning, and a Cloudflare Pages Function intake flow.
+Editorial Astro site and referral-intake flow for San Gabriel Valley homeowners planning drought-smart yard projects. Illustrative Project Style Guides are kept separate from the verified-contractor directory.
 
 ## Local Development
 
@@ -47,18 +47,19 @@ The Cloudflare adapter outputs the deployable site to `dist/`.
 `PUBLIC_SITE_URL`
 
 - Full production origin for canonical tags, Open Graph URLs, and sitemap generation.
+- Required before launch.
 - Example shape only: `https://your-production-domain`
 - Do not set this to a preview URL if you want production canonicals.
 
-`TURNSTILE_SECRET_KEY`
-
-- Reserved for future Turnstile verification inside `functions/api/lead.ts`.
-- Not required for the current prototype flow.
-
 `LEAD_WEBHOOK_URL`
 
-- Reserved for future webhook forwarding from the lead intake function.
-- Not required for the current prototype flow.
+- HTTPS endpoint that receives validated homeowner, contractor, and contact submissions.
+- Required before any public intake is opened. Without it, the API returns `503` and the UI does not claim success.
+
+`LEAD_DELIVERY_MODE`
+
+- Development-only switch. Set to `local_log` only while testing through localhost.
+- Never use `local_log` as the production delivery configuration.
 
 ## Cloudflare Pages Deployment Notes
 
@@ -79,13 +80,12 @@ dist
 
 ```text
 PUBLIC_SITE_URL=https://your-production-domain
-TURNSTILE_SECRET_KEY=
 LEAD_WEBHOOK_URL=
 ```
 
-5. Keep the secrets blank until the downstream integrations exist.
+5. Configure and verify the webhook before opening either intake form to public traffic.
 6. After `PUBLIC_SITE_URL` is set, Astro will emit canonical URLs and enable sitemap generation automatically.
-7. `robots.txt` is generated from `src/pages/robots.txt.ts` and includes the sitemap URL when `PUBLIC_SITE_URL` is present.
+7. `robots.txt` is generated from `src/pages/robots.txt.ts`, allows general crawlers (including OAI crawlers), and includes the sitemap URL when `PUBLIC_SITE_URL` is present.
 
 ## Useful Commands
 
@@ -93,6 +93,15 @@ LEAD_WEBHOOK_URL=
 | :-- | :-- |
 | `npm run dev` | Astro local development |
 | `npm run build` | Production build |
+| `npm run typecheck` | Astro and TypeScript diagnostics |
+| `npm test` | Lead-handler validation and delivery-state tests |
+| `npm run validate:links` | Validate internal links in the built output |
+| `npm run validate:content` | Check required readiness copy and retired-risk content |
 | `npm run preview` | Build and run Wrangler Pages locally |
 | `npm run pages:dev` | Same as preview; explicit Pages-local workflow |
 | `npm run generate-types` | Refresh Wrangler worker types |
+
+## Known Pre-Launch Gates
+
+- Configure and verify `PUBLIC_SITE_URL` and `LEAD_WEBHOOK_URL`; the forms intentionally return an error when delivery is unavailable.
+- Review the current `npm audit --omit=dev` findings before deployment. Framework or adapter upgrades should be handled as a targeted dependency task and followed by the full readiness validation matrix.

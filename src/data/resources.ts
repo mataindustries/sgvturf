@@ -39,7 +39,7 @@ export const resources: ResourceArticle[] = [
     featured: true,
     tags: ['Front Yard', 'Planning', 'Budget'],
     relatedCitySlugs: ['pasadena', 'south-pasadena'],
-    relatedRebateSlugs: ['upper-sgv-regional-programs', 'pasadena-water-and-power'],
+    relatedRebateSlugs: ['socal-watersmart-turf-replacement', 'pasadena-water-and-power'],
     keyTakeaways: [
       'Begin with circulation and open-space needs before selecting plants.',
       'Use fewer materials and repeat them consistently across the yard.',
@@ -75,7 +75,7 @@ export const resources: ResourceArticle[] = [
     ],
     ctaTitle: 'Ready to compare front-yard approaches?',
     ctaText:
-      'Use the city and contractor pages to see which profiles match compact lots, larger suburban frontages, or foothill-style landscapes.',
+      'Use the city and project style pages to compare compact lots, larger suburban frontages, or foothill-style landscapes.',
     metaDescription:
       'Editorial SGV resource on planning a drought-smart front yard with better curb appeal, lower water use, and a clearer design structure.',
   },
@@ -93,7 +93,7 @@ export const resources: ResourceArticle[] = [
     featured: true,
     tags: ['Artificial Turf', 'Planting', 'Decision Guide'],
     relatedCitySlugs: ['arcadia', 'temple-city'],
-    relatedRebateSlugs: ['upper-sgv-regional-programs', 'valley-county-water-district'],
+    relatedRebateSlugs: ['socal-watersmart-turf-replacement'],
     keyTakeaways: [
       'Artificial turf is strongest in spaces that need durable open-use coverage.',
       'Low-water planting usually ages more naturally and offers more visual depth.',
@@ -129,7 +129,7 @@ export const resources: ResourceArticle[] = [
     ],
     ctaTitle: 'Need help deciding what belongs where?',
     ctaText:
-      'Compare contractor profiles by specialty to find approaches oriented toward planting-first designs, turf zones, or blended layouts.',
+      'Compare illustrative project styles to explore planting-first designs, turf zones, or blended layouts.',
     metaDescription:
       'Editorial SGV guide comparing artificial turf and low-water planting for homeowners weighing heat, maintenance, and long-term curb appeal.',
   },
@@ -147,7 +147,7 @@ export const resources: ResourceArticle[] = [
     featured: false,
     tags: ['Irrigation', 'Maintenance', 'Systems'],
     relatedCitySlugs: ['san-gabriel', 'glendora'],
-    relatedRebateSlugs: ['golden-state-water-sgv', 'central-sgv-utility-programs'],
+    relatedRebateSlugs: ['socal-watersmart-turf-replacement'],
     keyTakeaways: [
       'Hydrozoning matters more than simply reducing watering frequency.',
       'Drip and point-source irrigation work best when the planting layout is clear.',
@@ -178,7 +178,7 @@ export const resources: ResourceArticle[] = [
     ],
     ctaTitle: 'Looking for irrigation-aware project examples?',
     ctaText:
-      'The city and contractor pages highlight profiles that emphasize irrigation retrofits, lower-maintenance planting, and practical system planning.',
+      'The city and project style pages highlight approaches that emphasize irrigation retrofits, lower-maintenance planting, and practical system planning.',
     metaDescription:
       'Editorial SGV article on irrigation upgrades, hydrozoning, and why low-water landscapes need a better system plan to perform well.',
   },
@@ -196,7 +196,7 @@ export const resources: ResourceArticle[] = [
     featured: false,
     tags: ['Premium Look', 'Curb Appeal', 'Editorial'],
     relatedCitySlugs: ['pasadena', 'monrovia'],
-    relatedRebateSlugs: ['upper-sgv-regional-programs'],
+    relatedRebateSlugs: ['socal-watersmart-turf-replacement'],
     keyTakeaways: [
       'The most premium yards usually rely on restraint rather than excess.',
       'Clean edges and repetition matter as much as plant selection.',
@@ -227,7 +227,7 @@ export const resources: ResourceArticle[] = [
     ],
     ctaTitle: 'Want a clearer benchmark for a refined result?',
     ctaText:
-      'Browse the contractor profiles and city guides to compare which approaches align with compact historic lots, larger suburban yards, or foothill-facing properties.',
+      'Browse the project style guides and city guides to compare approaches for compact historic lots, larger suburban yards, or foothill-facing properties.',
     metaDescription:
       'Editorial SGV guide to what makes a drought-smart yard feel premium after turf removal, including restraint, edges, and architectural fit.',
   },

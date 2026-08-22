@@ -1,10 +1,10 @@
-export type ContractorTone = 'sage' | 'terracotta' | 'olive';
+export type ProjectStyleGuideTone = 'sage' | 'terracotta' | 'olive';
 
-export interface ContractorProfile {
+export interface ProjectStyleGuide {
   slug: string;
   name: string;
   initials: string;
-  tone: ContractorTone;
+  tone: ProjectStyleGuideTone;
   featured: boolean;
   tagline: string;
   summary: string;
@@ -18,7 +18,7 @@ export interface ContractorProfile {
   disclaimer: string;
 }
 
-export const contractors: ContractorProfile[] = [
+export const projectStyleGuides: ProjectStyleGuide[] = [
   {
     slug: 'foothill-dryscape-studio',
     name: 'Foothill Dryscape Studio',
@@ -41,9 +41,9 @@ export const contractors: ContractorProfile[] = [
     ctaText:
       'Use this profile as a benchmark when comparing local firms for planning depth, material restraint, and front-yard composition.',
     metaDescription:
-      'Editorial SGV contractor profile for a design-forward drought-smart landscape studio serving foothill and character-home neighborhoods.',
+      'Illustrative SGV project style guide for design-forward drought-smart yards in foothill and character-home neighborhoods.',
     disclaimer:
-      'Editorial reference profile created to illustrate this project style and planning approach.',
+      'Planning example — not a real business.',
   },
   {
     slug: 'citrus-belt-landscape-atelier',
@@ -67,9 +67,9 @@ export const contractors: ContractorProfile[] = [
     ctaText:
       'Keep this profile in mind if you want strong layout discipline, clean planting zones, and a lower-maintenance finish.',
     metaDescription:
-      'Editorial SGV contractor profile focused on premium suburban yard refreshes, irrigation upgrades, and drought-smart planting plans.',
+      'Illustrative SGV project style guide focused on suburban yard refreshes, irrigation upgrades, and drought-smart planting plans.',
     disclaimer:
-      'Editorial reference profile created to illustrate this project style and planning approach.',
+      'Planning example — not a real business.',
   },
   {
     slug: 'mission-garden-works',
@@ -79,7 +79,7 @@ export const contractors: ContractorProfile[] = [
     featured: true,
     tagline: 'Practical lawn-to-landscape conversions for established residential blocks.',
     summary:
-      'An editorial reference profile representing a contractor style that feels dependable, organized, and well suited to homeowners who want a clear scope without chasing trend-heavy design.',
+      'An illustrative planning archetype representing an organized, practical approach for homeowners who want a clear scope without trend-heavy design.',
     specialties: ['Turf Removal', 'Drip Irrigation', 'Low-Maintenance Planting'],
     serviceAreas: ['Alhambra', 'San Gabriel', 'El Monte', 'Temple City'],
     fitHighlights: [
@@ -93,9 +93,9 @@ export const contractors: ContractorProfile[] = [
     ctaText:
       'Use this profile as a guide when evaluating contractors for clarity of scope, ease of upkeep, and practical front-yard planning.',
     metaDescription:
-      'Editorial SGV contractor profile centered on practical turf removal, drip irrigation, and low-maintenance residential landscape updates.',
+      'Illustrative SGV project style guide centered on practical turf removal, drip irrigation, and low-maintenance residential landscape updates.',
     disclaimer:
-      'Editorial reference profile created to illustrate this project style and planning approach.',
+      'Planning example — not a real business.',
   },
   {
     slug: 'arroyo-outdoor-edit',
@@ -119,9 +119,9 @@ export const contractors: ContractorProfile[] = [
     ctaText:
       'Reference this profile when comparing teams for detail sensitivity, entry sequencing, and refined low-water material choices.',
     metaDescription:
-      'Editorial SGV contractor profile for compact-lot planning, entry hardscape improvements, and refined low-water landscaping.',
+      'Illustrative SGV project style guide for compact-lot planning, entry hardscape improvements, and refined low-water landscaping.',
     disclaimer:
-      'Editorial reference profile created to illustrate this project style and planning approach.',
+      'Planning example — not a real business.',
   },
   {
     slug: 'canyon-line-xeriscapes',
@@ -145,9 +145,9 @@ export const contractors: ContractorProfile[] = [
     ctaText:
       'Compare real prospects against this profile if your project depends on slope handling, stronger zoning, and regionally appropriate planting.',
     metaDescription:
-      'Editorial SGV contractor profile for foothill properties, drainage-aware xeriscaping, and slope-sensitive landscape planning.',
+      'Illustrative SGV project style guide for foothill properties, drainage-aware xeriscaping, and slope-sensitive landscape planning.',
     disclaimer:
-      'Editorial reference profile created to illustrate this project style and planning approach.',
+      'Planning example — not a real business.',
   },
   {
     slug: 'valley-ground-plan',
@@ -171,8 +171,8 @@ export const contractors: ContractorProfile[] = [
     ctaText:
       'Use this profile to judge how well real candidates speak to heat resilience, long-term upkeep, and clear layout decisions.',
     metaDescription:
-      'Editorial SGV contractor profile focused on heat-tolerant planting, durable hardscape, and lower-maintenance suburban landscape updates.',
+      'Illustrative SGV project style guide focused on heat-tolerant planting, durable hardscape, and lower-maintenance suburban landscape updates.',
     disclaimer:
-      'Editorial reference profile created to illustrate this project style and planning approach.',
+      'Planning example — not a real business.',
   },
 ];

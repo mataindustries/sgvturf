@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Footer from '../../components/Footer.astro';
+import PageHero from '../../components/PageHero.astro';
+import CollectionCta from '../../components/CollectionCta.astro';
+import { projectStyleGuides } from '../../data/contractors';
+import type { ProjectStyleGuide } from '../../data/contractors';
+import { createBreadcrumbSchema } from '../../lib/seo';
+
+export function getStaticPaths() {
+  return projectStyleGuides.map((guide) => ({ params: { slug: guide.slug }, props: { guide } }));
+}
+
+const { guide } = Astro.props as { guide: ProjectStyleGuide };
+const guidePath = `/project-style-guides/${guide.slug}/`;
+const structuredData = createBreadcrumbSchema([
+  { name: 'Home', path: '/' },
+  { name: 'Project Style Guides', path: '/project-style-guides/' },
+  { name: `${guide.name} planning archetype`, path: guidePath },
+], Astro.site);
+---
+
+<BaseLayout title={`${guide.name} Illustrative Style Guide | SGV Turf`} description={guide.metaDescription} canonicalUrl={guidePath} ogTitle={`${guide.name} Illustrative Planning Archetype | SGV Turf`} ogDescription={`${guide.summary} This is not a contractor or business.`} structuredData={structuredData}>
+  <Nav />
+  <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Project Style Guides', href: '/project-style-guides/' }, { label: guide.name }]} />
+  <main id="main-content">
+    <PageHero eyebrow="Project Style Guide" description={guide.summary} meta={['Illustrative only', 'Not a business', guide.specialties.join(' · ')]} actions={[{ href: '/project-style-guides/', label: 'Back to Style Guides', variant: 'ghost' }, { href: '/sgv-yard-project/', label: 'Start My Project Brief' }]}>
+      <span slot="title">{guide.name}<br /><em>planning archetype</em></span>
+    </PageHero>
+    <section class="surface-section surface-section--cream">
+      <div class="section-shell">
+        <p class="archetype-disclosure archetype-disclosure--prominent">Planning example — not a real business.</p>
+        <div class="detail-grid">
+          <div class="detail-main">
+            <article class="detail-panel"><p class="detail-panel__eyebrow">Planning Direction</p><h2 class="detail-panel__title">{guide.tagline}</h2><p class="detail-panel__copy">{guide.trustBlurb}</p></article>
+            <article class="detail-panel"><p class="detail-panel__eyebrow">Useful Comparison Points</p><ul class="detail-list">{guide.fitHighlights.map((item) => <li>{item}</li>)}</ul></article>
+          </div>
+          <aside class="detail-sidebar">
+            <div class="meta-block"><p class="meta-block__title">Relevant SGV Settings</p><ul class="meta-list">{guide.serviceAreas.map((area) => <li>{area}</li>)}</ul></div>
+            <div class="meta-block"><p class="meta-block__title">Project Themes</p><ul class="meta-list">{guide.specialties.map((item) => <li>{item}</li>)}</ul></div>
+            <div class="meta-block"><p class="meta-block__title">Disclosure</p><p class="meta-block__text">{guide.disclaimer} It is not verified, listed, featured, or available to receive leads.</p></div>
+          </aside>
+        </div>
+      </div>
+    </section>
+    <CollectionCta eyebrow="Use the Guide" title={guide.ctaTitle} text={guide.ctaText} primaryHref="/sgv-yard-project/" primaryLabel="Start My Project Brief" secondaryHref="/project-style-guides/" secondaryLabel="Browse Style Guides" />
+  </main>
+  <Footer />
+</BaseLayout>

@@ -25,8 +25,8 @@ const relatedCities = cities.filter((city) => article.relatedCitySlugs.includes(
 const relatedRebateEntries = rebateEntries.filter((entry) => article.relatedRebateSlugs.includes(entry.slug));
 const rebateContext =
   relatedRebateEntries.length > 0
-    ? `${relatedRebateEntries.map((entry) => entry.districtName).join(' and ')} are useful estimate-only rebate lanes to compare alongside this topic.`
-    : 'Use the rebates hub as a planning cross-check if budget framing is part of the project.';
+    ? `${relatedRebateEntries.map((entry) => entry.districtName).join(' and ')} provide official-source program context to compare alongside this topic.`
+    : 'Use the rebates hub to locate official sources if incentive eligibility is part of the project.';
 const breadcrumbs = [
   { label: 'Home', href: '/' },
   { label: 'Resources', href: '/resources/' },
@@ -73,7 +73,7 @@ const structuredData = [
       meta={[article.publishedLabel, article.readTime, article.tags.join(' · ')]}
       actions={[
         { href: '/resources/', label: 'Back to Resources', variant: 'ghost' },
-        { href: '/rebates/', label: 'Review Estimated Rebates' },
+        { href: '/rebates/', label: 'Review Rebate Sources' },
       ]}
     >
       <span slot="title">{article.title}</span>
@@ -140,7 +140,7 @@ const structuredData = [
             <p class="meta-block__title">Related Rebate Planning</p>
             <p class="meta-block__text">{rebateContext}</p>
             <a class="inline-link meta-block__link" href="/rebates/">
-              Review estimated rebates
+              Review official rebate sources
             </a>
           </div>
         </aside>

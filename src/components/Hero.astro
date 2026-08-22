@@ -1,17 +1,3 @@
----
-import { cities } from '../data/cities';
-import { contractors } from '../data/contractors';
-import { rebateEntries } from '../data/rebates';
-import { resources } from '../data/resources';
-
-const stats = [
-  { value: `${contractors.length}`, label: 'Contractor Profiles' },
-  { value: `${cities.length}`, label: 'City Guides' },
-  { value: `${rebateEntries.length}`, label: 'Rebate Lanes' },
-  { value: `${resources.length}`, label: 'Editorial Reads' },
-];
----
-
 <section class="hero" id="top">
   <div class="hero__media" aria-hidden="true">
     <img
@@ -38,24 +24,15 @@ const stats = [
 
   <div class="section-shell hero__grid">
     <div class="hero__copy">
-      <div class="hero__eyebrow">San Gabriel Valley front-yard planning</div>
-      <h1 class="hero__title">Ditch the lawn. Build a better SGV yard.</h1>
+      <div class="hero__eyebrow">Simpler yard care for SGV homeowners</div>
+      <h1 class="hero__title">Less lawn. Better yard.</h1>
       <p class="hero__lede">
-        Find drought-smart landscape ideas, local contractor placement, and rebate guidance for
-        front-yard projects across the San Gabriel Valley.
+        Plan a lower-water, easier-care front yard with local city guidance, rebate context, and a contractor-ready project brief.
       </p>
 
       <div class="hero__actions">
-        <a class="button button--primary" href="/#quote">Start Your Project Brief</a>
-      </div>
-
-      <div class="hero__stats" aria-label="SGV Turf highlights">
-        {stats.map((stat) => (
-          <div class="hero-stat">
-            <div class="hero-stat__value">{stat.value}</div>
-            <div class="hero-stat__label">{stat.label}</div>
-          </div>
-        ))}
+        <a class="button button--primary" href="/sgv-yard-project/" data-analytics-event="primary_cta_click">Build My Free Yard Brief</a>
+        <a class="button button--ghost button--hero-ghost" href="#yard-options">Compare Yard Options</a>
       </div>
     </div>
   </div>

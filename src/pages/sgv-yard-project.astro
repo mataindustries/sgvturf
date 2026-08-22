@@ -1,0 +1,55 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectBriefForm from '../components/ProjectBriefForm.astro';
+import Footer from '../components/Footer.astro';
+import { createServiceSchema } from '../lib/seo';
+
+const description = 'Build a free SGV yard project brief based on your city, yard size, priorities, and preferred style.';
+const steps = [
+  ['01', 'Describe the yard', 'Share your city, approximate size, priorities, timing, and preferred direction.'],
+  ['02', 'Get a clearer scope', 'SGVTurf organizes the essentials and highlights option, city, and rebate questions to verify.'],
+  ['03', 'Compare consistently', 'Use the contractor-ready brief to discuss the same scope with independent professionals you choose.'],
+];
+const briefIncludes = [
+  ['A defined starting scope', 'Your city, yard size, project type, timing, priorities, and open questions in one place.'],
+  ['Planning context', 'Relevant lower-water options, city guidance, and rebate considerations to verify before work starts.'],
+  ['A contractor-ready summary', 'A practical brief you can use to compare proposals without relying on memory or guesswork.'],
+];
+const structuredData = createServiceSchema({ name: 'Free SGV yard project brief', description, serviceType: 'Landscape project planning and contractor referral intake', path: '/sgv-yard-project/', areaServed: 'San Gabriel Valley', areaType: 'AdministrativeArea' }, Astro.site);
+---
+
+<BaseLayout title="Free SGV Yard Project Brief | SGVTurf" description={description} canonicalUrl="/sgv-yard-project/" ogTitle="Replace Your SGV Lawn Without Guessing | Free Yard Brief" ogDescription="Build a free project brief to compare water-wise options, rebate considerations, and contractor proposals." socialImage="/img/sgv-turf-drought-tolerant-front-yard-san-gabriel-valley.jpg" structuredData={structuredData}>
+  <header class="landing-header"><div class="section-shell landing-header__inner"><a class="brand-mark" href="/" aria-label="SGVTurf home">SGV<span>Turf</span></a><a class="button button--primary" href="#project-brief-form" data-analytics-event="primary_cta_click">Build My Free Yard Brief</a></div></header>
+  <main id="main-content">
+    <section class="ad-hero" data-view-event="landing_view">
+      <div class="section-shell ad-hero__grid">
+        <div>
+          <p class="section-eyebrow">San Gabriel Valley yard planning</p>
+          <h1 class="ad-hero__title">Replace your SGV lawn without guessing.</h1>
+          <p class="ad-hero__lede">Build a free project brief based on your city, yard size, priorities, and preferred style. Use it to compare water-wise options, rebate considerations, and contractor proposals.</p>
+          <a class="button button--primary" href="#project-brief-form" data-analytics-event="primary_cta_click">Build My Free Yard Brief</a>
+          <p class="ad-hero__note">Free to build. SGVTurf does not promise contractor availability, estimates, savings, rebate eligibility, or project results.</p>
+        </div>
+        <img class="ad-hero__image" src="/img/sgv-turf-drought-tolerant-front-yard-san-gabriel-valley.jpg" alt="Drought-tolerant San Gabriel Valley front yard with layered planting and a low-water landscape" width="1200" height="800" loading="eager" fetchpriority="high" />
+      </div>
+    </section>
+
+    <section class="surface-section surface-section--white"><div class="section-shell"><p class="section-eyebrow">What you receive</p><h2 class="section-title">A practical brief for <em>better comparisons.</em></h2><div class="steps-grid ad-steps">{briefIncludes.map(([title, text]) => <article class="step-card"><h3 class="step-card__title">{title}</h3><p class="step-card__description">{text}</p></article>)}</div></div></section>
+
+    <section class="surface-section surface-section--cream"><div class="section-shell"><p class="section-eyebrow">How it works</p><h2 class="section-title">One brief. <em>Three clear steps.</em></h2><div class="steps-grid ad-steps">{steps.map(([number, title, text]) => <article class="step-card"><div class="step-card__number">{number}</div><h3 class="step-card__title">{title}</h3><p class="step-card__description">{text}</p></article>)}</div></div></section>
+
+    <section class="surface-section surface-section--white"><div class="section-shell detail-grid"><div class="detail-main"><article class="detail-panel"><p class="detail-panel__eyebrow">What SGVTurf Is</p><h2 class="detail-panel__title">A regional planning, editorial, and contractor-referral resource.</h2><p class="detail-panel__copy">SGVTurf organizes homeowner project information and provides planning context. The verified contractor directory is still opening, so this brief does not promise a contractor match.</p></article><article class="detail-panel"><p class="detail-panel__eyebrow">What SGVTurf Is Not</p><p class="detail-panel__copy">SGVTurf is not a landscape contractor and does not perform installation, make estimates, set project terms, or guarantee contractor licensing, suitability, workmanship, availability, or outcomes.</p></article></div><aside class="detail-sidebar"><div class="meta-block"><p class="meta-block__title">Rebate Warning</p><p class="meta-block__text">Rules vary by utility and pre-approval may be required. Artificial turf is not eligible for the regional SoCal Water$mart turf-replacement program. Confirm your water provider and current requirements before removing turf or starting work.</p><a class="inline-link meta-block__link" href="/rebates/">Check Official Rebate Sources</a></div></aside></div></section>
+
+    <section class="surface-section surface-section--cream" aria-labelledby="brief-heading"><div class="section-shell form-focus"><div><p class="section-eyebrow">Build your free brief</p><h2 class="section-title" id="brief-heading">A few essentials. <em>One clearer plan.</em></h2><p class="collection-lede">Your information is sent securely to SGVTurf to organize the brief and measure this funnel. It is not sent to analytics. Project details may be shared with a limited number of relevant independent contractors only with the consent shown in the form.</p><p class="privacy-reassurance">Privacy reassurance: no payment information is requested, and a delivery failure never produces a success message.</p></div><ProjectBriefForm formId="project-brief-form" /></div></section>
+
+    <section class="surface-section surface-section--white"><div class="section-shell"><div class="collection-cta"><div><p class="section-eyebrow">Ready when you are</p><h2 class="collection-cta__title">Replace the guesswork with a clearer starting point.</h2><p class="collection-cta__text">Free to build, with honest limits and no contractor-match promise.</p></div><a class="button button--primary" href="#project-brief-form" data-analytics-event="primary_cta_click">Build My Free Yard Brief</a></div></div></section>
+  </main>
+  <Footer />
+  <script>
+    const viewRoot = document.querySelector('[data-view-event="landing_view"]');
+    if (viewRoot && !sessionStorage.getItem('sgvturf_landing_view')) {
+      sessionStorage.setItem('sgvturf_landing_view', '1');
+      window.SGVTurfAnalytics?.track('landing_view', window.SGVTurfAnalytics.attribution({ page_path: window.location.pathname }));
+    }
+  </script>
+</BaseLayout>

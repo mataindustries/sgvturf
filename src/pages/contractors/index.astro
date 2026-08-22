@@ -4,87 +4,33 @@ import Nav from '../../components/Nav.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import Footer from '../../components/Footer.astro';
 import PageHero from '../../components/PageHero.astro';
-import ContractorCard from '../../components/ContractorCard.astro';
-import ContractorPricing from '../../components/ContractorPricing.astro';
-import { contractors } from '../../data/contractors';
+import CollectionCta from '../../components/CollectionCta.astro';
 import { createBreadcrumbSchema } from '../../lib/seo';
 
-const title = 'SGV Contractor Profiles | SGV Turf';
-const description =
-  'Browse SGV contractor profiles for drought-smart landscaping, turf removal, irrigation upgrades, and low-water front yard planning.';
-
-const breadcrumbs = [
-  { label: 'Home', href: '/' },
-  { label: 'Contractors' },
-];
-
-const structuredData = createBreadcrumbSchema(
-  [
-    { name: 'Home', path: '/' },
-    { name: 'Contractors', path: '/contractors/' },
-  ],
-  Astro.site,
-);
+const structuredData = createBreadcrumbSchema([
+  { name: 'Home', path: '/' },
+  { name: 'Verified Contractor Directory', path: '/contractors/' },
+], Astro.site);
 ---
 
-<BaseLayout
-  title={title}
-  description={description}
-  canonicalUrl="/contractors/"
-  ogTitle="SGV Contractor Profiles | SGV Turf"
-  ogDescription="Review SGV contractor profiles for different yard types, specialties, and planning fits."
-  structuredData={structuredData}
->
+<BaseLayout title="Verified SGV Contractor Directory | SGV Turf" description="The SGV Turf verified contractor roster is opening now. No illustrative businesses or placeholder listings appear in this directory." canonicalUrl="/contractors/" ogTitle="Verified SGV Contractor Directory | SGV Turf" ogDescription="The founding verified-contractor roster is opening now." structuredData={structuredData}>
   <Nav />
-  <Breadcrumbs items={breadcrumbs} />
+  <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Contractors' }]} />
   <main id="main-content">
-    <PageHero
-      eyebrow="Contractor Profiles"
-      description="These editorial profiles are designed to help you compare specialties, service areas, and project fit with a clearer sense of what to look for."
-      meta={['6 contractor profiles', 'Premium editorial framing', 'Organized by specialty']}
-      actions={[
-        { href: '/cities/', label: 'Explore City Guides', variant: 'ghost' },
-        { href: '/resources/', label: 'Read Resources' },
-      ]}
-    >
-      <span slot="title">
-        Compare <em>contractor fits</em><br />
-        before you shortlist.
-      </span>
+    <PageHero eyebrow="Verified Contractor Directory" description="Only verified real businesses supplied to SGV Turf will appear here. The founding roster is opening now, and no placeholder businesses are being used." meta={['0 published listings', 'Verified businesses only', 'Founding roster opening']} actions={[{ href: '/sgv-yard-project/', label: 'Start a Project Brief', analyticsEvent: 'primary_cta_click' }, { href: '/contractors/join/', label: 'For Contractors', variant: 'ghost', analyticsEvent: 'contractor_cta_click' }]}>
+      <span slot="title">An honest directory,<br /><em>ready for real partners.</em></span>
     </PageHero>
-
     <section class="surface-section surface-section--white">
       <div class="section-shell">
-        <div class="section-header">
-          <div>
-            <p class="section-eyebrow">Profile Collection</p>
-            <h2 class="section-title">
-              Different specialties for<br />
-              <em>different SGV yards</em>
-            </h2>
-          </div>
-        </div>
-
-        <p class="collection-lede">
-          Use these profiles as reference points: design-forward studios for Pasadena-adjacent
-          lots, practical planners for warm suburban yards, and foothill-aware approaches for more
-          complex sites.
-        </p>
-
-        <div class="contractor-grid">
-          {contractors.map((contractor) => (
-            <ContractorCard contractor={contractor} />
-          ))}
+        <div class="empty-state">
+          <p class="section-eyebrow">Current Roster</p>
+          <h2 class="empty-state__title">No verified contractor profiles are published yet.</h2>
+          <p class="empty-state__copy">SGV Turf is opening its first 3 founding partner spots. Homeowners can still submit a project brief; SGV Turf will only share it, with consent, when a potentially relevant independent contractor is available.</p>
+          <div class="collection-cta__actions"><a class="button button--primary" href="/sgv-yard-project/">Start a Free Project Brief</a><a class="button button--ghost" href="/project-style-guides/">View Illustrative Style Guides</a></div>
         </div>
       </div>
     </section>
-    <ContractorPricing
-      sectionId="founder-offer"
-      primaryHref="/#quote"
-      primaryLabel="Apply for Founder Spot"
-      bottomPrimaryHref="/#quote"
-      bottomPrimaryLabel="Request Founder Details"
-    />
+    <CollectionCta eyebrow="Founding SGV Contractor Test" title="Are you an established SGV landscape contractor?" text="Review the free initial 30-day traffic test and submit a short real-business intake." primaryHref="/contractors/join/" primaryLabel="Apply for the Free Test" primaryAnalyticsEvent="contractor_cta_click" />
   </main>
   <Footer />
 </BaseLayout>
