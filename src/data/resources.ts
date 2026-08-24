@@ -2,6 +2,18 @@ export interface ResourceSection {
   heading: string;
   paragraphs: string[];
   bullets?: string[];
+  links?: ResourceLink[];
+}
+
+export interface ResourceLink {
+  label: string;
+  href: string;
+  external?: boolean;
+}
+
+export interface ResourceFaq {
+  question: string;
+  answer: string;
 }
 
 export interface ResourceArticle {
@@ -19,12 +31,195 @@ export interface ResourceArticle {
   relatedRebateSlugs: string[];
   keyTakeaways: string[];
   sections: ResourceSection[];
+  lastVerified?: string;
+  faqs?: ResourceFaq[];
   ctaTitle: string;
   ctaText: string;
+  ctaPrimaryHref?: string;
+  ctaPrimaryLabel?: string;
+  ctaSecondaryHref?: string;
+  ctaSecondaryLabel?: string;
   metaDescription: string;
 }
 
 export const resources: ResourceArticle[] = [
+  {
+    slug: 'sgv-turf-replacement-rebates-2026',
+    category: 'Rebates & Eligibility',
+    title: 'SGV Turf Replacement Rebates in 2026: What to Check Before You Remove Your Lawn',
+    excerpt:
+      'Check the property\'s water provider, current program terms, and required approval before lawn removal. See the verified regional and Pasadena examples SGVTurf currently tracks.',
+    intro:
+      'Do not remove your lawn before confirming eligibility with the program that serves the property and obtaining any required approval. As last verified August 21, 2026, SGVTurf lists a regional SoCal Water$mart base incentive beginning at $2 per square foot for eligible customers of participating agencies. Pasadena Water and Power publishes $2 per square foot, plus $100 per eligible tree for up to five trees. Current terms, funding, and property eligibility still control. Artificial or synthetic turf is not an eligible conversion under the regional SoCal Water$mart lawn-to-garden program.',
+    publishedAt: '2026-08-24',
+    publishedLabel: 'August 2026',
+    readTime: '9 min read',
+    featured: true,
+    tags: ['Turf Replacement Rebate', 'Eligibility', 'Pasadena'],
+    relatedCitySlugs: ['pasadena', 'san-gabriel', 'arcadia'],
+    relatedRebateSlugs: ['socal-watersmart-turf-replacement', 'pasadena-water-and-power'],
+    keyTakeaways: [
+      'Apply and obtain any required approval before lawn removal or other project work.',
+      'The property\'s actual water provider, not its city name alone, determines which program may apply.',
+      'Artificial or synthetic turf does not qualify for the regional SoCal Water$mart lawn-to-garden rebate.',
+    ],
+    lastVerified: 'August 21, 2026',
+    sections: [
+      {
+        heading: 'How does the regional turf replacement rebate generally work?',
+        paragraphs: [
+          'SoCal Water$mart publishes a residential lawn-to-garden turf replacement program for eligible customers of participating regional water agencies. The verified SGVTurf record says the regional base program begins at $2 per square foot. That is a starting point, not a quote for every San Gabriel Valley property.',
+          'The program is for an eligible lawn-to-garden conversion. Approval, current terms, and available funding matter. A homeowner should use the official program page to check the current rules, then confirm that the property\'s water provider participates and that the proposed work qualifies.',
+          'Do not treat a rebate calculator result, a neighbor\'s approval, or an SGV city name as authorization to start. The program or utility makes the eligibility decision for the address.',
+        ],
+        links: [
+          {
+            label: 'Open the official SoCal Water$mart turf replacement program',
+            href: 'https://socalwatersmart.com/en/residential/rebates/available-rebates/turf-replacement-program/',
+            external: true,
+          },
+          { label: 'Compare SGVTurf\'s verified rebate records', href: '/rebates/' },
+        ],
+      },
+      {
+        heading: 'Why does the property\'s water provider matter?',
+        paragraphs: [
+          'A mailing address in Pasadena, Arcadia, San Gabriel, or another SGV city does not by itself identify the applicable rebate. Water service boundaries and city boundaries are not the same thing. The account\'s provider is the useful starting fact.',
+          'Find the provider name on the current water bill. If the bill or account arrangement is unclear, ask the property owner, landlord, HOA, or utility before relying on a program amount. Then use that provider\'s official source to confirm participation, customer eligibility, required approval, funding status, and the conversion rules that apply to the project.',
+          'SGVTurf\'s regional record lists several SGV cities as coverage context, but it is expressly limited to eligible customers of participating agencies. It should not be read as a promise that every address in those cities qualifies.',
+        ],
+        links: [
+          { label: 'See the San Gabriel city guide', href: '/cities/san-gabriel/' },
+          { label: 'See the Arcadia city guide', href: '/cities/arcadia/' },
+        ],
+      },
+      {
+        heading: 'What rebate examples has SGVTurf verified?',
+        paragraphs: [
+          'SGVTurf currently publishes two official-source examples, last verified August 21, 2026. The regional SoCal Water$mart residential lawn-to-garden program begins at $2 per square foot for eligible customers of participating agencies. The Pasadena Water and Power program publishes $2 per square foot, plus $100 per eligible tree for up to five trees.',
+          'These figures do not establish eligibility for a particular home. Both records remain subject to published conditions, current funding, and required approval.',
+          'If the property\'s utility is not represented on the SGVTurf rebate hub, the correct answer is to verify directly with that utility. Do not borrow an amount or rule from a neighboring provider.',
+        ],
+        links: [{ label: 'Review both verified examples on the SGVTurf rebate hub', href: '/rebates/' }],
+      },
+      {
+        heading: 'What should Pasadena homeowners check?',
+        paragraphs: [
+          'Pasadena Water and Power is the relevant verified example for eligible PWP residential and commercial customers. Its published incentive is $2 per square foot, plus $100 per eligible tree for up to five trees.',
+          'A Pasadena address is not enough to assume PWP eligibility. Confirm that PWP serves the property, review the current official conditions, and obtain required approval before removing turf or beginning work. The published incentive and tree provision are subject to current funding and program rules.',
+          'Use the Pasadena city guide for local project context, but use PWP\'s official page for the program decision. SGVTurf does not approve applications or determine eligibility.',
+        ],
+        links: [
+          {
+            label: 'Open the official Pasadena Water and Power turf replacement page',
+            href: 'https://pwp.cityofpasadena.net/turfreplacement/',
+            external: true,
+          },
+          { label: 'Read the Pasadena landscape guide', href: '/cities/pasadena/' },
+        ],
+      },
+      {
+        heading: 'Can I get a rebate for artificial turf?',
+        paragraphs: [
+          'Not through the regional SoCal Water$mart lawn-to-garden turf replacement program. Its verified program information says synthetic or artificial turf is not an approved conversion option.',
+          'Artificial turf can still be evaluated as a separate installation choice, but do not include it in a regional rebate plan or assume that removing living lawn is enough to qualify. Ask the applicable utility about its own current rules if a different local program may apply.',
+          'Homeowners comparing artificial turf with planting should separate two decisions: which finished surface fits the yard, and which proposed conversion meets a program\'s terms. The answers may differ.',
+        ],
+        links: [
+          {
+            label: 'Compare artificial turf and low-water planting for SGV homes',
+            href: '/resources/artificial-turf-versus-low-water-planting-for-sgv-homes/',
+          },
+        ],
+      },
+      {
+        heading: 'What should I do before demolition?',
+        paragraphs: [
+          'First, pause lawn removal. Confirm the water provider and locate the official program page. Read the current eligibility and conversion terms for the property type, then complete the application and obtain any approval required before work starts.',
+          'Keep the existing lawn in place until the program confirms that you can proceed. Save the applicable terms and approval record with the project file. Record the lawn area carefully, but do not assume your measurement is the final approved square footage.',
+          'Once approval status is clear, build the landscape scope around the program requirements and the needs of the site. Irrigation changes, planting zones, drainage, and usable open space should be decided before contractor pricing so each bid covers the same work.',
+        ],
+        bullets: [
+          'Identify the water provider shown on the property\'s current bill.',
+          'Open that provider\'s official rebate source, not a search-result summary.',
+          'Confirm customer, property, and proposed-conversion eligibility.',
+          'Confirm current funding and any required approval directly with the program.',
+          'Do not remove lawn or start work until the required approval is in hand.',
+          'Save the approval and current terms with the project records.',
+        ],
+        links: [
+          {
+            label: 'Plan a drought-smart SGV front yard',
+            href: '/resources/planning-a-drought-smart-front-yard-in-the-sgv/',
+          },
+          {
+            label: 'Review irrigation upgrades for a low-water landscape',
+            href: '/resources/sgv-irrigation-upgrades-that-make-low-water-landscapes-work/',
+          },
+        ],
+      },
+      {
+        heading: 'Which program applies to my property?',
+        paragraphs: [
+          'Use this sequence before adding a rebate to the project budget.',
+        ],
+        bullets: [
+          'Provider: Which water utility appears on the current bill?',
+          'Program: Does that provider direct residential customers to a current turf replacement program?',
+          'Property: Is this account and property type eligible under the published terms?',
+          'Project: Does the planned lawn-to-garden conversion meet the program rules?',
+          'Timing: Is approval required before removal or installation begins?',
+          'Funding: Is funding currently available, and has the program confirmed the applicable incentive?',
+          'Documentation: What approval or records must be retained for the project?',
+        ],
+        links: [
+          { label: 'Start with the SGVTurf rebate hub', href: '/rebates/' },
+          { label: 'Build a free homeowner project brief', href: '/sgv-yard-project/' },
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Should I apply before removing my lawn?',
+        answer:
+          'Yes. Confirm the property\'s water provider, review the current official terms, apply, and obtain any required approval before lawn removal or other project work.',
+      },
+      {
+        question: 'How much is the turf replacement rebate in the San Gabriel Valley?',
+        answer:
+          'There is no single SGV-wide amount. As last verified August 21, 2026, the regional SoCal Water$mart base program begins at $2 per square foot for eligible customers of participating agencies. Pasadena Water and Power publishes $2 per square foot, plus $100 per eligible tree for up to five trees. Confirm the applicable amount and eligibility with the property\'s provider.',
+      },
+      {
+        question: 'Does every SGV homeowner qualify for SoCal Water$mart?',
+        answer:
+          'No blanket eligibility is stated. The verified record applies to eligible customers of participating regional water agencies. Confirm the property\'s provider, participation, current terms, and required approval.',
+      },
+      {
+        question: 'Can I get the regional rebate for artificial turf?',
+        answer:
+          'No. Synthetic or artificial turf is not an approved conversion option under the regional SoCal Water$mart lawn-to-garden program.',
+      },
+      {
+        question: 'Is a Pasadena address enough to qualify for the PWP program?',
+        answer:
+          'No. The verified Pasadena example is for eligible Pasadena Water and Power customers. Confirm that PWP serves the property and approves the proposed work before removing turf.',
+      },
+      {
+        question: 'What if my water provider is not listed on SGVTurf?',
+        answer:
+          'Contact that provider and use its official program source. Do not assume that a regional example or a neighboring utility\'s amount applies to the property.',
+      },
+    ],
+    ctaTitle: 'Turn the verified rebate status into a project-ready brief.',
+    ctaText:
+      'Use the SGVTurf rebate hub to record the official source, then build a free homeowner project brief with the provider, approval status, and intended yard scope.',
+    ctaPrimaryHref: '/sgv-yard-project/',
+    ctaPrimaryLabel: 'Build My Free Yard Brief',
+    ctaSecondaryHref: '/rebates/',
+    ctaSecondaryLabel: 'Review the Rebate Hub',
+    metaDescription:
+      'Check 2026 SGV turf replacement rebates, Pasadena and regional examples, artificial turf eligibility, and what to confirm before lawn removal.',
+  },
   {
     slug: 'planning-a-drought-smart-front-yard-in-the-sgv',
     category: 'Planning & Budget',

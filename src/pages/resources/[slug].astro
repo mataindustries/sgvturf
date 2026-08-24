@@ -6,6 +6,7 @@ import Footer from '../../components/Footer.astro';
 import PageHero from '../../components/PageHero.astro';
 import ResourceCard from '../../components/ResourceCard.astro';
 import CollectionCta from '../../components/CollectionCta.astro';
+import FAQItem from '../../components/FAQItem.astro';
 import { cities } from '../../data/cities';
 import { rebateEntries } from '../../data/rebates';
 import { resources } from '../../data/resources';
@@ -21,6 +22,12 @@ export function getStaticPaths() {
 
 const { article } = Astro.props as { article: ResourceArticle };
 const relatedArticles = resources.filter((entry) => entry.slug !== article.slug).slice(0, 2);
+const articleMeta = [
+  article.publishedLabel,
+  article.readTime,
+  ...(article.lastVerified ? [`Sources last verified ${article.lastVerified}`] : []),
+  article.tags.join(' · '),
+];
 const relatedCities = cities.filter((city) => article.relatedCitySlugs.includes(city.slug));
 const relatedRebateEntries = rebateEntries.filter((entry) => article.relatedRebateSlugs.includes(entry.slug));
 const rebateContext =
@@ -70,7 +77,7 @@ const structuredData = [
     <PageHero
       eyebrow={article.category}
       description={article.excerpt}
-      meta={[article.publishedLabel, article.readTime, article.tags.join(' · ')]}
+      meta={articleMeta}
       actions={[
         { href: '/resources/', label: 'Back to Resources', variant: 'ghost' },
         { href: '/rebates/', label: 'Review Rebate Sources' },
@@ -110,9 +117,34 @@ const structuredData = [
                     ))}
                   </ul>
                 )}
+                {section.links && (
+                  <div class="list-grid article-links" aria-label={`${section.heading} links`}>
+                    {section.links.map((link) => (
+                      <a
+                        href={link.href}
+                        target={link.external ? '_blank' : undefined}
+                        rel={link.external ? 'noopener noreferrer' : undefined}
+                      >
+                        {link.label}
+                      </a>
+                    ))}
+                  </div>
+                )}
               </section>
             ))}
           </div>
+
+          {article.faqs && article.faqs.length > 0 && (
+            <section class="article-faq" aria-labelledby="article-faq-title">
+              <p class="section-eyebrow">FAQ</p>
+              <h2 class="article-panel__title" id="article-faq-title">Common rebate questions</h2>
+              <div class="faq-list">
+                {article.faqs.map((item, index) => (
+                  <FAQItem question={item.question} answer={item.answer} open={index === 0} />
+                ))}
+              </div>
+            </section>
+          )}
         </article>
 
         <aside class="article-sidebar">
@@ -171,10 +203,10 @@ const structuredData = [
       eyebrow="Next Step"
       title={article.ctaTitle}
       text={article.ctaText}
-      primaryHref="/resources/"
-      primaryLabel="Browse All Resources"
-      secondaryHref="/rebates/"
-      secondaryLabel="Review Rebate Guidance"
+      primaryHref={article.ctaPrimaryHref ?? '/resources/'}
+      primaryLabel={article.ctaPrimaryLabel ?? 'Browse All Resources'}
+      secondaryHref={article.ctaSecondaryHref ?? '/rebates/'}
+      secondaryLabel={article.ctaSecondaryLabel ?? 'Review Rebate Guidance'}
     />
   </main>
   <Footer />
